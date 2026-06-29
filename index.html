@@ -6,210 +6,235 @@
 <title>Ника Штефан — придумываю и собираю AI-решения</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f7f6f2; --card:#ffffff; --ink:#18180f; --muted:#7c766c;
-    --line:#e7e2d8; --accent:#e05c2a; --accent-soft:#fbeee6; --green:#3db87a;
-    --sans:'Geist',system-ui,-apple-system,sans-serif;
-    --serif:'Playfair Display',Georgia,serif;
-    --mono:'Geist Mono','Courier New',monospace;
-    --hand:'Caveat',cursive;
+    --bg:#103a4f; --bg2:#0d3243; --coral:#f0562e; --coral-d:#e34a22;
+    --cream:#f3ebe0; --mute:#9fb2ba; --line:rgba(240,86,46,.32);
+    --disp:'Oswald',Impact,sans-serif; --body:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 44px}
-  section{padding:46px 0;border-top:1px solid var(--line)}
-  .label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
-  a{color:inherit}
+  body{font-family:var(--body);background:var(--bg);color:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
 
-  /* hero — 2 columns */
-  .hero{padding:64px 0 50px;border-top:none;display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:center}
-  .hero h1{font-family:var(--serif);font-weight:800;font-size:52px;line-height:1.04;letter-spacing:-.01em;margin-bottom:16px}
-  .role{font-family:var(--mono);color:var(--accent);font-size:14px;margin-bottom:22px}
-  .pitch{font-size:21px;color:#3a352e}
-  .hand{font-family:var(--hand);font-size:26px;color:var(--accent);margin-top:16px;transform:rotate(-1.5deg);display:inline-block}
-  .loc{color:var(--muted);font-size:15px;margin-top:20px}
-  /* hero side card */
-  .herocard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;text-align:center}
-  .avatar{width:96px;height:96px;border-radius:9999px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 18px;border:1px solid var(--line)}
-  .herocard .tags{justify-content:center;margin-top:0;margin-bottom:22px}
-  .tags{display:flex;flex-wrap:wrap;gap:8px}
-  .tag{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);border-radius:9999px;padding:6px 13px;font-size:12px;color:#5a544b}
-  .btns{display:flex;flex-wrap:wrap;gap:10px}
-  .herocard .btns{flex-direction:column}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:9999px;font-weight:600;font-size:15px;text-decoration:none;transition:.15s;border:1px solid var(--line);background:#fff}
-  .btn:hover{transform:translateY(-2px)}
-  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
-  h3{font-family:var(--serif);font-weight:700;font-size:21px;margin-bottom:8px}
+  /* nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  nav .nm{color:var(--coral);font-weight:500}
+  nav .links{display:flex;gap:26px}
+  nav .links a:hover,nav .cta:hover{color:var(--coral)}
+  nav .cta{color:var(--coral);border-bottom:1px solid var(--coral)}
+  @media(max-width:760px){nav .links{display:none}}
 
-  /* services / proof / quotes / links — auto-fill grids that USE the width */
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;transition:.15s}
-  .card:hover{transform:translateY(-2px);border-color:var(--accent)}
-  .card p{color:var(--muted);font-size:15px}
-  .price{font-family:var(--mono);display:inline-block;margin-top:16px;font-weight:500;font-size:13px;color:var(--accent);background:var(--accent-soft);padding:5px 12px;border-radius:9999px}
-  .note{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:18px}
-  .abouttext{font-size:16.5px;color:#3a352e;max-width:760px;margin-bottom:22px}
+  /* hero */
+  .hero{padding:48px 0 30px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+  .chip{background:var(--coral);color:var(--bg);font-family:var(--mono);font-size:12px;font-weight:500;padding:7px 12px;line-height:1.3;text-transform:uppercase;letter-spacing:.03em}
+  h1{font-family:var(--disp);font-weight:700;text-transform:uppercase;color:var(--coral);font-size:clamp(44px,8.5vw,116px);line-height:.92;letter-spacing:-.01em}
+  .h1sub{font-family:var(--disp);font-weight:600;text-transform:uppercase;color:var(--cream);font-size:clamp(20px,3.4vw,44px);line-height:1;margin-top:10px;letter-spacing:.01em}
+  .heromedia{display:grid;grid-template-columns:1.1fr 2fr;gap:14px;margin-top:34px}
+  .heromedia .portrait{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;filter:saturate(1.05)}
+  .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .thumbs img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1}
+  .lead{font-size:clamp(18px,2vw,23px);max-width:760px;margin-top:34px;color:var(--cream)}
+  .hand-note{font-family:var(--mono);color:var(--coral);font-size:14px;margin-top:16px}
 
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:26px}
-  .stat .num{font-family:var(--serif);font-weight:800;font-size:34px;letter-spacing:-.02em}
-  .stat .lab{font-size:13px;color:var(--muted);margin-top:2px}
-  .exp p{color:#3a352e;font-size:16.5px;margin-bottom:11px;max-width:880px}
-  .exp .accent{color:var(--accent);font-weight:600}
+  /* section frame */
+  section{padding:96px 0;border-top:1px solid var(--line)}
+  .sechead{display:flex;align-items:baseline;gap:18px;margin-bottom:52px;flex-wrap:wrap}
+  .secnum{font-family:var(--mono);color:var(--coral);font-size:15px;padding-top:6px}
+  .sectitle{font-family:var(--disp);font-weight:700;text-transform:uppercase;color:var(--coral);font-size:clamp(30px,5.4vw,68px);line-height:.95;letter-spacing:-.01em}
+  .seclabel{font-family:var(--mono);color:var(--mute);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:26px}
 
-  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-  .chip{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px}
-  .chip b{font-size:15px}
-  .chip span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
-  a.chip{display:block;text-decoration:none;transition:.15s}
-  a.chip:hover{transform:translateY(-2px);border-color:var(--accent)}
-  .live{font-family:var(--mono);font-size:10px;font-weight:500;color:#fff;background:var(--green);padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:middle;letter-spacing:.05em}
+  /* services */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .card{border:1px solid var(--line);padding:30px;transition:.25s;background:var(--bg2)}
+  .card:hover{background:var(--coral);color:var(--bg)}
+  .card:hover h3,.card:hover .price{color:var(--bg)}
+  .card h3{font-family:var(--disp);font-weight:600;text-transform:uppercase;font-size:24px;color:var(--coral);margin-bottom:12px;line-height:1.05}
+  .card p{font-size:15.5px;color:inherit}
+  .price{font-family:var(--mono);display:inline-block;margin-top:18px;font-size:13px;color:var(--coral)}
+  .note{font-family:var(--mono);font-size:13px;color:var(--mute);margin-top:24px}
 
-  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-  blockquote{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:16px;padding:18px 22px}
-  blockquote p{font-size:15.5px}
-  blockquote cite{font-family:var(--mono);display:block;color:var(--muted);font-size:12.5px;margin-top:10px;font-style:normal}
+  /* stats + exp */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:44px}
+  .stat .num{font-family:var(--disp);font-weight:700;font-size:clamp(34px,4.5vw,58px);color:var(--coral);line-height:1}
+  .stat .lab{font-size:13.5px;color:var(--mute);margin-top:6px}
+  .exp p{font-size:17px;margin-bottom:16px;max-width:900px}
+  .exp .ac{color:var(--coral);font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.02em}
 
-  .linklist{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px}
-  .lrow{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-decoration:none;transition:.15s}
-  .lrow:hover{transform:translateY(-2px);border-color:var(--accent)}
-  .lrow .ic{font-size:22px;line-height:1}
-  .lrow b{font-size:15.5px}
-  .lrow small{display:block;color:var(--muted);font-size:13px;margin-top:2px;font-weight:400}
-  .lrow .go{margin-left:auto;color:var(--accent);font-size:20px}
-  .todo{font-family:var(--mono);color:#b45309;background:#fdf3e3;font-size:10px;padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:middle}
+  /* projects */
+  .plist{display:flex;flex-direction:column}
+  .prow{display:flex;align-items:center;gap:20px;padding:22px 4px;border-top:1px solid var(--line);transition:.2s}
+  .prow:last-child{border-bottom:1px solid var(--line)}
+  .prow:hover{padding-left:14px;color:var(--coral)}
+  .prow .ic{font-size:24px;width:30px;flex:none}
+  .prow b{font-family:var(--disp);font-weight:600;text-transform:uppercase;font-size:20px}
+  .prow small{display:block;color:var(--mute);font-size:14px;margin-top:3px;font-weight:400;font-family:var(--body)}
+  .prow .live{font-family:var(--mono);font-size:10px;color:var(--bg);background:var(--coral);padding:2px 7px;margin-left:8px;vertical-align:middle;letter-spacing:.05em}
+  .prow .go{margin-left:auto;color:var(--coral);font-size:22px}
 
-  .cta{background:var(--ink);color:#fff;border-radius:24px;padding:48px 30px;text-align:center;margin:8px 0;border:none}
-  .cta .label{color:#8d867a}
-  .cta h2{font-family:var(--serif);font-weight:700;font-size:30px;max-width:640px;margin:0 auto 26px;color:#fff;line-height:1.3}
-  .cta .btns{justify-content:center}
-  .cta .btn{background:#2a2722;border-color:#3a352e;color:#fff}
-  .cta .btn.primary{background:var(--accent);border-color:var(--accent)}
+  /* quotes */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  blockquote{border:1px solid var(--line);padding:24px;background:var(--bg2)}
+  blockquote p{font-size:16px}
+  blockquote cite{font-family:var(--mono);display:block;color:var(--coral);font-size:12.5px;margin-top:14px;font-style:normal;text-transform:uppercase;letter-spacing:.04em}
 
-  footer{padding:34px 0;color:var(--muted);font-size:13px;text-align:center;font-family:var(--mono)}
+  /* about */
+  .abouttext{font-size:18px;max-width:780px;margin-bottom:30px}
 
-  @media(max-width:860px){
+  /* cta */
+  .cta{background:var(--coral);color:var(--bg);padding:80px 40px;text-align:center}
+  .cta .secnum{color:var(--bg)}
+  .cta h2{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(30px,5vw,60px);line-height:.98;max-width:760px;margin:0 auto 30px}
+  .cbtns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .cbtn{font-family:var(--mono);font-size:14px;background:var(--bg);color:var(--coral);padding:15px 26px;transition:.2s;text-transform:uppercase;letter-spacing:.04em}
+  .cbtn:hover{transform:translateY(-2px)}
+  .cbtn.b2{background:transparent;color:var(--bg);border:1px solid var(--bg)}
+
+  footer{font-family:var(--mono);font-size:12px;color:var(--mute);text-align:center;padding:30px 0;text-transform:uppercase;letter-spacing:.08em}
+
+  @media(max-width:760px){
     .wrap{padding:0 22px}
-    .hero{grid-template-columns:1fr;gap:30px;padding:48px 0 36px}
-    .hero h1{font-size:38px}.pitch{font-size:18px}
-    .herocard .btns{flex-direction:row;flex-wrap:wrap}
+    .heromedia{grid-template-columns:1fr}
     .stats{grid-template-columns:repeat(2,1fr)}
+    section{padding:70px 0}
+    .sechead{margin-bottom:36px}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
+  <nav>
+    <span class="nm">Ника Штефан</span>
+    <span class="links">
+      <a href="#help">Услуги</a>
+      <a href="#exp">Опыт</a>
+      <a href="#projects">Проекты</a>
+      <a href="#about">Обо мне</a>
+    </span>
+    <a class="cta" href="https://t.me/kvazarchIk">Написать →</a>
+  </nav>
+
   <header class="hero">
-    <div class="herotext">
-      <h1>Ника Штефан</h1>
-      <div class="role">Founder, AI / vibe coding · ex-Product Lead Т-Банк</div>
-      <p class="pitch">Придумываю и собираю AI-решения. Приходишь с идеей или задачей — через дискавери понимаю, что реально нужно, и собираю работающее на AI за 2–4 недели.</p>
-      <div class="hand">не «построю что угодно» — а «построю то, что нужно» ✨</div>
-      <div class="loc">📍 Тбилиси · работаю с русскоязычными фаундерами и бизнесом</div>
+    <div class="chips reveal">
+      <span class="chip">Придумываю и собираю<br>AI-решения</span>
+      <span class="chip">Тбилиси · фаундерам<br>и бизнесу</span>
     </div>
-    <aside class="herocard">
-      <div class="avatar">👩🏻‍💻</div>
-      <div class="tags">
-        <span class="tag">Discovery</span>
-        <span class="tag">Vibe coding</span>
-        <span class="tag">AI-агенты</span>
-        <span class="tag">MVP</span>
+    <h1 class="reveal">Ника Штефан</h1>
+    <div class="h1sub reveal">от идеи до рабочего за 2–4 недели</div>
+
+    <div class="heromedia reveal">
+      <img class="portrait" src="img/nika.jpg" alt="Ника Штефан">
+      <div class="thumbs">
+        <img src="img/idea-checkbot-1.jpg" alt="Idea CheckBot">
+        <img src="img/litbot-admin.webp" alt="Система препод-ученик">
+        <img src="img/idea-checkbot-2.jpg" alt="Idea CheckBot">
       </div>
-      <div class="btns">
-        <a class="btn primary" href="https://t.me/kvazarchIk">✈️ Написать в Telegram</a>
-        <a class="btn" href="mailto:nik.shtefan@gmail.com">✉️ Почта</a>
-        <a class="btn" href="https://t.me/nikshtefan">📣 Канал</a>
-      </div>
-    </aside>
+    </div>
+
+    <p class="lead reveal">Приходишь с идеей или задачей — через дискавери понимаю, что реально нужно, и собираю работающее решение на AI. Чтобы ты проверил на людях, а не потратил полгода и миллионы.</p>
+    <div class="hand-note reveal">не «построю что угодно» — а «построю то, что нужно»</div>
   </header>
 
-  <section>
-    <div class="label">Чем помогаю</div>
+  <section id="help">
+    <div class="sechead reveal"><span class="secnum">[01]</span><h2 class="sectitle">Чем помогаю</h2></div>
     <div class="cards">
-      <div class="card">
-        <h3>Идея → прототип + проверка</h3>
-        <p>Фаундеру: от идеи до рабочего прототипа, который можно показать людям, и проверки спроса. Чтобы не потратить полгода на то, что не нужно.</p>
+      <div class="card reveal">
+        <h3>Идея → прототип<br>+ проверка</h3>
+        <p>Фаундеру: от идеи до рабочего прототипа, который можно показать людям, и проверки спроса.</p>
         <span class="price">2–4 недели</span>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>AI-решение / агент под задачу</h3>
         <p>Бизнесу: придумываю и собираю инструмент, автоматизацию или AI-агента под твою конкретную боль.</p>
         <span class="price">2–4 недели</span>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>Разбор + план</h3>
-        <p>Посмотрю твою идею или задачу, честно скажу что строить (и стоит ли) и дам конкретный план. Лучший вход — минимальный риск.</p>
+        <p>Посмотрю идею или задачу, честно скажу что строить (и стоит ли) и дам конкретный план.</p>
         <span class="price">2–3 дня</span>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>Менторинг</h3>
-        <p>Один на один — помогу с продуктовым дискавери и с вайбкодингом: как находить и проверять идеи и как собирать решения на AI самому.</p>
+        <p>Один на один — по продуктовому дискавери и вайбкодингу: как находить, проверять идеи и собирать на AI самому.</p>
         <span class="price">разовые сессии</span>
       </div>
     </div>
-    <p class="note">Стоимость и формат обсуждаем под твою конкретную задачу.</p>
+    <p class="note reveal">Стоимость и формат обсуждаем под твою конкретную задачу.</p>
   </section>
 
-  <section class="exp">
-    <div class="label">Опыт</div>
-    <div class="stats">
+  <section id="exp" class="exp">
+    <div class="sechead reveal"><span class="secnum">[02]</span><h2 class="sectitle">Опыт</h2></div>
+    <div class="stats reveal">
       <div class="stat"><div class="num">8+</div><div class="lab">лет в продуктах</div></div>
       <div class="stat"><div class="num">13 млн</div><div class="lab">клиентов в Т-Банке</div></div>
       <div class="stat"><div class="num">350+</div><div class="lab">команд с Discovery</div></div>
       <div class="stat"><div class="num">1500+</div><div class="lab">продактов обучила</div></div>
     </div>
-    <p><span class="accent">Product Lead в Т-Банке</span> — отвечала за клиентский опыт продуктов для 13 млн клиентов (6 сегментов Мобильного банка), команда 70+.</p>
-    <p><span class="accent">Head of Product Discovery</span> — построила с нуля систему Discovery в Т-Банке, масштабировала на 350+ команд и обучила 1500+ продактов. Совокупный эффект работ — сотни млн ₽.</p>
-    <p><span class="accent">Vibe coding</span> — собираю свои продукты и решения на AI без разработчиков и обучаю вайбкодингу других (интенсив Кворум, лекции в ЦУ).</p>
-    <p>«Понять, что реально нужно строить» — это то, что я годами ставила на поток в банке. Теперь делаю это для тебя и сама же собираю решение на AI. Преподаю продакт-менеджмент в Центральном Университете.</p>
+    <p class="reveal"><span class="ac">Product Lead в Т-Банке</span> — отвечала за клиентский опыт продуктов для 13 млн клиентов (6 сегментов Мобильного банка), команда 70+.</p>
+    <p class="reveal"><span class="ac">Head of Product Discovery</span> — построила с нуля систему Discovery в Т-Банке, масштабировала на 350+ команд и обучила 1500+ продактов. Совокупный эффект работ — сотни млн ₽.</p>
+    <p class="reveal"><span class="ac">Vibe coding</span> — собираю свои продукты и решения на AI без разработчиков и обучаю вайбкодингу других (интенсив Кворум, лекции в ЦУ).</p>
+    <p class="reveal">«Понять, что реально нужно строить» — это то, что я годами ставила на поток в банке. Теперь делаю это для тебя и сама же собираю решение на AI.</p>
   </section>
 
-  <section>
-    <div class="label">Проекты · собрала сама, с нуля, на AI</div>
-    <div class="linklist">
-      <a class="lrow" href="https://t.me/Idea_CheckBot"><span class="ic">🚀</span><span><b>Idea CheckBot <span class="live">LIVE</span></b><small>Миниапп: проверь бизнес-гипотезу до того, как сольёшь на неё деньги</small></span><span class="go">→</span></a>
-      <a class="lrow" href="https://kvorum-edu.ru/"><span class="ic">💅</span><span><b>Кворум — интенсив по вайбкодингу</b><small>Образовательный продукт: собрала сама и обучала других вайбкодингу</small></span><span class="go">→</span></a>
-      <div class="lrow"><span class="ic">🇬🇧</span><span><b>Агент-наставник по английскому</b><small>Персональный AI-репетитор; собираю агентов под любую задачу</small></span></div>
-      <div class="lrow"><span class="ic">🛰️</span><span><b>AI Ops</b><small>Агент парсит мои источники и шлёт еженедельный дайджест</small></span></div>
-      <div class="lrow"><span class="ic">📚</span><span><b>Система препод + ученик</b><small>Админка для преподавателя + Telegram-бот для учеников</small></span></div>
-      <div class="lrow"><span class="ic">🔍</span><span><b>Бот конкурентного анализа</b><small>Рабочий инструмент — собрала примерно за час</small></span></div>
+  <section id="projects">
+    <div class="sechead reveal"><span class="secnum">[03]</span><h2 class="sectitle">Проекты</h2></div>
+    <div class="seclabel reveal">Собрала сама, с нуля, на AI</div>
+    <div class="plist">
+      <a class="prow reveal" href="https://t.me/Idea_CheckBot"><span class="ic">🚀</span><span><b>Idea CheckBot <span class="live">LIVE</span></b><small>Миниапп: проверь бизнес-гипотезу до того, как сольёшь на неё деньги</small></span><span class="go">→</span></a>
+      <a class="prow reveal" href="https://kvorum-edu.ru/"><span class="ic">💅</span><span><b>Кворум</b><small>Образовательный продукт по вайбкодингу — собрала сама и обучала других</small></span><span class="go">→</span></a>
+      <div class="prow reveal"><span class="ic">🇬🇧</span><span><b>Агент-наставник по английскому</b><small>Персональный AI-репетитор; собираю агентов под любую задачу</small></span></div>
+      <div class="prow reveal"><span class="ic">🛰️</span><span><b>AI Ops</b><small>Агент парсит мои источники и шлёт еженедельный дайджест</small></span></div>
+      <div class="prow reveal"><span class="ic">📚</span><span><b>Система препод + ученик</b><small>Админка для преподавателя + Telegram-бот для учеников</small></span></div>
+      <div class="prow reveal"><span class="ic">🔍</span><span><b>Бот конкурентного анализа</b><small>Рабочий инструмент — собрала примерно за час</small></span></div>
     </div>
   </section>
 
-  <section>
-    <div class="label">Отзывы · участники интенсива Кворум</div>
+  <section id="reviews">
+    <div class="sechead reveal"><span class="secnum">[04]</span><h2 class="sectitle">Отзывы</h2></div>
+    <div class="seclabel reveal">Участники интенсива Кворум</div>
     <div class="quotes">
-      <blockquote><p>«Не спал всю ночь, но встретил утро сверхчеловеком — с готовым виртуальным ветеринаром»</p><cite>Егор · ex-CPO финтех</cite></blockquote>
-      <blockquote><p>«Классно объяснили, как устроены нейронки, агенты и скиллы. Коммьюнити крутое, атмосфера топ»</p><cite>Настя · руководитель направления, ЦУ</cite></blockquote>
-      <blockquote><p>«Я вообще далека от IT, пришла понять, что за хайп. В итоге поняла — возможности безграничны»</p><cite>Галина · бизнес-трекер</cite></blockquote>
+      <blockquote class="reveal"><p>«Не спал всю ночь, но встретил утро сверхчеловеком — с готовым виртуальным ветеринаром»</p><cite>Егор · ex-CPO финтех</cite></blockquote>
+      <blockquote class="reveal"><p>«Классно объяснили, как устроены нейронки, агенты и скиллы. Коммьюнити крутое, атмосфера топ»</p><cite>Настя · руководитель направления, ЦУ</cite></blockquote>
+      <blockquote class="reveal"><p>«Я вообще далека от IT, пришла понять, что за хайп. В итоге поняла — возможности безграничны»</p><cite>Галина · бизнес-трекер</cite></blockquote>
     </div>
   </section>
 
-  <section>
-    <div class="label">Обо мне</div>
-    <p class="abouttext">Ушла из найма и иду в своё дело через вайбкодинг — открыто, build in public. Веду подкаст и канал про этот путь: как выбираю идеи, проверяю гипотезы и собираю продукты на AI.</p>
-    <div class="linklist">
-      <a class="lrow" href="#"><span class="ic">🎧</span><span><b>Подкаст «Путь, который нравится» <span class="todo">нужна ссылка</span></b><small>С Настей исследуем с гостями, как любить своё дело и реализовывать мечты 🥤</small></span><span class="go">→</span></a>
-      <a class="lrow" href="#"><span class="ic">▶️</span><span><b>«Путь, который нравится» — YouTube <span class="todo">нужна ссылка</span></b><small>Тот же подкаст, но в видеоформате</small></span><span class="go">→</span></a>
-      <a class="lrow" href="https://t.me/nikshtefan"><span class="ic">📣</span><span><b>Канал @nikshtefan</b><small>Про путь из найма в своё через вайбкодинг — build in public</small></span><span class="go">→</span></a>
+  <section id="about">
+    <div class="sechead reveal"><span class="secnum">[05]</span><h2 class="sectitle">Обо мне</h2></div>
+    <p class="abouttext reveal">Ушла из найма и иду в своё дело через вайбкодинг — открыто, build in public. Веду подкаст и канал про этот путь: как выбираю идеи, проверяю гипотезы и собираю продукты на AI.</p>
+    <div class="plist">
+      <a class="prow reveal" href="#"><span class="ic">🎧</span><span><b>Подкаст «Путь, который нравится»</b><small>С Настей исследуем с гостями, как любить своё дело и реализовывать мечты · нужна ссылка</small></span><span class="go">→</span></a>
+      <a class="prow reveal" href="#"><span class="ic">▶️</span><span><b>Тот же подкаст на YouTube</b><small>Видеоформат · нужна ссылка</small></span><span class="go">→</span></a>
+      <a class="prow reveal" href="https://t.me/nikshtefan"><span class="ic">📣</span><span><b>Канал @nikshtefan</b><small>Про путь из найма в своё через вайбкодинг — build in public</small></span><span class="go">→</span></a>
     </div>
   </section>
-
-  <div class="cta">
-    <div class="label">Как начать</div>
-    <h2>Есть идея или задача, где AI бы помог?<br>Напиши — разберу бесплатно за 20 минут.</h2>
-    <div class="btns" style="justify-content:center">
-      <a class="btn primary" href="https://t.me/kvazarchIk">✈️ Написать в Telegram</a>
-      <a class="btn" href="mailto:nik.shtefan@gmail.com">✉️ nik.shtefan@gmail.com</a>
-    </div>
-  </div>
-
-  <footer>Ника Штефан · придумываю и собираю AI-решения · @kvazarchIk</footer>
 
 </div>
+
+<div class="cta" id="contact">
+  <div class="secnum" style="margin-bottom:14px">[06] — Как начать</div>
+  <h2>Есть идея или задача,<br>где AI бы помог?</h2>
+  <div class="cbtns">
+    <a class="cbtn" href="https://t.me/kvazarchIk">✈️ Telegram @kvazarchIk</a>
+    <a class="cbtn b2" href="mailto:nik.shtefan@gmail.com">✉️ nik.shtefan@gmail.com</a>
+  </div>
+</div>
+
+<footer>Ника Штефан · придумываю и собираю AI-решения · @kvazarchIk</footer>
+
+<script>
+  const io=new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
