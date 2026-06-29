@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ника Штефан — придумываю и собираю AI-решения</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f6f2; --card:#ffffff; --ink:#18180f; --muted:#7c766c;
+    --line:#e7e2d8; --accent:#e05c2a; --accent-soft:#fbeee6; --green:#3db87a;
+    --sans:'Geist',system-ui,-apple-system,sans-serif;
+    --serif:'Playfair Display',Georgia,serif;
+    --mono:'Geist Mono','Courier New',monospace;
+    --hand:'Caveat',cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 44px}
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  .label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
+  a{color:inherit}
+
+  /* hero — 2 columns */
+  .hero{padding:64px 0 50px;border-top:none;display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:center}
+  .hero h1{font-family:var(--serif);font-weight:800;font-size:52px;line-height:1.04;letter-spacing:-.01em;margin-bottom:16px}
+  .role{font-family:var(--mono);color:var(--accent);font-size:14px;margin-bottom:22px}
+  .pitch{font-size:21px;color:#3a352e}
+  .hand{font-family:var(--hand);font-size:26px;color:var(--accent);margin-top:16px;transform:rotate(-1.5deg);display:inline-block}
+  .loc{color:var(--muted);font-size:15px;margin-top:20px}
+  /* hero side card */
+  .herocard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;text-align:center}
+  .avatar{width:96px;height:96px;border-radius:9999px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 18px;border:1px solid var(--line)}
+  .herocard .tags{justify-content:center;margin-top:0;margin-bottom:22px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);border-radius:9999px;padding:6px 13px;font-size:12px;color:#5a544b}
+  .btns{display:flex;flex-wrap:wrap;gap:10px}
+  .herocard .btns{flex-direction:column}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:9999px;font-weight:600;font-size:15px;text-decoration:none;transition:.15s;border:1px solid var(--line);background:#fff}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  h3{font-family:var(--serif);font-weight:700;font-size:21px;margin-bottom:8px}
+
+  /* services / proof / quotes / links — auto-fill grids that USE the width */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;transition:.15s}
+  .card:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .card p{color:var(--muted);font-size:15px}
+  .price{font-family:var(--mono);display:inline-block;margin-top:16px;font-weight:500;font-size:13px;color:var(--accent);background:var(--accent-soft);padding:5px 12px;border-radius:9999px}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:26px}
+  .stat .num{font-family:var(--serif);font-weight:800;font-size:34px;letter-spacing:-.02em}
+  .stat .lab{font-size:13px;color:var(--muted);margin-top:2px}
+  .exp p{color:#3a352e;font-size:16.5px;margin-bottom:11px;max-width:880px}
+  .exp .accent{color:var(--accent);font-weight:600}
+
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .chip b{font-size:15px}
+  .chip span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+  a.chip{display:block;text-decoration:none;transition:.15s}
+  a.chip:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .live{font-family:var(--mono);font-size:10px;font-weight:500;color:#fff;background:var(--green);padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:middle;letter-spacing:.05em}
+
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  blockquote{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:16px;padding:18px 22px}
+  blockquote p{font-size:15.5px}
+  blockquote cite{font-family:var(--mono);display:block;color:var(--muted);font-size:12.5px;margin-top:10px;font-style:normal}
+
+  .linklist{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px}
+  .lrow{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-decoration:none;transition:.15s}
+  .lrow:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .lrow .ic{font-size:22px;line-height:1}
+  .lrow b{font-size:15.5px}
+  .lrow small{display:block;color:var(--muted);font-size:13px;margin-top:2px;font-weight:400}
+  .lrow .go{margin-left:auto;color:var(--accent);font-size:20px}
+  .todo{font-family:var(--mono);color:#b45309;background:#fdf3e3;font-size:10px;padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:middle}
+
+  .cta{background:var(--ink);color:#fff;border-radius:24px;padding:48px 30px;text-align:center;margin:8px 0;border:none}
+  .cta .label{color:#8d867a}
+  .cta h2{font-family:var(--serif);font-weight:700;font-size:30px;max-width:640px;margin:0 auto 26px;color:#fff;line-height:1.3}
+  .cta .btns{justify-content:center}
+  .cta .btn{background:#2a2722;border-color:#3a352e;color:#fff}
+  .cta .btn.primary{background:var(--accent);border-color:var(--accent)}
+
+  footer{padding:34px 0;color:var(--muted);font-size:13px;text-align:center;font-family:var(--mono)}
+
+  @media(max-width:860px){
+    .wrap{padding:0 22px}
+    .hero{grid-template-columns:1fr;gap:30px;padding:48px 0 36px}
+    .hero h1{font-size:38px}.pitch{font-size:18px}
+    .herocard .btns{flex-direction:row;flex-wrap:wrap}
+    .stats{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="herotext">
+      <h1>Ника Штефан</h1>
+      <div class="role">Founder, AI / vibe coding · ex-Product Lead Т-Банк</div>
+      <p class="pitch">Придумываю и собираю AI-решения. Приходишь с идеей или задачей — через дискавери понимаю, что реально нужно, и собираю работающее на AI за 2–4 недели.</p>
+      <div class="hand">не «построю что угодно» — а «построю то, что нужно» ✨</div>
+      <div class="loc">📍 Тбилиси · работаю с русскоязычными фаундерами и бизнесом</div>
+    </div>
+    <aside class="herocard">
+      <div class="avatar">👩🏻‍💻</div>
+      <div class="tags">
+        <span class="tag">Discovery</span>
+        <span class="tag">Vibe coding</span>
+        <span class="tag">AI-агенты</span>
+        <span class="tag">MVP</span>
+      </div>
+      <div class="btns">
+        <a class="btn primary" href="https://t.me/kvazarchIk">✈️ Написать в Telegram</a>
+        <a class="btn" href="mailto:nik.shtefan@gmail.com">✉️ Почта</a>
+        <a class="btn" href="https://t.me/nikshtefan">📣 Канал</a>
+      </div>
+    </aside>
+  </header>
+
+  <section>
+    <div class="label">Чем помогаю</div>
+    <div class="cards">
+      <div class="card">
+        <h3>Идея → прототип + проверка</h3>
+        <p>Фаундеру: от идеи до рабочего прототипа, который можно показать людям, и проверки спроса. Чтобы не потратить полгода на то, что не нужно.</p>
+        <span class="price">от 120 000 ₽ · 2–4 недели</span>
+      </div>
+      <div class="card">
+        <h3>AI-решение / агент под задачу</h3>
+        <p>Бизнесу: придумываю и собираю инструмент, автоматизацию или AI-агента под твою конкретную боль.</p>
+        <span class="price">от 60 000 ₽ · 2–4 недели</span>
+      </div>
+      <div class="card">
+        <h3>Разбор + план</h3>
+        <p>Посмотрю твою идею или задачу, честно скажу что строить (и стоит ли) и дам конкретный план. Лучший вход — минимальный риск.</p>
+        <span class="price">от 20 000 ₽ · 2–3 дня</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="exp">
+    <div class="label">Опыт</div>
+    <div class="stats">
+      <div class="stat"><div class="num">8+</div><div class="lab">лет в продуктах</div></div>
+      <div class="stat"><div class="num">13 млн</div><div class="lab">клиентов в Т-Банке</div></div>
+      <div class="stat"><div class="num">350+</div><div class="lab">команд с Discovery</div></div>
+      <div class="stat"><div class="num">1500+</div><div class="lab">продактов обучила</div></div>
+    </div>
+    <p><span class="accent">Product Lead в Т-Банке</span> — стратегия и продуктовый опыт 6 клиентских сегментов Мобильного банка, команда 70+.</p>
+    <p><span class="accent">Head of Product Discovery</span> — построила систему Discovery в банке с нуля и масштабировала на сотни команд. Совокупный эффект работ — сотни млн ₽.</p>
+    <p>«Понять, что реально нужно строить» — это то, что я годами ставила на поток в банке. Теперь делаю это для тебя и сама же собираю решение на AI. Преподаю продакт-менеджмент в Центральном Университете.</p>
+  </section>
+
+  <section>
+    <div class="label">Что я собрала · сама, на AI</div>
+    <div class="grid3">
+      <a class="chip" href="https://t.me/Idea_CheckBot"><b>Idea CheckBot <span class="live">LIVE</span></b><span>Telegram-приложение: проверяет бизнес-идею за 5 минут →</span></a>
+      <a class="chip" href="https://kvorum-edu.ru/#cases"><b>Контроль сделок <span class="live">LIVE</span></b><span>B2B-инструмент для агентов недвижимости — собрала за час →</span></a>
+      <div class="chip"><b>Агент-наставник по английскому</b><span>персональный AI-репетитор; собираю агентов под любую задачу</span></div>
+      <div class="chip"><b>AI Ops</b><span>агент парсит источники и шлёт еженедельный дайджест</span></div>
+      <div class="chip"><b>Система препод + ученик</b><span>админка для преподавателя + бот для учеников</span></div>
+      <div class="chip"><b>A/B платёжного флоу</b><span>кейс C-level: CR +8 п.п., GMV +30%+</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Отзывы</div>
+    <div class="quotes">
+      <blockquote><p>«Не спал всю ночь, но встретил утро сверхчеловеком — с готовым виртуальным ветеринаром»</p><cite>Егор · ex-CPO финтех</cite></blockquote>
+      <blockquote><p>«Классно объяснили, как устроены нейронки, агенты и скиллы. Коммьюнити крутое, атмосфера топ»</p><cite>Настя · руководитель направления, ЦУ</cite></blockquote>
+      <blockquote><p>«Я вообще далека от IT, пришла понять, что за хайп. В итоге поняла — возможности безграничны»</p><cite>Галина · бизнес-трекер</cite></blockquote>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Ссылки и проекты</div>
+    <div class="linklist">
+      <a class="lrow" href="https://t.me/Idea_CheckBot"><span class="ic">🚀</span><span><b>Idea CheckBot</b><small>Миниапп: проверь бизнес-гипотезу до того, как сольёшь на неё деньги</small></span><span class="go">→</span></a>
+      <a class="lrow" href="https://kvorum-edu.ru/"><span class="ic">💅</span><span><b>Кворум — интенсив по вайбкодингу</b><small>За 3 дня научим создавать MVP, оптимизировать работу и вкатиться в AI</small></span><span class="go">→</span></a>
+      <a class="lrow" href="#"><span class="ic">🎧</span><span><b>Подкаст «Путь, который нравится» <span class="todo">нужна ссылка</span></b><small>С Настей исследуем с гостями, как любить своё дело и реализовывать мечты 🥤</small></span><span class="go">→</span></a>
+      <a class="lrow" href="#"><span class="ic">▶️</span><span><b>«Путь, который нравится» — YouTube <span class="todo">нужна ссылка</span></b><small>Тот же подкаст, но в видеоформате</small></span><span class="go">→</span></a>
+      <a class="lrow" href="https://t.me/nikshtefan"><span class="ic">📣</span><span><b>Канал @nikshtefan</b><small>Про путь из найма в своё через вайбкодинг — build in public</small></span><span class="go">→</span></a>
+      <a class="lrow" href="https://t.me/kvazarchIk"><span class="ic">✈️</span><span><b>Telegram @kvazarchIk</b><small>Личные сообщения — написать мне напрямую</small></span><span class="go">→</span></a>
+      <a class="lrow" href="mailto:nik.shtefan@gmail.com"><span class="ic">✉️</span><span><b>nik.shtefan@gmail.com</b><small>Почта</small></span><span class="go">→</span></a>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div class="label">Как начать</div>
+    <h2>Есть идея или задача, где AI бы помог?<br>Напиши — разберу бесплатно за 20 минут.</h2>
+    <div class="btns" style="justify-content:center">
+      <a class="btn primary" href="https://t.me/kvazarchIk">✈️ Написать в Telegram</a>
+      <a class="btn" href="mailto:nik.shtefan@gmail.com">✉️ nik.shtefan@gmail.com</a>
+    </div>
+  </div>
+
+  <footer>Ника Штефан · придумываю и собираю AI-решения · @kvazarchIk</footer>
+
+</div>
+</body>
+</html>
