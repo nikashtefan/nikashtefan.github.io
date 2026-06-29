@@ -15,6 +15,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:var(--body);background:var(--green);color:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   .wrap{max-width:1180px;margin:0 auto;padding:0 36px}
   a{color:inherit;text-decoration:none}
   img{display:block;max-width:100%}
@@ -44,7 +45,7 @@
   .fct .v{font-size:15.5px}
   @media(max-width:760px){.fct{grid-template-columns:1fr;gap:2px}}
 
-  section{padding:64px 0}
+  section{padding:104px 0}
   .stitle{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4vw,44px);line-height:1.02;margin-bottom:8px}
   .ssub{font-family:var(--hand);color:var(--yellow);font-size:26px;transform:rotate(-2deg);display:inline-block;margin-bottom:26px}
 
@@ -62,12 +63,12 @@
   .card:hover{background:var(--yellow);color:var(--ink);transform:rotate(-1deg)}
   .card:hover .pr{color:var(--ink)}
   .card h4{font-family:var(--disp);font-weight:600;font-size:19px;margin-bottom:8px}
-  .card p{font-size:14.5px}
-  .pr{font-family:var(--hand);font-size:21px;color:var(--yellow);margin-top:12px;display:block}
+  .card p{font-size:15.5px}
+  .pr{font-family:var(--hand);font-size:21px;color:var(--cream);margin-top:12px;display:block}
   .note{font-family:var(--hand);font-size:22px;color:var(--yellow);margin-top:22px;transform:rotate(-1deg)}
 
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:30px}
-  .num{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,40px);color:var(--yellow);white-space:nowrap}
+  .num{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,40px);color:var(--cream);white-space:nowrap}
   .lab{font-size:13px;opacity:.85;margin-top:4px}
   .exp p{font-size:16.5px;max-width:880px;margin-bottom:12px}
   .exp b{color:var(--yellow)}
@@ -77,12 +78,12 @@
   .proj:hover{transform:rotate(-1deg)}
   .proj .ic{font-size:22px}
   .proj b{font-family:var(--disp);font-weight:600;font-size:16px}
-  .proj small{display:block;color:#42531f;font-size:13.5px;margin-top:2px}
+  .proj small{display:block;color:#42531f;font-size:14.5px;margin-top:2px}
 
   .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
   blockquote{background:var(--green2);border:2px solid var(--cream);border-radius:20px;padding:22px}
   blockquote p{font-size:15.5px}
-  blockquote cite{font-family:var(--hand);font-size:20px;color:var(--yellow);display:block;margin-top:10px;font-style:normal}
+  blockquote cite{font-family:var(--hand);font-size:20px;color:rgba(245,241,228,.78);display:block;margin-top:10px;font-style:normal}
 
   .cta{background:var(--yellow);color:var(--ink);border-radius:30px;padding:60px 30px;text-align:center;margin:20px 0}
   .cta h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4.4vw,48px);line-height:1.02;margin-bottom:14px}
@@ -93,7 +94,15 @@
   .cbtn:hover{transform:translateY(-2px)}
   footer{font-family:var(--hand);font-size:22px;color:var(--yellow);text-align:center;padding:24px 0}
 
-  @media(max-width:760px){.wrap{padding:0 20px}.herogrid{grid-template-columns:1fr}.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+  .cred{font-size:15px;color:var(--cream);opacity:.88;margin-top:16px;max-width:660px;line-height:1.5}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+  .step{background:var(--green2);border:2px solid var(--cream);border-radius:20px;padding:24px}
+  .step .snum{font-family:var(--disp);font-weight:700;font-size:30px;color:var(--yellow);margin-bottom:10px}
+  .step b{font-family:var(--disp);font-weight:600;font-size:19px;display:block;margin-bottom:6px}
+  .step p{font-size:15px;opacity:.9}
+  .midbtn{display:inline-block;background:var(--yellow);color:var(--ink);font-family:var(--disp);font-weight:600;font-size:18px;padding:14px 28px;border-radius:999px;transition:.2s}
+  .midbtn:hover{transform:translateY(-2px)}
+  @media(max-width:760px){.wrap{padding:0 20px}.herogrid{grid-template-columns:1fr}.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}section{padding:72px 0}}
 </style>
 </head>
 <body>
@@ -108,6 +117,7 @@
   <header class="hero">
     <div class="scrawl reveal">привет, я Ника 👋</div>
     <h1 class="reveal">придумываю и собираю<br><span class="accentword">AI-решения</span></h1>
+    <div class="cred reveal">ex-Product Lead в Т-Банке · построила Discovery для 350+ команд · обучила 1500+ продактов</div>
     <div class="herogrid">
       <div>
         <p class="lead reveal">Приходишь с идеей или задачей — через дискавери понимаю, что реально нужно, и собираю работающее на AI за <span class="hl">2–4 недели</span>. Не «построю что угодно» — а «построю то, что нужно».</p>
@@ -150,16 +160,17 @@
       <div class="card reveal"><h4>Менторинг</h4><p>по дискавери и вайбкодингу, один на один</p><span class="pr">разовые сессии</span></div>
     </div>
     <div class="note reveal">стоимость обсуждаем под задачу 🙂</div>
+    <div style="margin-top:42px"><a class="midbtn reveal" href="https://t.me/kvazarchIk">Обсудить задачу →</a></div>
   </section>
 
   <section id="exp" class="exp">
     <div class="ssub reveal">немного фактов →</div>
     <div class="stitle reveal" style="margin-bottom:24px">Опыт</div>
     <div class="stats reveal" style="margin-bottom:30px">
-      <div><div class="num">8+</div><div class="lab">лет в продуктах</div></div>
-      <div><div class="num">13 млн</div><div class="lab">клиентов — вела их продуктовый опыт</div></div>
-      <div><div class="num">350+</div><div class="lab">команд внедрили Discovery</div></div>
-      <div><div class="num">1500+</div><div class="lab">продактов обучила</div></div>
+      <div><div class="num">8+</div><div class="lab">лет в IT-продуктах</div></div>
+      <div><div class="num">13 млн</div><div class="lab">клиентов — улучшала их опыт в мобильном приложении</div></div>
+      <div><div class="num">350+</div><div class="lab">команд обучила Discovery и разработке продуктов</div></div>
+      <div><div class="num">1500+</div><div class="lab">продактов обучила лично</div></div>
     </div>
     <p class="reveal"><b>Product Lead в Т-Банке</b> — отвечала за клиентский опыт продуктов для 13 млн клиентов (6 сегментов Мобильного банка), команда 70+.</p>
     <p class="reveal"><b>Head of Product Discovery</b> — построила с нуля систему Discovery в Т-Банке, масштабировала на 350+ команд и обучила 1500+ продактов. Эффект работ — сотни млн ₽.</p>
@@ -179,6 +190,17 @@
     </div>
   </section>
 
+  <section id="process">
+    <div class="ssub reveal">как всё проходит →</div>
+    <div class="stitle reveal" style="margin-bottom:26px">Как работаю</div>
+    <div class="steps">
+      <div class="step reveal"><div class="snum">01</div><b>Бесплатный разбор</b><p>20 минут: рассказываешь идею или задачу, честно говорю — стоит ли и как</p></div>
+      <div class="step reveal"><div class="snum">02</div><b>План</b><p>Фиксирую, что именно строим и почему</p></div>
+      <div class="step reveal"><div class="snum">03</div><b>Спринт</b><p>Собираю на AI, показываю по ходу, не пропадаю</p></div>
+      <div class="step reveal"><div class="snum">04</div><b>Результат</b><p>Работающее решение и что делать дальше</p></div>
+    </div>
+  </section>
+
   <section id="reviews">
     <div class="ssub reveal">что говорят →</div>
     <div class="stitle reveal" style="margin-bottom:24px">Отзывы участников Кворума</div>
@@ -192,7 +214,7 @@
   <section id="about">
     <div class="ssub reveal">кто я →</div>
     <div class="stitle reveal" style="margin-bottom:20px">Обо мне</div>
-    <p class="exp reveal" style="font-size:17px;max-width:760px;margin-bottom:22px">Ушла из найма и иду в своё дело через вайбкодинг — открыто, build in public. Веду подкаст и канал про этот путь.</p>
+    <p class="exp reveal" style="font-size:17px;max-width:760px;margin-bottom:22px">Скажу честно — я в начале пути в своё дело и прохожу его открыто: ушла из найма, иду через вайбкодинг, со всеми качелями. Пишу про это в подкасте и канале.</p>
     <div class="plist">
       <a class="proj reveal" href="#"><span class="ic">🎧</span><span><b>Подкаст «Путь, который нравится»</b><small>С Настей — про любимое дело и мечты · нужна ссылка</small></span></a>
       <a class="proj reveal" href="https://www.youtube.com/@nika.shtefan" target="_blank"><span class="ic">▶️</span><span><b>YouTube · @nika.shtefan</b><small>«Путь, который нравится» в видеоформате</small></span></a>
