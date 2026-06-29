@@ -51,6 +51,8 @@
   .card:hover{transform:translateY(-2px);border-color:var(--accent)}
   .card p{color:var(--muted);font-size:15px}
   .price{font-family:var(--mono);display:inline-block;margin-top:16px;font-weight:500;font-size:13px;color:var(--accent);background:var(--accent-soft);padding:5px 12px;border-radius:9999px}
+  .note{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:18px}
+  .abouttext{font-size:16.5px;color:#3a352e;max-width:760px;margin-bottom:22px}
 
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:26px}
   .stat .num{font-family:var(--serif);font-weight:800;font-size:34px;letter-spacing:-.02em}
@@ -131,19 +133,25 @@
       <div class="card">
         <h3>Идея → прототип + проверка</h3>
         <p>Фаундеру: от идеи до рабочего прототипа, который можно показать людям, и проверки спроса. Чтобы не потратить полгода на то, что не нужно.</p>
-        <span class="price">от 120 000 ₽ · 2–4 недели</span>
+        <span class="price">2–4 недели</span>
       </div>
       <div class="card">
         <h3>AI-решение / агент под задачу</h3>
         <p>Бизнесу: придумываю и собираю инструмент, автоматизацию или AI-агента под твою конкретную боль.</p>
-        <span class="price">от 60 000 ₽ · 2–4 недели</span>
+        <span class="price">2–4 недели</span>
       </div>
       <div class="card">
         <h3>Разбор + план</h3>
         <p>Посмотрю твою идею или задачу, честно скажу что строить (и стоит ли) и дам конкретный план. Лучший вход — минимальный риск.</p>
-        <span class="price">от 20 000 ₽ · 2–3 дня</span>
+        <span class="price">2–3 дня</span>
+      </div>
+      <div class="card">
+        <h3>Менторинг</h3>
+        <p>Один на один — помогу с продуктовым дискавери и с вайбкодингом: как находить и проверять идеи и как собирать решения на AI самому.</p>
+        <span class="price">разовые сессии</span>
       </div>
     </div>
+    <p class="note">Стоимость и формат обсуждаем под твою конкретную задачу.</p>
   </section>
 
   <section class="exp">
@@ -160,19 +168,19 @@
   </section>
 
   <section>
-    <div class="label">Что я собрала · сама, на AI</div>
-    <div class="grid3">
-      <a class="chip" href="https://t.me/Idea_CheckBot"><b>Idea CheckBot <span class="live">LIVE</span></b><span>Telegram-приложение: проверяет бизнес-идею за 5 минут →</span></a>
-      <a class="chip" href="https://kvorum-edu.ru/#cases"><b>Контроль сделок <span class="live">LIVE</span></b><span>B2B-инструмент для агентов недвижимости — собрала за час →</span></a>
-      <div class="chip"><b>Агент-наставник по английскому</b><span>персональный AI-репетитор; собираю агентов под любую задачу</span></div>
-      <div class="chip"><b>AI Ops</b><span>агент парсит источники и шлёт еженедельный дайджест</span></div>
-      <div class="chip"><b>Система препод + ученик</b><span>админка для преподавателя + бот для учеников</span></div>
-      <div class="chip"><b>A/B платёжного флоу</b><span>кейс C-level: CR +8 п.п., GMV +30%+</span></div>
+    <div class="label">Проекты · собрала сама, с нуля, на AI</div>
+    <div class="linklist">
+      <a class="lrow" href="https://t.me/Idea_CheckBot"><span class="ic">🚀</span><span><b>Idea CheckBot <span class="live">LIVE</span></b><small>Миниапп: проверь бизнес-гипотезу до того, как сольёшь на неё деньги</small></span><span class="go">→</span></a>
+      <a class="lrow" href="https://kvorum-edu.ru/"><span class="ic">💅</span><span><b>Кворум — интенсив по вайбкодингу</b><small>Образовательный продукт: собрала сама и обучала других вайбкодингу</small></span><span class="go">→</span></a>
+      <div class="lrow"><span class="ic">🇬🇧</span><span><b>Агент-наставник по английскому</b><small>Персональный AI-репетитор; собираю агентов под любую задачу</small></span></div>
+      <div class="lrow"><span class="ic">🛰️</span><span><b>AI Ops</b><small>Агент парсит мои источники и шлёт еженедельный дайджест</small></span></div>
+      <div class="lrow"><span class="ic">📚</span><span><b>Система препод + ученик</b><small>Админка для преподавателя + Telegram-бот для учеников</small></span></div>
+      <div class="lrow"><span class="ic">🔍</span><span><b>Бот конкурентного анализа</b><small>Рабочий инструмент — собрала примерно за час</small></span></div>
     </div>
   </section>
 
   <section>
-    <div class="label">Отзывы</div>
+    <div class="label">Отзывы · участники интенсива Кворум</div>
     <div class="quotes">
       <blockquote><p>«Не спал всю ночь, но встретил утро сверхчеловеком — с готовым виртуальным ветеринаром»</p><cite>Егор · ex-CPO финтех</cite></blockquote>
       <blockquote><p>«Классно объяснили, как устроены нейронки, агенты и скиллы. Коммьюнити крутое, атмосфера топ»</p><cite>Настя · руководитель направления, ЦУ</cite></blockquote>
@@ -181,15 +189,12 @@
   </section>
 
   <section>
-    <div class="label">Ссылки и проекты</div>
+    <div class="label">Обо мне</div>
+    <p class="abouttext">Ушла из найма и иду в своё дело через вайбкодинг — открыто, build in public. Веду подкаст и канал про этот путь: как выбираю идеи, проверяю гипотезы и собираю продукты на AI.</p>
     <div class="linklist">
-      <a class="lrow" href="https://t.me/Idea_CheckBot"><span class="ic">🚀</span><span><b>Idea CheckBot</b><small>Миниапп: проверь бизнес-гипотезу до того, как сольёшь на неё деньги</small></span><span class="go">→</span></a>
-      <a class="lrow" href="https://kvorum-edu.ru/"><span class="ic">💅</span><span><b>Кворум — интенсив по вайбкодингу</b><small>За 3 дня научим создавать MVP, оптимизировать работу и вкатиться в AI</small></span><span class="go">→</span></a>
       <a class="lrow" href="#"><span class="ic">🎧</span><span><b>Подкаст «Путь, который нравится» <span class="todo">нужна ссылка</span></b><small>С Настей исследуем с гостями, как любить своё дело и реализовывать мечты 🥤</small></span><span class="go">→</span></a>
       <a class="lrow" href="#"><span class="ic">▶️</span><span><b>«Путь, который нравится» — YouTube <span class="todo">нужна ссылка</span></b><small>Тот же подкаст, но в видеоформате</small></span><span class="go">→</span></a>
       <a class="lrow" href="https://t.me/nikshtefan"><span class="ic">📣</span><span><b>Канал @nikshtefan</b><small>Про путь из найма в своё через вайбкодинг — build in public</small></span><span class="go">→</span></a>
-      <a class="lrow" href="https://t.me/kvazarchIk"><span class="ic">✈️</span><span><b>Telegram @kvazarchIk</b><small>Личные сообщения — написать мне напрямую</small></span><span class="go">→</span></a>
-      <a class="lrow" href="mailto:nik.shtefan@gmail.com"><span class="ic">✉️</span><span><b>nik.shtefan@gmail.com</b><small>Почта</small></span><span class="go">→</span></a>
     </div>
   </section>
 
