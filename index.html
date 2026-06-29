@@ -6,11 +6,11 @@
 <title>Ника Штефан — AI + vibe coding (вариант 2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@500;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --green:#5c8a37; --green2:#527d31; --cream:#f5f1e4; --ink:#22300f; --yellow:#f5e24b;
-    --line:rgba(245,241,228,.35); --disp:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --hand:'Caveat',cursive;
+    --line:rgba(245,241,228,.35); --disp:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --hand:'Shantell Sans',cursive;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -102,6 +102,10 @@
   .step p{font-size:15px;opacity:.9}
   .midbtn{display:inline-block;background:var(--yellow);color:var(--ink);font-family:var(--disp);font-weight:600;font-size:18px;padding:14px 28px;border-radius:999px;transition:.2s}
   .midbtn:hover{transform:translateY(-2px)}
+  .stitle{position:relative;display:inline-block}
+  .stitle::after{content:"";position:absolute;left:1%;right:1%;bottom:-16px;height:14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='14' viewBox='0 0 220 14' preserveAspectRatio='none'%3E%3Cpath d='M3 8 q14 -7 28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0' fill='none' stroke='%23f5e24b' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat;background-size:100% 100%}
+  .accentword{position:relative;display:inline-block}
+  .accentword::after{content:"";position:absolute;left:-5%;top:-14%;width:110%;height:132%;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 130' preserveAspectRatio='none'%3E%3Cpath d='M160 8 C60 6 14 40 16 66 C18 98 90 122 168 121 C250 120 308 92 304 60 C300 30 250 9 150 9' fill='none' stroke='%23f5e24b' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%}
   @media(max-width:760px){.wrap{padding:0 20px}.herogrid{grid-template-columns:1fr}.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}section{padding:72px 0}}
 </style>
 </head>
@@ -216,7 +220,7 @@
     <div class="stitle reveal" style="margin-bottom:20px">Обо мне</div>
     <p class="exp reveal" style="font-size:17px;max-width:760px;margin-bottom:22px">Скажу честно — я в начале пути в своё дело и прохожу его открыто: ушла из найма, иду через вайбкодинг, со всеми качелями. Пишу про это в подкасте и канале.</p>
     <div class="plist">
-      <a class="proj reveal" href="#"><span class="ic">🎧</span><span><b>Подкаст «Путь, который нравится»</b><small>С Настей — про любимое дело и мечты · нужна ссылка</small></span></a>
+      <a class="proj reveal" href="https://music.yandex.ru/album/37162362" target="_blank"><span class="ic">🎧</span><span><b>Подкаст «Путь, который нравится»</b><small>С Настей — про любимое дело и мечты, на Яндекс Музыке</small></span></a>
       <a class="proj reveal" href="https://www.youtube.com/@nika.shtefan" target="_blank"><span class="ic">▶️</span><span><b>YouTube · @nika.shtefan</b><small>«Путь, который нравится» в видеоформате</small></span></a>
       <a class="proj reveal" href="https://t.me/nikshtefan"><span class="ic">📣</span><span><b>Канал @nikshtefan</b><small>build in public</small></span></a>
     </div>
@@ -225,7 +229,7 @@
   <div class="cta">
     <div class="scrawl2">давай поговорим →</div>
     <h2>Расскажи свою идею<br>или задачу</h2>
-    <p class="ctasub">Разберу бесплатно за 20 минут — честно скажу, что стоит строить и как. Даже если не сработаемся, уйдёшь с планом.</p>
+    <p class="ctasub">Разберу бесплатно за 20 минут — честно скажу, что стоит строить, и соберу это на AI (вайбкодинг). Даже если не сработаемся, уйдёшь с планом.</p>
     <div class="cbtns">
       <a class="cbtn" href="https://t.me/kvazarchIk">✈️ Telegram @kvazarchIk</a>
       <a class="cbtn" href="mailto:nik.shtefan@gmail.com">✉️ почта</a>
