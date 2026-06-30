@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ника Штефан — придумываю и собираю AI-решения</title>
+<link rel="icon" href="img/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -89,7 +93,8 @@
     border-bottom:1px solid var(--line);
   }
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
-  .brand{font-family:"Oswald",sans-serif;font-weight:700;letter-spacing:.18em;font-size:15px;text-transform:uppercase}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Oswald",sans-serif;font-weight:700;letter-spacing:.18em;font-size:15px;text-transform:uppercase}
+  .brand img{width:28px;height:28px;border-radius:7px;display:block}
   .brand b{color:var(--red)}
   .nav-links{display:flex;gap:30px;font-family:"Oswald",sans-serif;font-weight:500;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
   .nav-links a{position:relative;padding-bottom:2px}
@@ -516,7 +521,7 @@
 <!-- NAV -->
 <nav>
   <div class="wrap nav-in">
-    <div class="brand"><b>НИКА</b> ШТЕФАН</div>
+    <div class="brand"><img src="img/logo.png" alt="Лого Ника Штефан"><span><b>НИКА</b> ШТЕФАН</span></div>
     <div class="nav-links">
       <a href="#dirs">что умею</a>
       <a href="#exp">опыт</a>
