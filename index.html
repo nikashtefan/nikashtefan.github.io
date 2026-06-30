@@ -3,110 +3,499 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ника Штефан — AI + vibe coding (вариант 2)</title>
+<title>Ника Штефан — придумываю и собираю AI-решения</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@500;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --green:#5c8a37; --green2:#527d31; --cream:#f5f1e4; --ink:#22300f; --yellow:#f5e24b;
-    --line:rgba(245,241,228,.35); --disp:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --hand:'Shantell Sans',cursive;
+    --cream:#f4f1e8;
+    --paper:#fffdf7;
+    --ink:#111111;
+    --red:#e8261f;
+    --line:#d8d2c2;
+    --yellow:#f5e24b;
+    --green:#5d8136;
+    --maxw:1280px;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
+  *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:var(--body);background:var(--green);color:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 36px}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Inter",sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
   a{color:inherit;text-decoration:none}
-  img{display:block;max-width:100%}
-  .reveal{opacity:0;transform:translateY(26px) rotate(-.3deg);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+
+  /* ---------- TYPE HELPERS ---------- */
+  .display{
+    font-family:"Unbounded",sans-serif;
+    font-weight:900;
+    line-height:.9;
+    letter-spacing:-.02em;
+    text-transform:lowercase;
+  }
+  .mark{
+    font-family:"Oswald",sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--red);
+  }
+  .mark.ink{color:var(--ink)}
+  .section-h{
+    font-family:"Unbounded",sans-serif;
+    font-weight:800;
+    line-height:.95;
+    letter-spacing:-.02em;
+    font-size:clamp(34px,6vw,84px);
+    text-transform:lowercase;
+    position:relative;
+    display:inline-block;
+  }
+  /* нарисованная от руки каляка-подчёркивание под заголовком */
+  .squiggle{
+    position:absolute;left:-4px;bottom:-.34em;width:108%;height:.4em;
+    overflow:visible;pointer-events:none;
+  }
+  .squiggle path{
+    fill:none;stroke:var(--red);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:560;stroke-dashoffset:560;
+    transition:stroke-dashoffset 1s ease .25s;
+  }
+  .reveal.in .squiggle path,.section-h.in .squiggle path{stroke-dashoffset:0}
+  .red{color:var(--red)}
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  section{position:relative;padding:150px 0;border-top:1px solid var(--line)}
+  .corners{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    gap:16px;margin-bottom:58px;flex-wrap:wrap;
+  }
+  .corners .mid{flex:1;text-align:center}
+  .corners .right{text-align:right}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,241,232,.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+  .brand{font-family:"Oswald",sans-serif;font-weight:700;letter-spacing:.18em;font-size:15px;text-transform:uppercase}
+  .brand b{color:var(--red)}
+  .nav-links{display:flex;gap:30px;font-family:"Oswald",sans-serif;font-weight:500;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+  .nav-links a{position:relative;padding-bottom:2px}
+  .nav-links a:hover{color:var(--red)}
+  .btn{
+    display:inline-block;background:var(--red);color:#fff;
+    font-family:"Oswald",sans-serif;font-weight:600;font-size:13px;
+    letter-spacing:.14em;text-transform:uppercase;
+    padding:11px 20px;border:1px solid var(--red);
+    transition:.18s;
+  }
+  .btn:hover{background:var(--ink);border-color:var(--ink)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:#fff}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:70px;padding-bottom:60px}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.35fr .9fr;gap:56px;align-items:start}
+  .doodle-bird{position:absolute;top:-30px;right:33%;transform:rotate(-9deg);z-index:3;pointer-events:none}
+  @media(max-width:920px){.doodle-bird{display:none}}
+  .hero h1{
+    font-family:"Unbounded",sans-serif;font-weight:900;color:var(--red);
+    line-height:.9;letter-spacing:-.03em;text-transform:lowercase;
+    font-size:clamp(42px,7.6vw,118px);
+    margin-bottom:30px;
+  }
+  /* приветствие — сразу «про Нику», как на зелёном сайте */
+  .hello{font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(20px,3vw,32px);line-height:1.2;text-transform:lowercase;margin-bottom:20px;color:var(--ink)}
+  .hello .mk{background:var(--green);color:var(--cream);padding:0 .26em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  /* акцентное слово в заголовке с рисованным овалом */
+  .h1word{position:relative;display:inline-block}
+  .h1circle{position:absolute;left:-5%;top:-10%;width:110%;height:130%;pointer-events:none;overflow:visible}
+  .h1circle path{fill:none;stroke:var(--red);stroke-width:4;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;transition:stroke-dashoffset 1.1s ease .4s}
+  .reveal.in .h1circle path{stroke-dashoffset:0}
+  @media(prefers-reduced-motion:reduce){.h1circle path{transition:none;stroke-dashoffset:0}}
+  .credline{font-family:"Oswald",sans-serif;font-weight:500;font-size:15px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:30px;line-height:1.5}
+  .lead{font-size:clamp(18px,2.1vw,21px);line-height:1.6;max-width:560px;font-weight:400}
+  .lead b{font-weight:700}
+  .lead .hl{background:var(--red);color:#fff;padding:1px 8px;font-weight:600;white-space:nowrap}
+  .hero-photo{position:relative;max-width:330px;margin-left:auto}
+  .hero-photo img{
+    width:100%;display:block;
+    border:6px solid var(--ink);
+    transform:rotate(2.2deg);
+    filter:grayscale(.15) contrast(1.05);
+    box-shadow:14px 14px 0 var(--red);
+  }
+  .photo-tag{
+    position:absolute;left:-6px;bottom:-26px;
+    background:var(--red);color:#fff;
+    font-family:"Oswald",sans-serif;font-weight:600;font-size:11px;
+    letter-spacing:.2em;text-transform:uppercase;padding:6px 12px;
+    transform:rotate(2.2deg);
+  }
+
+  /* ---------- FACTS ---------- */
+  .facts{margin-top:110px;border-top:2px solid var(--ink)}
+  .fact{
+    display:grid;grid-template-columns:200px 1fr;gap:30px;
+    padding:26px 0;border-bottom:1px solid var(--line);align-items:baseline;
+  }
+  .fact-k{font-family:"Oswald",sans-serif;font-weight:600;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+  .fact-v{font-size:18px;line-height:1.55;max-width:640px}
+
+  /* ---------- TWO DIRECTIONS ---------- */
+  .dirs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--ink)}
+  .dir{padding:48px 42px;transition:transform .25s ease,background .25s ease}
+  .dir:first-child{border-right:2px solid var(--ink)}
+  .dir:hover{background:var(--paper);transform:translateY(-4px)}
+  .dir .num{font-family:"Unbounded",sans-serif;font-weight:800;color:var(--red);font-size:46px;line-height:1;margin-bottom:22px}
+  .dir h3{font-family:"Unbounded",sans-serif;font-weight:700;font-size:26px;line-height:1.05;text-transform:lowercase;margin-bottom:16px}
+  .dir p{font-size:17px;line-height:1.6}
+  .together{
+    text-align:center;margin-top:44px;
+    font-family:"Oswald",sans-serif;font-weight:500;font-size:clamp(16px,2.4vw,24px);
+    letter-spacing:.04em;text-transform:uppercase;
+  }
+  .together b{color:var(--red);font-weight:700}
+
+  /* ---------- FORMATS ---------- */
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--ink);border-bottom:none}
+  .card{padding:34px 28px;border-bottom:2px solid var(--ink);border-right:1px solid var(--line);
+    position:relative;transition:transform .25s ease,background .25s ease,box-shadow .25s ease}
+  .card:last-child{border-right:none}
+  .card:hover{background:var(--paper);transform:translateY(-4px);box-shadow:inset 5px 0 0 var(--red);z-index:2}
+  .card h4{font-family:"Unbounded",sans-serif;font-weight:700;font-size:20px;line-height:1.05;text-transform:lowercase;margin-bottom:16px;min-height:46px}
+  .card p{font-size:15px;line-height:1.55;margin-bottom:22px}
+  .card .term{font-family:"Oswald",sans-serif;font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);transition:.2s}
+  .card:hover .term{letter-spacing:.2em}
+  .formats-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:42px;flex-wrap:wrap}
+  .formats-foot p{font-family:"Oswald",sans-serif;font-weight:400;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+
+  /* ---------- STATS ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);margin-bottom:56px}
+  .stat{padding:34px 24px;border-right:1px solid var(--line);transition:background .25s ease}
+  .stat:last-child{border-right:none}
+  .stat:hover{background:var(--paper)}
+  .stat .big{font-family:"Unbounded",sans-serif;font-weight:800;color:var(--red);font-size:clamp(34px,4.6vw,56px);line-height:1;
+    display:inline-block;transform-origin:left center;transition:transform .25s ease}
+  .stat:hover .big{transform:scale(1.08)}
+  .stat .lbl{font-size:14px;line-height:1.45;margin-top:12px}
+  .exp-text{display:grid;grid-template-columns:1fr 1fr;gap:38px 56px;margin-top:14px}
+  .exp-text p{font-size:17px;line-height:1.65;max-width:560px}
+  .exp-text b{font-weight:700;color:var(--red)}
+
+  /* ---------- PROJECTS ---------- */
+  .projects{border-top:2px solid var(--ink)}
+  .proj{
+    display:grid;grid-template-columns:42px 1fr 320px auto;gap:24px;align-items:baseline;
+    padding:24px 0;border-bottom:1px solid var(--line);transition:.18s;
+  }
+  .proj:hover{background:var(--paper);padding-left:14px;padding-right:14px}
+  .proj .pn{font-family:"Oswald",sans-serif;font-weight:600;font-size:14px;color:var(--red)}
+  .proj .pt{font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(20px,2.6vw,30px);text-transform:lowercase;line-height:1}
+  .proj .pd{font-size:15px;line-height:1.45;color:#333}
+  .proj .pl{font-family:"Oswald",sans-serif;font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+  .proj a.pl:hover{color:var(--red)}
+
+  /* ---------- STEPS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--ink)}
+  .step{padding:38px 28px;border-right:1px solid var(--line);position:relative;
+    transition:transform .25s ease,background .25s ease,box-shadow .25s ease}
+  .step:last-child{border-right:none}
+  .step:hover{background:var(--paper);transform:translateY(-4px);box-shadow:inset 5px 0 0 var(--red);z-index:2}
+  .step .sn{font-family:"Unbounded",sans-serif;font-weight:800;color:var(--red);font-size:40px;line-height:1;margin-bottom:20px}
+  .step h4{font-family:"Unbounded",sans-serif;font-weight:700;font-size:19px;text-transform:lowercase;margin-bottom:14px;line-height:1.05}
+  .step p{font-size:15px;line-height:1.55}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink)}
+  .rev{padding:40px 32px;border-right:1px solid var(--line);transition:background .25s ease;display:flex;flex-direction:column}
+  .rev:last-child{border-right:none}
+  .rev:hover{background:var(--paper)}
+  .rev .q{font-family:"Unbounded",sans-serif;font-weight:600;font-size:19px;line-height:1.3;margin-bottom:26px;flex:1 0 auto}
+  .rev .who{margin-top:auto}
+  .rev .who{font-family:"Oswald",sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:start}
+  .about-grid p{font-size:21px;line-height:1.6;max-width:620px}
+  .links-list{border-top:2px solid var(--ink)}
+  .lnk{display:flex;justify-content:space-between;gap:18px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line);transition:.16s}
+  .lnk:hover{color:var(--red);padding-left:10px}
+  .lnk .lt{font-family:"Unbounded",sans-serif;font-weight:700;font-size:20px;text-transform:lowercase;line-height:1.05}
+  .lnk .ld{font-size:14px;color:#333;margin-top:4px}
+  .lnk:hover .ld{color:var(--red)}
+  .lnk .arr{font-family:"Oswald",sans-serif;font-weight:600;font-size:18px}
+
+  /* ---------- CTA ---------- */
+  .cta{text-align:center}
+  .cta h2{
+    font-family:"Unbounded",sans-serif;font-weight:900;color:var(--red);
+    font-size:clamp(38px,8vw,110px);line-height:.9;letter-spacing:-.03em;
+    text-transform:lowercase;margin-bottom:26px;
+  }
+  .cta p{max-width:660px;margin:0 auto 44px;font-size:20px;line-height:1.6}
+  .cta-btns{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .cta-btns .btn{font-size:15px;padding:15px 26px}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:34px 0}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .foot-in .mark{color:var(--ink)}
+
+  /* ---------- KNIT BAND (signature «Жили-были»: вязаный зелёный ландшафт с жёлудями) ---------- */
+  .knit-band{
+    position:relative;height:150px;margin:0;overflow:hidden;
+    background:#5d8136;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.06) 0 2px, rgba(255,255,255,.05) 2px 4px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 3px, transparent 3px 6px);
+  }
+  .knit-band::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:28px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H100 V6 Q95 12 90 6 T80 6 T70 6 T60 6 T50 6 T40 6 T30 6 T20 6 T10 6 T0 6 Z' fill='%23f4f1e8'/%3E%3C/svg%3E") no-repeat;
+    background-size:100% 100%;
+  }
+  .knit-band::after{
+    content:"";position:absolute;bottom:0;left:0;right:0;height:28px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M0 12 H100 V6 Q95 0 90 6 T80 6 T70 6 T60 6 T50 6 T40 6 T30 6 T20 6 T10 6 T0 6 Z' fill='%23f4f1e8'/%3E%3C/svg%3E") no-repeat;
+    background-size:100% 100%;
+  }
+  .knit-acorns{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-around;padding:0 5%}
+  .knit-acorns svg{flex:0 0 auto;filter:drop-shadow(0 3px 0 rgba(0,0,0,.14))}
+  @media(max-width:640px){.knit-band{height:104px}.knit-acorns svg{width:20px;height:27px}}
+
+  /* ---------- GREEN STRIP (большой зелёный экран с иллюстрацией-ландшафтом) ---------- */
+  .green-strip{position:relative;background:var(--green);color:var(--cream);padding:128px 0;overflow:hidden;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 2px, rgba(255,255,255,.04) 2px 4px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 3px, transparent 3px 6px);}
+  .green-strip::before{content:"";position:absolute;top:0;left:0;right:0;height:30px;z-index:1;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H100 V6 Q95 12 90 6 T80 6 T70 6 T60 6 T50 6 T40 6 T30 6 T20 6 T10 6 T0 6 Z' fill='%23f4f1e8'/%3E%3C/svg%3E") no-repeat;background-size:100% 100%}
+  .green-strip::after{content:"";position:absolute;bottom:0;left:0;right:0;height:30px;z-index:1;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M0 12 H100 V6 Q95 0 90 6 T80 6 T70 6 T60 6 T50 6 T40 6 T30 6 T20 6 T10 6 T0 6 Z' fill='%23f4f1e8'/%3E%3C/svg%3E") no-repeat;background-size:100% 100%}
+  .gs-row{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(16px,3vw,46px);align-items:center}
+  .gs-word{font-family:"Unbounded",sans-serif;font-weight:900;font-size:clamp(32px,5.4vw,82px);line-height:.9;text-transform:lowercase;text-align:center;color:var(--cream)}
+  .gs-frame{justify-self:center}
+  .gs-ill{display:block;width:clamp(220px,30vw,360px);height:auto;border:5px solid var(--cream);box-shadow:12px 12px 0 rgba(0,0,0,.18);background:#d9e7bf}
+  .gs-cap{position:relative;z-index:2;text-align:center;margin-top:50px;font-family:"Oswald",sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:clamp(15px,2.1vw,22px);color:var(--cream)}
+  .gs-cap b{color:var(--yellow);font-weight:700}
+  @media(max-width:760px){.gs-row{grid-template-columns:1fr;gap:26px}.green-strip{padding:92px 0}}
+
+  /* ---------- СЕКЦИЯ НА ЗЕЛЁНОМ ФОНЕ ---------- */
+  .sec-green{background:var(--green);color:var(--cream);border-top:none;overflow:hidden;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 2px, rgba(255,255,255,.04) 2px 4px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 3px, transparent 3px 6px);}
+  .sec-green::before{content:"";position:absolute;top:0;left:0;right:0;height:30px;z-index:1;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H100 V6 Q95 12 90 6 T80 6 T70 6 T60 6 T50 6 T40 6 T30 6 T20 6 T10 6 T0 6 Z' fill='%23f4f1e8'/%3E%3C/svg%3E") no-repeat;background-size:100% 100%}
+  .sec-green::after{content:"";position:absolute;bottom:0;left:0;right:0;height:30px;z-index:1;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M0 12 H100 V6 Q95 0 90 6 T80 6 T70 6 T60 6 T50 6 T40 6 T30 6 T20 6 T10 6 T0 6 Z' fill='%23f4f1e8'/%3E%3C/svg%3E") no-repeat;background-size:100% 100%}
+  .sec-green .wrap{position:relative;z-index:2}
+  .sec-green .mark{color:var(--yellow)}
+  .sec-green .section-h{color:var(--cream)}
+  .sec-green .squiggle path{stroke:var(--yellow)}
+  .sec-green .steps{border:none;gap:18px}
+  .sec-green .step{border:3px solid var(--cream)!important;background:rgba(0,0,0,.10);color:var(--cream)}
+  .sec-green .step:hover{background:rgba(255,255,255,.10);transform:translateY(-5px);box-shadow:10px 10px 0 var(--yellow)}
+  .sec-green .step h4{color:var(--cream)}
+  .sec-green .step p{color:var(--cream)}
+  .sec-green .step .sn{color:var(--yellow)}
+  .sec-green .steps-note{color:var(--yellow)}
+  /* форматы на зелёном — отдельные карточки-рамки как на референсе */
+  .sec-green .cards{border:none;gap:18px}
+  .sec-green .card{border:3px solid var(--cream)!important;background:rgba(0,0,0,.10);color:var(--cream)}
+  .sec-green .card:hover{background:rgba(255,255,255,.10);transform:translateY(-5px);box-shadow:10px 10px 0 var(--yellow)}
+  .sec-green .card h4{color:var(--cream)}
+  .sec-green .card p{color:var(--cream)}
+  .sec-green .card .term{color:var(--yellow)}
+  .sec-green .formats-foot p{color:var(--cream)}
+  @media(max-width:920px){.sec-green .card,.sec-green .step{border-right:3px solid var(--cream)!important}}
+
+  /* ---------- SHOWCASE на зелёном (как «NEW COLLECTION / TWO BIRDS») ---------- */
+  .showcase{position:relative;overflow:hidden;background:var(--green);color:var(--cream);
+    margin-top:72px;padding:clamp(30px,4.5vw,54px);
+    background-image:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 2px, rgba(255,255,255,.04) 2px 4px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 3px, transparent 3px 6px);}
+  .showcase-h{font-family:"Unbounded",sans-serif;font-weight:900;font-size:clamp(24px,4vw,46px);line-height:1;text-transform:lowercase;margin-bottom:30px;color:var(--cream)}
+  .showcase .shots{margin-top:0}
+  .showcase .shot{border-color:var(--cream)}
+  .showcase .shot:hover{box-shadow:10px 10px 0 var(--yellow)}
+  .showcase .shot-cap{background:var(--yellow);color:var(--ink)}
+  /* плитки-обложки соцсетей (пока нет реальных скринов) */
+  .media-tile{height:270px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:8px;padding:18px;color:#fff}
+  .media-tile .ic{font-size:40px;line-height:1}
+  .media-tile .nm{font-family:"Unbounded",sans-serif;font-weight:800;font-size:18px;line-height:1.15}
+  .media-tile .sub{font-size:13px;opacity:.9}
+  .tile-yt{background:#131313}
+  .tile-yt .ic{color:#ff3b30}
+  .tile-tg{background:#2aabee}
+  .tile-in{background:#0a66c2}
+  .tile-in .ic{font-family:"Unbounded",sans-serif;font-weight:900;text-transform:lowercase;font-size:34px}
+  .about-me p{font-size:clamp(18px,2vw,21px);line-height:1.6;max-width:620px}
+  /* галерея площадок в «обо мне» — формат 4:5, чтобы скрины не резались */
+  .showcase-media .shot{aspect-ratio:4/5}
+  .showcase-media .shot img{height:100%;object-position:top center}
+
+  /* ---------- REVIEWS NOTE (сноска про Кворум) ---------- */
+  .rev-note{margin-top:28px;font-size:14.5px;line-height:1.55;color:#555;max-width:700px}
+  .rev-note a{color:var(--red);font-weight:600;white-space:nowrap}
+  .rev-note a:hover{text-decoration:underline}
+
+  /* ---------- STEPS NOTE (оплата договорная) ---------- */
+  .steps-note{margin-top:30px;font-family:"Oswald",sans-serif;font-weight:600;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+
+  /* ---------- ABOUT: фото + текст, чтобы блок был очевиден ---------- */
+  .about-me{display:flex;gap:30px;align-items:flex-start}
+  .about-photo{flex:0 0 160px}
+  .about-photo img{width:160px;height:196px;object-fit:cover;border:4px solid var(--ink);transform:rotate(-1.6deg);box-shadow:9px 9px 0 var(--red)}
+  @media(max-width:640px){.about-me{flex-direction:column;gap:22px}.about-photo{flex:none}}
+
+  /* ---------- SHOWCASE: скрины приложений + превью сайтов ---------- */
+  .shots-label{font-family:"Oswald",sans-serif;font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:64px 0 22px}
+  .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .shot{position:relative;display:block;border:3px solid var(--ink);background:#0c0c0c;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+  .shot:hover{transform:translateY(-6px);box-shadow:10px 10px 0 var(--red)}
+  .shot img{width:100%;height:270px;object-fit:cover;object-position:top center;display:block}
+  .shot-cap{position:absolute;left:0;bottom:0;background:var(--red);color:#fff;font-family:"Oswald",sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px}
+  @media(max-width:920px){.shots{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.shots{grid-template-columns:1fr}.shot img{height:240px}}
+
+  /* ---------- COLLAB-блок (готова к сотрудничеству) ---------- */
+  .collab{border:2px solid var(--ink);background:var(--paper);padding:36px 38px;margin-top:54px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+  .collab .ct{font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(20px,2.6vw,28px);text-transform:lowercase;line-height:1.1;max-width:640px}
+  .collab .ct b{color:var(--red)}
+  .collab .cb{flex:0 0 auto}
+
+  /* доп. птички-дудлы в секциях */
+  .doodle-bird2{position:absolute;z-index:4;pointer-events:none;animation:fly2 7s ease-in-out infinite}
+  .doodle-bird2.b-proj{top:64px;left:3%;width:56px;transform:rotate(7deg)}
+  .doodle-bird2.b-about{top:80px;right:5%;width:48px;transform:rotate(-10deg)}
+  @keyframes fly2{0%,100%{transform:translateY(0) rotate(var(--rot,6deg))}50%{transform:translateY(-11px) rotate(calc(var(--rot,6deg) - 4deg))}}
+  .doodle-bird2.b-proj{--rot:7deg}
+  .doodle-bird2.b-about{--rot:-10deg}
+  @media(max-width:920px){.doodle-bird2{display:none}}
+  @media(prefers-reduced-motion:reduce){.doodle-bird2{animation:none}}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
-  nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-family:var(--disp);font-weight:600;font-size:14px}
-  nav .links{display:flex;gap:22px}
-  nav a:hover{color:var(--yellow)}
-  nav .pill{background:var(--yellow);color:var(--ink);padding:8px 16px;border-radius:999px}
-  @media(max-width:760px){nav .links{display:none}}
+  /* СТАГГЕР: карточки/факты/проекты/шаги/отзывы появляются по очереди.
+     Через transition (а не animation), чтобы hover-трансформы карточек не ломались. */
+  .cards .card,.stats .stat,.steps .step,.reviews .rev,.facts .fact,
+  .dirs .dir,.projects .proj,.links-list .lnk,.cta-btns .btn{
+    opacity:0;
+    transition:opacity .6s ease,transform .25s ease,background .25s ease,box-shadow .25s ease,padding .18s ease,color .18s ease,letter-spacing .2s ease;
+  }
+  .cards .card,.stats .stat,.steps .step,.reviews .rev,.facts .fact,.dirs .dir{
+    transform:translateY(18px);
+  }
+  .cards.in .card,.stats.in .stat,.steps.in .step,.reviews.in .rev,.facts.in .fact,
+  .dirs.in .dir,.projects.in .proj,.links-list.in .lnk,.cta-btns.in .btn{opacity:1}
+  .cards.in .card,.stats.in .stat,.steps.in .step,.reviews.in .rev,.facts.in .fact,.dirs.in .dir{transform:none}
+  /* нарастающая задержка появления */
+  .cards.in .card:nth-child(1),.stats.in .stat:nth-child(1),.steps.in .step:nth-child(1),
+  .reviews.in .rev:nth-child(1),.facts.in .fact:nth-child(1),.dirs.in .dir:nth-child(1),
+  .projects.in .proj:nth-child(1),.links-list.in .lnk:nth-child(1),.cta-btns.in .btn:nth-child(1){transition-delay:.06s}
+  .cards.in .card:nth-child(2),.stats.in .stat:nth-child(2),.steps.in .step:nth-child(2),
+  .reviews.in .rev:nth-child(2),.facts.in .fact:nth-child(2),.dirs.in .dir:nth-child(2),
+  .projects.in .proj:nth-child(2),.links-list.in .lnk:nth-child(2),.cta-btns.in .btn:nth-child(2){transition-delay:.14s}
+  .cards.in .card:nth-child(3),.stats.in .stat:nth-child(3),.steps.in .step:nth-child(3),
+  .reviews.in .rev:nth-child(3),.facts.in .fact:nth-child(3),
+  .projects.in .proj:nth-child(3),.links-list.in .lnk:nth-child(3){transition-delay:.22s}
+  .cards.in .card:nth-child(4),.stats.in .stat:nth-child(4),.steps.in .step:nth-child(4),
+  .facts.in .fact:nth-child(4),.projects.in .proj:nth-child(4){transition-delay:.30s}
+  .projects.in .proj:nth-child(5){transition-delay:.38s}
+  .projects.in .proj:nth-child(6){transition-delay:.46s}
+  /* при hover задержка убирается, чтобы реакция была мгновенной */
+  .card:hover,.step:hover,.stat:hover,.rev:hover,.dir:hover,.proj:hover{transition-delay:0s}
 
-  .scrawl{font-family:var(--hand);color:var(--yellow);font-size:clamp(30px,5vw,52px);line-height:.9;transform:rotate(-3deg);display:inline-block}
-  .hero{padding:30px 0 40px}
-  .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(40px,7vw,84px);line-height:1;letter-spacing:-.02em;margin:14px 0 0}
-  .hero .accentword{color:var(--yellow)}
-  .herogrid{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:center;margin-top:36px}
-  .photo{border-radius:26px;overflow:hidden;border:4px solid var(--cream);transform:rotate(1.5deg);max-width:320px;margin-left:auto}
-  .photo img{width:100%;aspect-ratio:4/5;object-fit:cover}
-  .lead{font-size:clamp(17px,2vw,21px);max-width:620px}
-  .lead .hl{background:var(--yellow);color:var(--ink);padding:0 6px;border-radius:4px}
-  .facts{margin-top:26px;display:flex;flex-direction:column}
-  .fct{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
-  .fct:last-child{border-bottom:1px solid var(--line)}
-  .fct .k{font-family:var(--hand);color:var(--yellow);font-size:21px;line-height:1.1}
-  .fct .v{font-size:15.5px}
-  @media(max-width:760px){.fct{grid-template-columns:1fr;gap:2px}}
+  /* ---------- ДУДЛЫ / РИСОВАННЫЕ АКЦЕНТЫ ---------- */
+  .doodle{position:absolute;pointer-events:none;z-index:4;color:var(--red)}
+  .doodle svg{display:block}
+  .doodle-star{top:-14px;right:6%;width:46px;height:46px}
+  .doodle-spark{top:40px;left:-10px;width:34px;height:34px;color:var(--ink)}
+  .doodle-arrow{position:relative;display:inline-block;width:62px;height:30px;color:var(--red);margin-left:-6px;vertical-align:middle}
+  @media(max-width:640px){.doodle-star,.doodle-spark{display:none}}
 
-  section{padding:104px 0}
-  .stitle{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4vw,44px);line-height:1.02;margin-bottom:8px}
-  .ssub{font-family:var(--hand);color:var(--yellow);font-size:26px;transform:rotate(-2deg);display:inline-block;margin-bottom:26px}
+  /* анимация птички — медленный полёт */
+  .doodle-bird{animation:fly 6s ease-in-out infinite}
+  @keyframes fly{0%,100%{transform:rotate(-9deg) translateY(0)}50%{transform:rotate(-5deg) translateY(-12px)}}
 
-  /* pillars */
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  .pill-card{background:var(--cream);color:var(--ink);border-radius:24px;padding:30px}
-  .pill-card .tag{font-family:var(--hand);font-size:26px;color:var(--green);transform:rotate(-2deg);display:inline-block}
-  .pill-card h3{font-family:var(--disp);font-weight:700;font-size:25px;margin:6px 0 12px}
-  .pill-card p{font-size:15.5px;color:#3a4a23}
-  .magic{font-family:var(--hand);font-size:clamp(24px,3.4vw,38px);color:var(--yellow);text-align:center;margin-top:30px;transform:rotate(-1deg)}
+  /* жёлуди — лёгкое покачивание с разными задержками */
+  .knit-acorns svg{animation:sway 4.2s ease-in-out infinite;transform-origin:50% 0}
+  .knit-acorns svg:nth-child(2n){transform:translateY(-20px);animation-delay:.5s;animation-duration:4.8s}
+  .knit-acorns svg:nth-child(3n){transform:translateY(14px);animation-delay:1s;animation-duration:3.8s}
+  .knit-acorns svg:nth-child(5n){transform:translateY(-8px);animation-delay:1.4s}
+  @keyframes sway{0%,100%{rotate:-5deg}50%{rotate:5deg}}
 
-  /* formats */
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-  .card{background:var(--green2);border:2px solid var(--cream);border-radius:22px;padding:24px;transition:.2s}
-  .card:hover{background:var(--yellow);color:var(--ink);transform:rotate(-1deg)}
-  .card:hover .pr{color:var(--ink)}
-  .card h4{font-family:var(--disp);font-weight:600;font-size:19px;margin-bottom:8px}
-  .card p{font-size:15.5px}
-  .pr{font-family:var(--hand);font-size:21px;color:var(--cream);margin-top:12px;display:block}
-  .note{font-family:var(--hand);font-size:22px;color:var(--yellow);margin-top:22px;transform:rotate(-1deg)}
+  /* каляка-звёздочка лёгкое мерцание */
+  .doodle-star svg{animation:twinkle 3.5s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{transform:rotate(0) scale(1);opacity:.95}50%{transform:rotate(18deg) scale(1.12);opacity:1}}
 
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:30px}
-  .num{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,40px);color:var(--cream);white-space:nowrap}
-  .lab{font-size:13px;opacity:.85;margin-top:4px}
-  .exp p{font-size:16.5px;max-width:880px;margin-bottom:12px}
-  .exp b{color:var(--yellow)}
+  /* стрелка возле кнопки слегка подпрыгивает */
+  .doodle-arrow svg{animation:nudge 1.8s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 
-  .plist{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-  .proj{background:var(--cream);color:var(--ink);border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start;transition:.2s}
-  .proj:hover{transform:rotate(-1deg)}
-  .proj .ic{font-size:22px}
-  .proj b{font-family:var(--disp);font-weight:600;font-size:16px}
-  .proj small{display:block;color:#42531f;font-size:14.5px;margin-top:2px}
+  /* уважение к prefers-reduced-motion */
+  @media(prefers-reduced-motion:reduce){
+    .doodle-bird,.knit-acorns svg,.doodle-star svg,.doodle-arrow svg{animation:none}
+    .knit-acorns svg{rotate:0}
+    .squiggle path{transition:none;stroke-dashoffset:0}
+    .cards .card,.stats .stat,.steps .step,.reviews .rev,.facts .fact,.dirs .dir,
+    .projects .proj,.links-list .lnk,.cta-btns .btn{opacity:1;transform:none;transition:none}
+    .reveal{transition:opacity .3s ease}
+    .reveal,.reveal.in{transform:none}
+  }
 
-  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-  blockquote{background:var(--green2);border:2px solid var(--cream);border-radius:20px;padding:22px}
-  blockquote p{font-size:15.5px}
-  blockquote cite{font-family:var(--hand);font-size:20px;color:rgba(245,241,228,.78);display:block;margin-top:10px;font-style:normal}
-
-  .cta{background:var(--yellow);color:var(--ink);border-radius:30px;padding:60px 30px;text-align:center;margin:20px 0}
-  .cta h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4.4vw,48px);line-height:1.02;margin-bottom:14px}
-  .cta .ctasub{font-size:clamp(16px,2vw,20px);max-width:580px;margin:0 auto 26px;color:var(--ink)}
-  .cta .scrawl2{font-family:var(--hand);font-size:30px;color:var(--green);transform:rotate(-2deg);display:inline-block;margin-bottom:22px}
-  .cbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .cbtn{background:var(--ink);color:var(--cream);font-family:var(--disp);font-weight:600;padding:14px 24px;border-radius:999px;transition:.2s}
-  .cbtn:hover{transform:translateY(-2px)}
-  footer{font-family:var(--hand);font-size:22px;color:var(--yellow);text-align:center;padding:24px 0}
-
-  .cred{font-size:15px;color:var(--cream);opacity:.88;margin-top:16px;max-width:660px;line-height:1.5}
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-  .step{background:var(--green2);border:2px solid var(--cream);border-radius:20px;padding:24px}
-  .step .snum{font-family:var(--disp);font-weight:700;font-size:30px;color:var(--yellow);margin-bottom:10px}
-  .step b{font-family:var(--disp);font-weight:600;font-size:19px;display:block;margin-bottom:6px}
-  .step p{font-size:15px;opacity:.9}
-  .midbtn{display:inline-block;background:var(--yellow);color:var(--ink);font-family:var(--disp);font-weight:600;font-size:18px;padding:14px 28px;border-radius:999px;transition:.2s}
-  .midbtn:hover{transform:translateY(-2px)}
-  .stitle{position:relative;display:inline-block}
-  .stitle::after{content:"";position:absolute;left:1%;right:1%;bottom:-16px;height:14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='14' viewBox='0 0 220 14' preserveAspectRatio='none'%3E%3Cpath d='M3 8 q14 -7 28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0' fill='none' stroke='%23f5e24b' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat;background-size:100% 100%}
-  .accentword{position:relative;display:inline-block}
-  .accentword::after{content:"";position:absolute;left:-5%;top:-14%;width:110%;height:132%;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 130' preserveAspectRatio='none'%3E%3Cpath d='M160 8 C60 6 14 40 16 66 C18 98 90 122 168 121 C250 120 308 92 304 60 C300 30 250 9 150 9' fill='none' stroke='%23f5e24b' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%}
-  @media(max-width:760px){.wrap{padding:0 20px}.herogrid{grid-template-columns:1fr}.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}section{padding:72px 0}}
+  /* ---------- MOBILE ---------- */
+  @media(max-width:920px){
+    section{padding:96px 0}
+    .hero-grid{grid-template-columns:1fr;gap:60px}
+    .facts{margin-top:80px}
+    .hero-photo{max-width:380px;margin:0 auto}
+    .dirs{grid-template-columns:1fr}
+    .dir:first-child{border-right:none;border-bottom:2px solid var(--ink)}
+    .cards{grid-template-columns:1fr 1fr}
+    .card{border-right:1px solid var(--line)!important}
+    .card:nth-child(2n){border-right:none!important}
+    .stats{grid-template-columns:1fr 1fr}
+    .stat:nth-child(2n){border-right:none}
+    .exp-text{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .reviews{grid-template-columns:1fr}
+    .rev{border-right:none;border-bottom:1px solid var(--line)}
+    .about-grid{grid-template-columns:1fr;gap:36px}
+    .proj{grid-template-columns:32px 1fr;gap:6px 16px}
+    .proj .pd,.proj .pl{grid-column:2}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 20px}
+    section{padding:72px 0}
+    .facts{margin-top:56px}
+    .doodle-star,.doodle-spark{display:none}
+    .nav-links{display:none}
+    .fact{grid-template-columns:1fr;gap:6px}
+    .cards{grid-template-columns:1fr}
+    .card{border-right:none!important}
+    .steps{grid-template-columns:1fr}
+    .step{border-right:none;border-bottom:1px solid var(--line)}
+    .corners .mid{flex-basis:100%;text-align:left;order:3}
+    .corners .right{text-align:left}
+  }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -123,138 +512,390 @@
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-<div class="wrap">
 
-  <nav>
-    <span style="font-family:var(--disp);font-weight:700">ника ✺ ai + vibe coding</span>
-    <span class="links"><a href="#two">что умею</a><a href="#exp">опыт</a><a href="#proj">проекты</a><a href="#about">обо мне</a></span>
-    <a class="pill" href="https://t.me/kvazarchIk">написать</a>
-  </nav>
-
-  <header class="hero">
-    <div class="scrawl reveal">привет, я Ника 👋</div>
-    <h1 class="reveal">придумываю и собираю<br><span class="accentword">AI-решения</span></h1>
-    <div class="cred reveal">ex-Product Lead в Т-Банке · построила Discovery для 350+ команд · обучила 1500+ продактов</div>
-    <div class="herogrid">
-      <div>
-        <p class="lead reveal">Приходишь с идеей или задачей — через дискавери понимаю, что реально нужно, и собираю работающее на AI за <span class="hl">2–4 недели</span>. Не «построю что угодно» — а «построю то, что нужно».</p>
-        <div class="facts reveal">
-          <div class="fct"><span class="k">кто</span><span class="v">Founder · AI / vibe coding. Ex-Product Lead в Т-Банке, 8+ лет в продуктах</span></div>
-          <div class="fct"><span class="k">суперсила</span><span class="v">Дискавери — понять, что реально стоит строить. Построила Discovery в Т-Банке с нуля</span></div>
-          <div class="fct"><span class="k">делаю</span><span class="v">Собираю продукты и AI-решения сама, без разработчиков — на вайбкодинге</span></div>
-          <div class="fct"><span class="k">с кем</span><span class="v">Онлайн — с русскоязычными фаундерами и бизнесом по всему миру</span></div>
-        </div>
-      </div>
-      <div class="photo reveal"><img src="img/nika.jpg" alt="Ника Штефан"></div>
+<!-- NAV -->
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand"><b>НИКА</b> ШТЕФАН</div>
+    <div class="nav-links">
+      <a href="#dirs">что умею</a>
+      <a href="#exp">опыт</a>
+      <a href="#projects">проекты</a>
+      <a href="#about">обо мне</a>
     </div>
-  </header>
+    <a class="btn" href="https://t.me/kvazarchIk" target="_blank" rel="noopener">написать</a>
+  </div>
+</nav>
 
-  <section id="two">
-    <div class="ssub reveal">умею две вещи →</div>
-    <div class="stitle reveal" style="margin-bottom:26px">И с тем, и с тем помогу</div>
-    <div class="two">
-      <div class="pill-card reveal">
-        <span class="tag">продукт ✏️</span>
-        <h3>Продукт и дискавери</h3>
+<!-- HERO -->
+<section class="hero" style="border-top:none">
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">AI + VIBE CODING</span>
+      <span class="mark right">@NIKSHTEFAN</span>
+    </div>
+
+    <div class="hero-grid">
+      <svg class="doodle-bird" width="70" height="46" viewBox="0 0 70 46" aria-hidden="true"><path d="M3 32 C16 27 23 29 30 22 C34 11 41 5 52 5 C49 11 49 16 53 19 C60 17 65 19 67 24 C60 26 56 28 51 33 C44 39 36 42 26 42 C17 42 9 39 3 32 Z" fill="#111"/><circle cx="50" cy="15" r="1.7" fill="#f4f1e8"/><path d="M30 22 l-9 -6" stroke="#111" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <div class="reveal">
+        <div class="hello">привет, я <span class="mk">Ника</span> 👋</div>
+        <h1>придумываю и собираю <span class="h1word">AI-решения<svg class="h1circle" viewBox="0 0 320 130" preserveAspectRatio="none" aria-hidden="true"><path d="M160 8 C60 6 14 40 16 66 C18 98 90 122 168 121 C250 120 308 92 304 60 C300 30 250 9 150 9"/></svg></span></h1>
+        <p class="credline">ex-Product Lead в Т-Банке · построила Discovery для 350+ команд · обучила 1500+ продактов</p>
+        <p class="lead">Приходишь с идеей или задачей — через дискавери понимаю, что реально нужно, и собираю работающее на AI за <span class="hl">1–3 недели</span>. На выходе — <b class="red">рабочий прототип или AI-агент</b>, проверенный на реальных людях, и план, что делать дальше.</p>
+      </div>
+      <div class="hero-photo reveal">
+        <img src="img/nika.jpg" alt="Ника Штефан">
+        <span class="photo-tag">NIKA SHTEFAN · 2026</span>
+      </div>
+    </div>
+
+    <!-- FACTS -->
+    <div class="facts reveal">
+      <div class="fact"><div class="fact-k">кто</div><div class="fact-v">Founder · AI / vibe coding. Ex-Product Lead в Т-Банке, 8+ лет в продуктах</div></div>
+      <div class="fact"><div class="fact-k">суперсила</div><div class="fact-v">Дискавери — понять, что реально стоит строить. Построила Discovery в Т-Банке с нуля</div></div>
+      <div class="fact"><div class="fact-k">делаю</div><div class="fact-v">Собираю продукты и AI-решения сама, без разработчиков — на вайбкодинге</div></div>
+      <div class="fact"><div class="fact-k">с кем</div><div class="fact-v">Офлайн в Тбилиси или онлайн — с русскоязычными фаундерами и бизнесом по всему миру</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- KNIT BAND (вязаный ландшафт с жёлудями) -->
+<div class="knit-band" aria-hidden="true">
+  <div class="knit-acorns">
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+  </div>
+</div>
+
+<!-- DIRECTIONS -->
+<section id="dirs">
+  <span class="doodle doodle-star" aria-hidden="true"><svg viewBox="0 0 46 46" fill="none"><path d="M23 3 L26 19 L43 21 L28 28 L34 44 L23 33 L12 44 L18 28 L3 21 L20 19 Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></span>
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">два направления</span>
+      <span class="mark mid">discovery × build</span>
+      <span class="mark right">COLLECTION 2026</span>
+    </div>
+    <h2 class="section-h reveal">и с тем,<br>и с тем <span class="red">помогу</span><svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
+    <div class="dirs reveal" style="margin-top:46px">
+      <div class="dir">
+        <div class="num">01</div>
+        <h3>продукт и дискавери</h3>
         <p>Понять, ЧТО реально стоит строить и кому. Кастдев, проверка гипотез, стратегия, приоритизация — это я годами ставила на поток в Т-Банке.</p>
       </div>
-      <div class="pill-card reveal">
-        <span class="tag">сборка 🛠️</span>
-        <h3>Вайбкодинг и сборка</h3>
+      <div class="dir">
+        <div class="num">02</div>
+        <h3>вайбкодинг и сборка</h3>
         <p>Собрать решение на AI без разработчиков — прототип, MVP, бот, агент, автоматизация. Быстро и без лишнего.</p>
       </div>
     </div>
-    <div class="magic reveal">а вместе — придумываю правильное решение и сразу собираю ✦</div>
-  </section>
+    <p class="together reveal">а вместе — <b>придумываю правильное решение и сразу собираю</b></p>
+  </div>
+</section>
 
-  <section id="formats">
-    <div class="ssub reveal">как поработать →</div>
-    <div class="stitle reveal" style="margin-bottom:26px">Форматы</div>
-    <div class="cards">
-      <div class="card reveal"><h4>Идея → прототип</h4><p>от идеи до рабочего прототипа + проверка спроса</p><span class="pr">2–4 недели</span></div>
-      <div class="card reveal"><h4>AI-решение / агент</h4><p>инструмент, автоматизация или агент под твою задачу</p><span class="pr">2–4 недели</span></div>
-      <div class="card reveal"><h4>Разбор + план</h4><p>честно скажу что строить и дам план</p><span class="pr">2–3 дня</span></div>
-      <div class="card reveal"><h4>Менторинг</h4><p>по дискавери и вайбкодингу, один на один</p><span class="pr">разовые сессии</span></div>
+<!-- FORMATS -->
+<section class="sec-green">
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">форматы</span>
+      <span class="mid mark">как поработать</span>
+      <span class="mark right">@NIKSHTEFAN</span>
     </div>
-    <div class="note reveal">стоимость обсуждаем под задачу 🙂</div>
-    <div style="margin-top:42px"><a class="midbtn reveal" href="https://t.me/kvazarchIk">Обсудить задачу →</a></div>
-  </section>
-
-  <section id="exp" class="exp">
-    <div class="ssub reveal">немного фактов →</div>
-    <div class="stitle reveal" style="margin-bottom:24px">Опыт</div>
-    <div class="stats reveal" style="margin-bottom:30px">
-      <div><div class="num">8+</div><div class="lab">лет в IT-продуктах</div></div>
-      <div><div class="num">13 млн</div><div class="lab">клиентов — улучшала их опыт в мобильном приложении</div></div>
-      <div><div class="num">350+</div><div class="lab">команд обучила Discovery и разработке продуктов</div></div>
-      <div><div class="num">1500+</div><div class="lab">продактов обучила лично</div></div>
+    <h2 class="section-h reveal" style="margin-bottom:58px">форматы<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
+    <div class="cards reveal">
+      <div class="card">
+        <h4>идея → MVP</h4>
+        <p>соберу твою идею + проверю бизнес-модель</p>
+        <span class="term">1–3 недели</span>
+      </div>
+      <div class="card">
+        <h4>AI-решение / агент</h4>
+        <p>инструмент, автоматизация или агент под твою задачу</p>
+        <span class="term">1–3 недели</span>
+      </div>
+      <div class="card">
+        <h4>разбор + план</h4>
+        <p>разбор идеи + план реализации</p>
+        <span class="term">2–3 дня</span>
+      </div>
+      <div class="card">
+        <h4>менторинг</h4>
+        <p>по дискавери и вайбкодингу, один на один</p>
+        <span class="term">разовые сессии</span>
+      </div>
     </div>
-    <p class="reveal"><b>Product Lead в Т-Банке</b> — отвечала за клиентский опыт продуктов для 13 млн клиентов (6 сегментов Мобильного банка), команда 70+.</p>
-    <p class="reveal"><b>Head of Product Discovery</b> — построила с нуля систему Discovery в Т-Банке, масштабировала на 350+ команд и обучила 1500+ продактов. Эффект работ — сотни млн ₽.</p>
-    <p class="reveal"><b>Vibe coding</b> — собираю свои продукты на AI без разработчиков и обучаю вайбкодингу других (Кворум, ЦУ).</p>
-  </section>
-
-  <section id="proj">
-    <div class="ssub reveal">собрала сама, с нуля →</div>
-    <div class="stitle reveal" style="margin-bottom:24px">Проекты</div>
-    <div class="plist">
-      <a class="proj reveal" href="https://t.me/Idea_CheckBot"><span class="ic">🚀</span><span><b>Idea CheckBot</b><small>Миниапп: проверь бизнес-гипотезу до того, как сольёшь деньги</small></span></a>
-      <a class="proj reveal" href="https://kvorum-edu.ru/"><span class="ic">💅</span><span><b>Кворум</b><small>Образовательный продукт по вайбкодингу — собрала и обучала</small></span></a>
-      <div class="proj reveal"><span class="ic">🇬🇧</span><span><b>Агент по английскому</b><small>Персональный AI-репетитор; собираю агентов под любую задачу</small></span></div>
-      <div class="proj reveal"><span class="ic">🛰️</span><span><b>AI Ops</b><small>Агент парсит источники и шлёт дайджест</small></span></div>
-      <div class="proj reveal"><span class="ic">📚</span><span><b>Система препод + ученик</b><small>Админка + бот для учеников</small></span></div>
-      <div class="proj reveal"><span class="ic">🔍</span><span><b>Бот конкурентного анализа</b><small>Собрала примерно за час</small></span></div>
-    </div>
-  </section>
-
-  <section id="process">
-    <div class="ssub reveal">как всё проходит →</div>
-    <div class="stitle reveal" style="margin-bottom:26px">Как работаю</div>
-    <div class="steps">
-      <div class="step reveal"><div class="snum">01</div><b>Бесплатный разбор</b><p>20 минут: рассказываешь идею или задачу, честно говорю — стоит ли и как</p></div>
-      <div class="step reveal"><div class="snum">02</div><b>План</b><p>Фиксирую, что именно строим и почему</p></div>
-      <div class="step reveal"><div class="snum">03</div><b>Спринт</b><p>Собираю на AI, показываю по ходу, не пропадаю</p></div>
-      <div class="step reveal"><div class="snum">04</div><b>Результат</b><p>Работающее решение и что делать дальше</p></div>
-    </div>
-  </section>
-
-  <section id="reviews">
-    <div class="ssub reveal">что говорят →</div>
-    <div class="stitle reveal" style="margin-bottom:24px">Отзывы участников Кворума</div>
-    <div class="quotes">
-      <blockquote class="reveal"><p>«Не спал всю ночь, но встретил утро сверхчеловеком — с готовым виртуальным ветеринаром»</p><cite>Егор · ex-CPO финтех</cite></blockquote>
-      <blockquote class="reveal"><p>«Классно объяснили, как устроены нейронки, агенты и скиллы. Атмосфера топ»</p><cite>Настя · ЦУ</cite></blockquote>
-      <blockquote class="reveal"><p>«Я далека от IT, пришла понять что за хайп. Поняла — возможности безграничны»</p><cite>Галина · бизнес-трекер</cite></blockquote>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="ssub reveal">кто я →</div>
-    <div class="stitle reveal" style="margin-bottom:20px">Обо мне</div>
-    <p class="exp reveal" style="font-size:17px;max-width:760px;margin-bottom:22px">Скажу честно — я в начале пути в своё дело и прохожу его открыто: ушла из найма, иду через вайбкодинг, со всеми качелями. Пишу про это в подкасте и канале.</p>
-    <div class="plist">
-      <a class="proj reveal" href="https://music.yandex.ru/album/37162362" target="_blank"><span class="ic">🎧</span><span><b>Подкаст «Путь, который нравится»</b><small>С Настей — про любимое дело и мечты, на Яндекс Музыке</small></span></a>
-      <a class="proj reveal" href="https://www.youtube.com/@nika.shtefan" target="_blank"><span class="ic">▶️</span><span><b>YouTube · @nika.shtefan</b><small>«Путь, который нравится» в видеоформате</small></span></a>
-      <a class="proj reveal" href="https://t.me/nikshtefan"><span class="ic">📣</span><span><b>Канал @nikshtefan</b><small>build in public</small></span></a>
-    </div>
-  </section>
-
-  <div class="cta">
-    <div class="scrawl2">давай поговорим →</div>
-    <h2>Расскажи свою идею<br>или задачу</h2>
-    <p class="ctasub">Разберу бесплатно за 20 минут — честно скажу, что стоит строить, и соберу это на AI (вайбкодинг). Даже если не сработаемся, уйдёшь с планом.</p>
-    <div class="cbtns">
-      <a class="cbtn" href="https://t.me/kvazarchIk">✈️ Telegram @kvazarchIk</a>
-      <a class="cbtn" href="mailto:nik.shtefan@gmail.com">✉️ почта</a>
+    <div class="formats-foot reveal">
+      <p>стоимость обсуждаем под задачу</p>
+      <div style="display:flex;align-items:center;gap:4px">
+        <span class="doodle-arrow" aria-hidden="true"><svg viewBox="0 0 62 30" fill="none"><path d="M2 16 C18 10 34 12 50 14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M40 6 L52 14 L40 22" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <a class="btn" href="https://t.me/kvazarchIk" target="_blank" rel="noopener">Обсудить задачу →</a>
+      </div>
     </div>
   </div>
+</section>
 
-  <footer>сделано на вайбкодинге, конечно ✦</footer>
+<!-- EXPERIENCE -->
+<section id="exp">
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">опыт</span>
+      <span class="mid mark">8+ лет в продуктах</span>
+      <span class="mark right">T-BANK · ЦУ · КВОРУМ</span>
+    </div>
+    <h2 class="section-h reveal" style="margin-bottom:58px">опыт<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
+    <div class="stats reveal">
+      <div class="stat"><div class="big">8+</div><div class="lbl">лет в IT-продуктах</div></div>
+      <div class="stat"><div class="big">13 млн</div><div class="lbl">клиентов: улучшила их опыт использования приложения Т-банка</div></div>
+      <div class="stat"><div class="big">350+</div><div class="lbl">команд обучила Discovery и разработке продуктов в Т-банке</div></div>
+      <div class="stat"><div class="big">1500+</div><div class="lbl">продактов обучила лучшим продуктовым практикам</div></div>
+    </div>
+    <div class="exp-text reveal">
+      <p><b>Product Lead в Т-Банке</b> — отвечала за клиентский опыт продуктов для 13 млн клиентов (6 сегментов Мобильного банка), команда 70+.</p>
+      <p><b>Head of Product Discovery</b> — построила с нуля систему Discovery в Т-Банке, масштабировала на 350+ команд и обучила 1500+ продактов. Эффект работ — сотни млн ₽.</p>
+      <p><b>Vibe coding</b> — собрала 6 проектов за 3 месяца на AI, без разработчиков, и обучаю вайбкодингу других (Кворум, ЦУ).</p>
+    </div>
+  </div>
+</section>
 
+<!-- GREEN STRIP (большой зелёный экран с иллюстрацией) -->
+<div class="green-strip">
+  <div class="wrap">
+    <div class="gs-row reveal">
+      <h2 class="gs-word">придумываю</h2>
+      <div class="gs-frame">
+        <svg class="gs-ill" viewBox="0 0 340 210" aria-hidden="true">
+          <rect width="340" height="210" fill="#d9e7bf"/>
+          <ellipse cx="68" cy="42" rx="24" ry="10" fill="#eef4e3"/>
+          <ellipse cx="252" cy="32" rx="28" ry="11" fill="#eef4e3"/>
+          <ellipse cx="162" cy="56" rx="17" ry="8" fill="#eef4e3"/>
+          <path d="M0 120 Q85 92 170 116 T340 108 V210 H0 Z" fill="#b0cd85"/>
+          <path d="M0 150 Q90 124 185 148 T340 140 V210 H0 Z" fill="#8fb863"/>
+          <path d="M0 178 Q100 156 200 176 T340 170 V210 H0 Z" fill="#6f9a45"/>
+          <g><rect x="246" y="118" width="26" height="22" fill="#efe7d2"/><path d="M242 118 L259 104 L276 118 Z" fill="#c2563b"/><rect x="255" y="127" width="8" height="13" fill="#8a4a2e"/></g>
+          <g fill="#3f6b2c"><circle cx="55" cy="136" r="11"/><rect x="52" y="143" width="6" height="13" fill="#6b4f2a"/></g>
+          <g fill="#3f6b2c"><circle cx="118" cy="158" r="9"/><rect x="115.5" y="164" width="5" height="11" fill="#6b4f2a"/></g>
+          <g fill="#3f6b2c"><circle cx="302" cy="150" r="10"/><rect x="299" y="157" width="6" height="12" fill="#6b4f2a"/></g>
+        </svg>
+      </div>
+      <h2 class="gs-word">собираю</h2>
+    </div>
+    <p class="gs-cap reveal"><b>спойлер:</b> проверяешь на живых людях за пару недель, а не за полгода</p>
+  </div>
 </div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <span class="doodle doodle-spark" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none"><path d="M17 2 L17 32 M2 17 L32 17 M6 6 L28 28 M28 6 L6 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">проекты</span>
+      <span class="mid mark">собрала сама, с нуля</span>
+      <span class="mark right">BUILT BY @NIKSHTEFAN</span>
+    </div>
+    <h2 class="section-h reveal" style="margin-bottom:58px">проекты<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
+    <div class="projects reveal">
+      <a class="proj" href="https://t.me/Idea_CheckBot" target="_blank" rel="noopener">
+        <span class="pn">01</span><span class="pt">Idea CheckBot</span>
+        <span class="pd">Миниапп: проверь бизнес-гипотезу до того, как сольёшь деньги</span>
+        <span class="pl">t.me/Idea_CheckBot →</span>
+      </a>
+      <a class="proj" href="https://kvorum-edu.ru/" target="_blank" rel="noopener">
+        <span class="pn">02</span><span class="pt">Кворум</span>
+        <span class="pd">Образовательный продукт по вайбкодингу — собрала и обучала</span>
+        <span class="pl">kvorum-edu.ru →</span>
+      </a>
+      <div class="proj">
+        <span class="pn">03</span><span class="pt">Агент по английскому</span>
+        <span class="pd">Персональный AI-репетитор; собираю агентов под любую задачу</span>
+        <span class="pl"></span>
+      </div>
+      <div class="proj">
+        <span class="pn">04</span><span class="pt">AI Ops</span>
+        <span class="pd">Агент парсит источники и шлёт дайджест</span>
+        <span class="pl"></span>
+      </div>
+      <div class="proj">
+        <span class="pn">05</span><span class="pt">Система препод + ученик</span>
+        <span class="pd">Админка + бот для учеников</span>
+        <span class="pl"></span>
+      </div>
+      <div class="proj">
+        <span class="pn">06</span><span class="pt">Бот конкурентного анализа</span>
+        <span class="pd">Собрала примерно за час</span>
+        <span class="pl"></span>
+      </div>
+    </div>
+
+    <div class="showcase reveal">
+      <div class="showcase-h">что собрала на AI 👇</div>
+      <div class="shots">
+      <a class="shot" href="https://t.me/Idea_CheckBot" target="_blank" rel="noopener">
+        <img src="img/idea-checkbot-1.jpg" alt="Idea CheckBot — миниапп для проверки бизнес-идей">
+        <span class="shot-cap">Idea CheckBot · миниапп</span>
+      </a>
+      <a class="shot" href="https://kvorum-edu.ru/" target="_blank" rel="noopener">
+        <img src="img/kvorum-site.jpg" alt="Кворум — сайт курса по вайбкодингу">
+        <span class="shot-cap">Кворум · сайт</span>
+      </a>
+      <div class="shot">
+        <img src="img/litbot-admin.webp" alt="Литбот — админка преподавателя">
+        <span class="shot-cap">Литбот · админка препода</span>
+      </div>
+      <div class="shot">
+        <img src="img/literary-bot-1.webp" alt="Литбот — бот для учеников">
+        <span class="shot-cap">Литбот · бот для ученика</span>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="sec-green">
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">как работаю</span>
+      <span class="mid mark">от идеи до результата</span>
+      <span class="mark right">PROCESS</span>
+    </div>
+    <h2 class="section-h reveal" style="margin-bottom:58px">как работаю<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
+    <div class="steps reveal">
+      <div class="step"><div class="sn">01</div><h4>бесплатный разбор</h4><p>20 минут: рассказываешь идею или задачу, честно говорю — стоит ли и как</p></div>
+      <div class="step"><div class="sn">02</div><h4>план</h4><p>Фиксирую, что именно строим и почему</p></div>
+      <div class="step"><div class="sn">03</div><h4>спринт</h4><p>Собираю на AI, показываю по ходу, не пропадаю</p></div>
+      <div class="step"><div class="sn">04</div><h4>результат</h4><p>Работающее решение и что делать дальше</p></div>
+    </div>
+    <p class="steps-note reveal">оплата договорная — обсуждаем под задачу</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section>
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">отзывы</span>
+      <span class="mid mark">участники кворума</span>
+      <span class="mark right">REVIEWS</span>
+    </div>
+    <h2 class="section-h reveal" style="margin-bottom:58px">отзывы участников <span class="red">кворума</span><svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
+    <div class="reviews reveal">
+      <div class="rev">
+        <p class="q">«Не спал всю ночь, но встретил утро сверхчеловеком — с готовым виртуальным ветеринаром»</p>
+        <p class="who">Егор · ex-CPO финтех</p>
+      </div>
+      <div class="rev">
+        <p class="q">«Классно объяснили, как устроены нейронки, агенты и скиллы. Атмосфера топ»</p>
+        <p class="who">Настя · ЦУ</p>
+      </div>
+      <div class="rev">
+        <p class="q">«Я далека от IT, пришла понять что за хайп. Поняла — возможности безграничны»</p>
+        <p class="who">Галина · бизнес-трекер</p>
+      </div>
+    </div>
+    <p class="rev-note reveal">Кворум — мой курс по вайбкодингу: собрала его сама (сайт + LMS) и провела поток. <a href="https://kvorum-edu.ru/" target="_blank" rel="noopener">kvorum-edu.ru →</a></p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">обо мне</span>
+      <span class="mid mark">build in public</span>
+      <span class="mark right">@NIKSHTEFAN</span>
+    </div>
+    <h2 class="section-h reveal" style="margin-bottom:58px">обо мне<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
+    <div class="about-me reveal">
+      <div class="about-photo"><img src="img/nika.jpg" alt="Ника Штефан"></div>
+      <p>Я много лет в IT, но в начале предпринимательского пути. Честно рассказываю, как его прохожу: ушла из найма, иду через вайбкодинг, запускаю свои проекты. Пишу про это в подкасте и канале.</p>
+    </div>
+
+    <div class="showcase showcase-media reveal" style="margin-top:50px">
+      <div class="showcase-h">подкаст, ютуб и канал 👇</div>
+      <div class="shots">
+        <a class="shot" href="https://music.yandex.ru/album/37162362" target="_blank" rel="noopener">
+          <img src="img/podcast-cover.jpg" alt="Подкаст «Путь, который нравится»">
+          <span class="shot-cap">Подкаст «Путь, который нравится»</span>
+        </a>
+        <a class="shot" href="https://www.youtube.com/@nika.shtefan" target="_blank" rel="noopener">
+          <img src="img/youtube.jpg" alt="YouTube-канал Nika Shtefan">
+          <span class="shot-cap">YouTube · подкаст в видео</span>
+        </a>
+        <a class="shot" href="https://t.me/nikshtefan" target="_blank" rel="noopener">
+          <img src="img/channel.jpg" alt="Telegram-канал «Продакт в поиске ответов»">
+          <span class="shot-cap">Telegram-канал @nikshtefan</span>
+        </a>
+        <a class="shot" href="https://www.linkedin.com/in/nika-shtefan-b164561a3/" target="_blank" rel="noopener">
+          <img src="img/linkedin.jpg" alt="LinkedIn — Nika Shtefan">
+          <span class="shot-cap">LinkedIn</span>
+        </a>
+      </div>
+    </div>
+    <div class="collab reveal">
+      <div class="ct">открыта к <b>сотрудничеству</b> — если есть идея, чем можем быть полезны друг другу, просто напиши</div>
+      <a class="btn cb" href="https://t.me/kvazarchIk" target="_blank" rel="noopener">Написать →</a>
+    </div>
+  </div>
+</section>
+
+<!-- KNIT BAND -->
+<div class="knit-band" aria-hidden="true">
+  <div class="knit-acorns">
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+    <svg width="26" height="34" viewBox="0 0 26 34"><ellipse cx="13" cy="22" rx="9.5" ry="10.5" fill="#2c3a16"/><path d="M2.5 11 Q13 2 23.5 11 Q13 16 2.5 11 Z" fill="#1b2510"/><rect x="11.5" y="0" width="3" height="5" rx="1.5" fill="#1b2510"/></svg>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta">
+  <span class="doodle doodle-star" aria-hidden="true"><svg viewBox="0 0 46 46" fill="none"><path d="M23 3 L26 19 L43 21 L28 28 L34 44 L23 33 L12 44 L18 28 L3 21 L20 19 Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></span>
+  <div class="wrap">
+    <div class="corners">
+      <span class="mark">контакт</span>
+      <span class="mid mark">20 минут бесплатно</span>
+      <span class="mark right">LET'S BUILD</span>
+    </div>
+    <h2 class="reveal">расскажи свою идею или задачу</h2>
+    <p class="reveal">Разберу бесплатно за 20 минут — честно скажу, что стоит строить, и соберу это на AI (вайбкодинг). Даже если не сработаемся, уйдёшь с планом.</p>
+    <div class="cta-btns reveal">
+      <a class="btn" href="https://t.me/kvazarchIk" target="_blank" rel="noopener">✈️ Telegram @kvazarchIk</a>
+      <a class="btn ghost" href="mailto:nik.shtefan@gmail.com">✉️ почта</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-in">
+    <span class="mark">© НИКА ШТЕФАН · 2026</span>
+    <span class="mark">сделано на вайбкодинге, конечно</span>
+  </div>
+</footer>
+
 <script>
-  const io=new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // Лёгкая reveal-анимация через IntersectionObserver
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
 </script>
 </body>
 </html>
