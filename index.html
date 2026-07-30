@@ -374,6 +374,9 @@
   .shot{position:relative;display:block;border:3px solid var(--ink);background:#0c0c0c;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
   .shot:hover{transform:translateY(-6px);box-shadow:10px 10px 0 var(--red)}
   .shot img{width:100%;height:270px;object-fit:cover;object-position:top center;display:block}
+  /* плитка, где важен текст на скрине - показываем кадр целиком */
+  .shot.fit{background:#fff}
+  .shot.fit img{object-fit:contain;object-position:center;padding:10px;background:#fff}
   .shot-cap{position:absolute;left:0;bottom:0;background:var(--red);color:#fff;font-family:"Oswald",sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px}
   @media(max-width:920px){.shots{grid-template-columns:1fr 1fr}}
   @media(max-width:560px){.shots{grid-template-columns:1fr}.shot img{height:240px}}
@@ -735,6 +738,21 @@
         <span class="pd">Собрала примерно за час</span>
         <span class="pl"></span>
       </div>
+      <a class="proj" href="https://nikashtefan.github.io/models-hub/" target="_blank" rel="noopener">
+        <span class="pn">07</span><span class="pt">Хаб моделей</span>
+        <span class="pd">Интерактивные расчёты: юнит-экономика, узкие места, симуляции</span>
+        <span class="pl">nikashtefan.github.io/models-hub →</span>
+      </a>
+      <div class="proj">
+        <span class="pn">08</span><span class="pt">Контент-фабрика</span>
+        <span class="pd">Один выпуск подкаста → превью, главы, семь публикаций</span>
+        <span class="pl"></span>
+      </div>
+      <div class="proj">
+        <span class="pn">09</span><span class="pt">Рой агентов</span>
+        <span class="pd">Одни агенты ищут причину, другие её опровергают — остаётся ограничение</span>
+        <span class="pl"></span>
+      </div>
     </div>
 
     <div class="showcase reveal">
@@ -755,6 +773,22 @@
       <div class="shot">
         <img src="img/literary-bot-1.webp" alt="Литбот — бот для учеников">
         <span class="shot-cap">Литбот · бот для ученика</span>
+      </div>
+      <a class="shot fit" href="https://nikashtefan.github.io/models-hub/" target="_blank" rel="noopener">
+        <img src="img/models-hub.png" alt="Хаб интерактивных моделей и симуляций">
+        <span class="shot-cap">Хаб моделей · сайт</span>
+      </a>
+      <div class="shot fit">
+        <img src="img/content-factory.png" alt="Контент-фабрика — модули пайплайна">
+        <span class="shot-cap">Контент-фабрика</span>
+      </div>
+      <div class="shot fit">
+        <img src="img/agents-swarm.png" alt="Рой AI-агентов: одни ищут причину, другие опровергают">
+        <span class="shot-cap">Рой агентов · диагностика</span>
+      </div>
+      <div class="shot fit">
+        <img src="img/english-bot.png" alt="Бот-тренер английского в Telegram">
+        <span class="shot-cap">Агент по английскому</span>
       </div>
       </div>
     </div>
