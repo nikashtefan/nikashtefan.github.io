@@ -397,9 +397,12 @@
   .shot{position:relative;display:block;border:3px solid var(--ink);background:#0c0c0c;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
   .shot:hover{transform:translateY(-6px);box-shadow:10px 10px 0 var(--red)}
   .shot img{width:100%;height:270px;object-fit:cover;object-position:top center;display:block}
-  /* плитка, где важен текст на скрине - показываем кадр целиком */
-  .shot.fit{background:#fff}
-  .shot.fit img{object-fit:contain;object-position:center;padding:10px;background:#fff}
+  /* галерея проектов: на скринах важен текст, поэтому 2 крупные колонки
+     и кадр целиком, без обрезки. Галерея площадок ниже остаётся 4-в-ряд. */
+  .showcase:not(.showcase-media) .shots{grid-template-columns:repeat(2,1fr)}
+  .showcase:not(.showcase-media) .shot{background:#fff}
+  .showcase:not(.showcase-media) .shot img{height:400px;object-fit:contain;object-position:center;padding:12px;background:#fff}
+  @media(max-width:920px){.showcase:not(.showcase-media) .shots{grid-template-columns:1fr}}
   .shot-cap{position:absolute;left:0;bottom:0;background:var(--red);color:#fff;font-family:"Oswald",sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 12px}
   @media(max-width:920px){.shots{grid-template-columns:1fr 1fr}}
   @media(max-width:560px){.shots{grid-template-columns:1fr}.shot img{height:240px}}
@@ -811,19 +814,19 @@
         <img src="img/literary-bot-1.webp" alt="Литбот — бот для учеников">
         <span class="shot-cap">Литбот · бот для ученика</span>
       </div>
-      <a class="shot fit" href="https://nikashtefan.github.io/models-hub/" target="_blank" rel="noopener">
+      <a class="shot" href="https://nikashtefan.github.io/models-hub/" target="_blank" rel="noopener">
         <img src="img/models-hub.png" alt="Хаб интерактивных моделей и симуляций">
         <span class="shot-cap">Хаб моделей · сайт</span>
       </a>
-      <div class="shot fit">
+      <div class="shot">
         <img src="img/content-factory.png" alt="Контент-фабрика — модули пайплайна">
         <span class="shot-cap">Контент-фабрика</span>
       </div>
-      <div class="shot fit">
+      <div class="shot">
         <img src="img/agents-swarm.png" alt="Рой AI-агентов: одни ищут причину, другие опровергают">
         <span class="shot-cap">Рой агентов · диагностика</span>
       </div>
-      <div class="shot fit">
+      <div class="shot">
         <img src="img/english-bot.png" alt="Бот-тренер английского в Telegram">
         <span class="shot-cap">Агент по английскому</span>
       </div>
