@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
+<!-- свой цвет у каждой страницы, чтобы офферы отличались визуально -->
+<style>:root{--red:#2d5be3;--green:#1f3a8a}.sec-green,.knit-band{background-color:var(--green)}</style>
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110258557', 'ym');
     ym(110258557, 'init', {ssr:true, webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
@@ -50,7 +52,7 @@
   <div class="wrap">
     <div class="corners"><span class="mark">боль</span><span class="mid mark">если оставить как есть</span><span class="mark right">PAIN</span></div>
     <h2 class="section-h reveal" style="margin-bottom:58px">знакомо?<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
-    <ul class="pains reveal"><li>Смотришь, как другие за вечер собирают ботов, а сам открываешь Cursor и не понимаешь, с чего начать</li><li>Посмотрел пять туториалов, но ни одного своего инструмента так и не сделал</li><li>Начал проект на курсе, он застрял на ошибке, и ты его забросил</li><li>Каждую неделю руками делаешь то, что давно можно было отдать AI</li></ul>
+    <ul class="pains reveal"><li>Смотришь, как другие за вечер собирают ботов, а сам открываешь Cursor и не понимаешь, с чего начать</li><li>Посмотрел пять туториалов, но ни одного своего инструмента так и не сделал</li><li>Проект почти готов, но застрял на последних 20%: выложить в интернет, подключить оплату или авторизацию</li><li>Каждую неделю руками делаешь то, что давно можно было отдать AI</li></ul>
   </div>
 </section>
 
@@ -67,6 +69,14 @@
     <div class="corners"><span class="mark">результат</span><span class="mid mark">что остаётся на руках</span><span class="mark right">DELIVERABLES</span></div>
     <h2 class="section-h reveal" style="margin-bottom:58px">что получишь<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
     <div class="cards reveal"><div class="card"><h4>рабочий инструмент</h4><p>Собран под твою задачу и остаётся у тебя.</p><span class="term">результат</span></div><div class="card"><h4>понимание подхода</h4><p>Как ставить задачу AI, как чинить ошибки, как не застревать.</p><span class="term">навык</span></div><div class="card"><h4>запись сессии</h4><p>Можно пересмотреть и повторить самому.</p><span class="term">🎁 бонус</span></div><div class="card"><h4>шпаргалка промптов</h4><p>Мои рабочие промпты и правила для Cursor и Claude Code.</p><span class="term">🎁 бонус</span></div></div>
+  </div>
+</section>
+
+<section id="examples">
+  <div class="wrap">
+    <div class="corners"><span class="mark">примеры</span><span class="mid mark">реальные примеры под разные роли</span><span class="mark right">EXAMPLES</span></div>
+    <h2 class="section-h reveal" style="margin-bottom:58px">что можно собрать за 1,5 часа<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
+    <div class="cards reveal"><div class="card"><h4>анализ отзывов</h4><p>Скрипт, который берёт 200+ отзывов из таблицы и выдаёт темы, частоту и цитаты. Для продакта — вместо недели ручного чтения.</p><span class="term">продакт</span></div><div class="card"><h4>отчёт из выгрузки</h4><p>Кидаешь CSV из CRM или аналитики, получаешь готовый отчёт с графиками. Каждую неделю одной командой.</p><span class="term">аналитик</span></div><div class="card"><h4>telegram-бот</h4><p>Бот, который отвечает на частые вопросы клиентов или учеников по твоему тексту, или напоминалка для команды.</p><span class="term">эксперт</span></div><div class="card"><h4>лендинг с формой</h4><p>Одностраничник под идею или мероприятие с формой заявки, выложенный в интернет.</p><span class="term">предприниматель</span></div><div class="card"><h4>посты из голосового</h4><p>Надиктовал мысль — получил черновики постов для Telegram и LinkedIn в своём стиле.</p><span class="term">маркетолог</span></div><div class="card"><h4>резюме созвона</h4><p>Расшифровка записи встречи → итоги, решения и задачи с ответственными.</p><span class="term">руководитель</span></div><div class="card"><h4>калькулятор</h4><p>Интерактивный калькулятор юнит-экономики или цены, который можно отправить клиенту ссылкой.</p><span class="term">фаундер</span></div><div class="card"><h4>свой ассистент</h4><p>Настроенный Claude-проект или скилл под твою повторяющуюся задачу: PRD, КП, разбор интервью.</p><span class="term">любая роль</span></div></div>
   </div>
 </section>
 
