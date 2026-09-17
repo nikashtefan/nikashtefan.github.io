@@ -629,3 +629,10 @@
   /* заголовок не должен выталкивать кнопку за первый экран */
   .hero h1{font-size:clamp(34px,4.2vw,60px)}
   .h1-sub{font-size:clamp(19px,2vw,26px);margin-top:-6px;margin-bottom:22px}
+
+  /* --- первый экран: фото и буллеты 18.09 --- */
+  .hero-side{max-width:none;gap:32px}
+  .hero-side .hero-photo{max-width:300px}
+  .hero-photo img{height:auto;max-height:380px;object-fit:cover;object-position:top center}
+  .creds li{font-size:17px}
+  @media(max-width:920px){.hero-side .hero-photo{max-width:280px}}
