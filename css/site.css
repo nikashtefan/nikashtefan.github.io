@@ -636,3 +636,14 @@
   .hero-photo img{height:auto;max-height:380px;object-fit:cover;object-position:top center}
   .creds li{font-size:17px}
   @media(max-width:920px){.hero-side .hero-photo{max-width:280px}}
+  /* карточки одной высоты: подпись-бейдж и текст прижаты одинаково */
+  .card{display:flex;flex-direction:column}
+  .card p{flex:1 1 auto}
+  .card .term{margin-top:auto;padding-top:8px}
+  .step{display:flex;flex-direction:column}
+  .step p{flex:1 1 auto}
+  .creds{align-content:start}
+  /* полоса проектов на офферных страницах */
+  .shots .shot img{height:220px}
+  .cards{align-items:stretch}
+  .cards .card{height:100%}
