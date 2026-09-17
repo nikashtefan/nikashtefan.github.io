@@ -675,7 +675,7 @@ def render(slug, o):
 <nav>
   <div class="wrap nav-in">
     <a class="brand" href="index.html"><img src="img/logo.png" alt="Лого"><span><b>НИКА</b> ШТЕФАН</span></a>
-    <div class="nav-links"><a href="#why">почему я</a><a href="#for">кому</a><a href="#get">{"что получишь" if slug == "session" else "что получите"}</a><a href="#how">как проходит</a><a href="#price">цена</a><a href="#faq">вопросы</a></div>
+    <div class="nav-links"><a href="#for">кому</a><a href="#get">{"что получишь" if slug == "session" else "что получите"}</a><a href="#how">как проходит</a><a href="#why">почему я</a><a href="#price">цена</a><a href="#faq">вопросы</a></div>
     <a class="btn" href="{tg}" target="_blank" rel="noopener">записаться</a>
   </div>
 </nav>
