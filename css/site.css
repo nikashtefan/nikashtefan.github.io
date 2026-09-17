@@ -588,3 +588,10 @@
   .incl.doc b{font-family:"Unbounded",sans-serif;font-weight:700;text-transform:lowercase}
   @media(max-width:920px){#examples .cards{grid-template-columns:1fr 1fr}}
   @media(max-width:640px){#examples .cards{grid-template-columns:1fr}}
+  /* первый экран: фото + буллеты с экспертизой рядом */
+  .hero-side{max-width:380px;margin-left:auto;display:flex;flex-direction:column;gap:48px}
+  .hero-side .hero-photo{max-width:330px;margin:0 0 0 auto}
+  .creds{list-style:none;border-top:3px solid var(--ink);display:grid;gap:0}
+  .creds li{position:relative;padding:14px 0 14px 30px;border-bottom:1px solid var(--line);font-size:16.5px;line-height:1.45}
+  .creds li::before{content:"✓";position:absolute;left:0;top:14px;color:var(--red);font-weight:800}
+  @media(max-width:920px){.hero-side{max-width:520px;margin:0 auto}.hero-side .hero-photo{margin:0 auto}}
