@@ -8,6 +8,7 @@
 Продающие триггеры из видео Тимочко («12 уловок») отмечены в комментариях [T: ...].
 """
 from pathlib import Path
+import re
 from html import escape
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -461,7 +462,8 @@ OFFERS = {
         "accent": "#8a0f3c", "band": "#4a0820",
         "creds": ["ex-Head of Product Discovery в Т-Банке", "Новый способ работы прижился в 350+ командах", "Обучила 1500+ продактов, вела команду 70+", "Тренер по Claude Code на курсе Замесина"],
         "corners": ("ai-native спринт", "6 недель · одна команда", "для руководителей"),
-        "h1": ("команда работает с AI ", "каждый день", ", а не два месяца после обучения"),
+        "h1": ("команда работает с ", "AI", " каждый день"),
+        "h1_sub": "а не два месяца после обучения",
         "lead": "6 недель с одной вашей командой: выбираем процессы, переводим их на AI, выращиваем <b>2–3 чемпионов внутри команды</b> и замеряем результат. После спринта команда <span class=\"hl\">продолжает сама</span>.",
         "note": "не разовое обучение · чемпионы внутри команды · метрика «было / стало»",
         "photo": ("img/nika.jpg", "внедряла новый способ работы в 350+ командах"),
@@ -566,10 +568,27 @@ def extra_sections(o):
     return out
 
 
+NBSP = "\u00a0"
+
+
+def typo(html):
+    """Клеит предлоги и союзы (в, и, а, не, по…) к следующему слову, чтобы они
+    не оставались одни в конце строки. Работает только по тексту, не по тегам."""
+    out, i = [], 0
+    for m in re.finditer(r"<[^>]*>", html):
+        out.append(re.sub(r"(?<![^\s(«—>])([\wа-яА-ЯёЁ]{1,2}|не|же|бы|из|от|до|для|при|под|над|про)\s+(?=[\wа-яА-ЯёЁ«])", r"\1" + NBSP, html[i:m.start()]))
+        out.append(m.group(0))
+        i = m.end()
+    out.append(html[i:])
+    return "".join(out)
+
+
 def render(slug, o):
     from urllib.parse import quote
     tg = f"{TG}?text={quote(o['tg_text'])}"
     h1a, h1b, h1c = o["h1"]
+    # длинную мысль выносим мелкой строкой: крупный заголовок иначе читается одним комом
+    h1sub = f'<p class="h1-sub">{o["h1_sub"]}</p>' if o.get("h1_sub") else ""
     tiers = "".join(
         f'<div class="tier{" main" if t["main"] else ""}">'
         + ('<span class="badge">выбирают чаще</span>' if t["main"] else "")
@@ -624,7 +643,7 @@ def render(slug, o):
     {corners(*o['corners'])}
     <div class="hero-grid">
       <div class="reveal">
-        <h1>{h1a}<span class="h1word">{h1b}{CIRCLE}</span>{h1c}</h1>
+        <h1>{h1a}<span class="h1word">{h1b}{CIRCLE}</span>{h1c}</h1>{h1sub}
         <p class="lead">{o['lead']}</p>
         <p class="lead-note">{o['note']}</p>
         <!-- [T: дефицит + срочность] реальный лимит мест и дата -->
@@ -739,5 +758,5 @@ def render(slug, o):
 
 if __name__ == "__main__":
     for slug, offer in OFFERS.items():
-        (ROOT / f"{slug}.html").write_text(render(slug, offer), encoding="utf-8")
+        (ROOT / f"{slug}.html").write_text(typo(render(slug, offer)), encoding="utf-8")
         print("written", slug + ".html")
