@@ -750,7 +750,7 @@ def render(slug, o):
       <a class="btn" href="{tg}" target="_blank" rel="noopener">✈️ написать в Telegram →</a>
       <a class="btn ghost" href="mailto:nik.shtefan@gmail.com">✉️ написать на почту</a>
     </div>
-    <p style="margin-top:40px"><a class="back" href="index.html">← все форматы и проекты</a></p>
+    <p style="margin-top:40px"><a class="back" href="index.html">← обо мне и моих проектах</a></p>
   </div>
 </section>
 
