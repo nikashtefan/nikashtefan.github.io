@@ -647,3 +647,5 @@
   .shots .shot img{height:220px}
   .cards{align-items:stretch}
   .cards .card{height:100%}
+  /* буквы не налезают друг на друга в крупном заголовке */
+  .hero h1{line-height:1.04}
