@@ -661,7 +661,10 @@ def render(slug, o):
 <meta property="og:title" content="{escape(o['title'])}">
 <meta property="og:description" content="{escape(o['desc'])}">
 <meta property="og:url" content="https://nikashtefan.github.io/{slug}.html">
-<meta property="og:image" content="https://nikashtefan.github.io/img/nika.jpg">
+<meta property="og:image" content="https://nikashtefan.github.io/img/og-{slug}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <noscript><style>.reveal,.cards .card,.steps .step,.reviews .rev,.cta-btns .btn{{opacity:1!important;transform:none!important}}</style></noscript>
 <!-- свой цвет у каждой страницы, чтобы офферы отличались визуально -->
 <style>:root{{--red:{o['accent']};--green:{o['band']}}}.sec-green,.knit-band{{background-color:var(--green)}}</style>
