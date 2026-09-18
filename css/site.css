@@ -649,3 +649,21 @@
   .cards .card{height:100%}
   /* буквы не налезают друг на друга в крупном заголовке */
   .hero h1{line-height:1.04}
+
+/* Бесплатный первый шаг: главный элемент страницы, поэтому контрастная плашка,
+   а не ещё одна карточка в ряду тарифов */
+.freestep{border:2px solid var(--red);background:#fff;padding:36px 34px;margin:0 0 56px;
+  position:relative;box-shadow:8px 8px 0 var(--red)}
+.fs-tag{display:inline-block;background:var(--red);color:#f4f1e8;font-weight:700;
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;margin-bottom:18px}
+.fs-h{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,34px);
+  line-height:1.15;text-transform:lowercase;margin:0 0 14px}
+.fs-lead{font-size:18px;line-height:1.55;max-width:760px;margin:0 0 20px}
+.fs-list{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:10px}
+.fs-list li{padding-left:30px;position:relative;font-size:17px;line-height:1.45}
+.fs-list li::before{content:"✓";position:absolute;left:0;top:0;color:var(--red);font-weight:800}
+.fs-note{font-size:15px;line-height:1.5;opacity:.72;margin:18px 0 0;max-width:720px}
+@media (max-width:640px){
+  .freestep{padding:26px 20px;box-shadow:5px 5px 0 var(--red)}
+  .fs-lead,.fs-list li{font-size:16px}
+}
