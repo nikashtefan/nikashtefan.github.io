@@ -16,7 +16,6 @@ TG = "https://t.me/kvazarchIk"
 SQUIGGLE = '<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg>'
 CIRCLE = '<svg class="h1circle" viewBox="0 0 320 130" preserveAspectRatio="none" aria-hidden="true"><path d="M160 8 C60 6 14 40 16 66 C18 98 90 122 168 121 C250 120 308 92 304 60 C300 30 250 9 150 9"/></svg>'
 
-DEADLINE = "30 сентября"
 
 OFFERS = {
     "audit": {
@@ -754,7 +753,7 @@ def render(slug, o):
 
 <section id="price">
   <div class="wrap">
-    {corners('цена', 'стартовая цена до ' + DEADLINE, 'PRICE')}
+    {corners('цена', 'три формата на выбор', 'PRICE')}
     {section_h('форматы и цены')}
     <div class="tiers reveal">{tiers}</div>
     <div class="guarantee reveal"><span class="gi">🛡</span><p>{o['guarantee']}</p></div>
@@ -774,7 +773,7 @@ def render(slug, o):
   <div class="wrap">
     {corners('контакт', '30 минут бесплатно', "LET'S TALK")}
     <h2 class="reveal">{o['cta_h']}</h2>
-    <p class="reveal">{"30 минут бесплатно: поймём, подходит ли тебе это." if slug == "session" else "30 минут бесплатно: поймём, подходит ли это вам."} Стартовая цена — для первых трёх клиентов суммарно по всем форматам, до {DEADLINE}. Дальше цена обычная.</p>
+    <p class="reveal">{"30 минут бесплатно: поймём, подходит ли тебе это." if slug == "session" else "30 минут бесплатно: поймём, подходит ли это вам."}</p>
     <div class="cta-btns reveal">
       <a class="btn" href="{tg}" target="_blank" rel="noopener">✈️ написать в Telegram →</a>
       <a class="btn ghost" href="mailto:nik.shtefan@gmail.com">✉️ написать на почту</a>
