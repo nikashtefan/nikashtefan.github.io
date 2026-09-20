@@ -21,7 +21,7 @@ CARDS = {
     "workshop": ("Воркшоп Claude Code", "за день команда собирает 4 инструмента на своих задачах", "от 25 000 ₽"),
     "content": ("Контент-конвейер", "из одного эфира — 7 публикаций в вашем голосе", "от 12 000 ₽"),
     "digest": ("AI-дайджест", "агент читает рынок за вас и присылает 5–10 событий", "от 10 000 ₽"),
-    "ainative": ("Команда и процессы", "команда переходит на AI и не откатывается через два месяца", "первый шаг бесплатно"),
+    "ainative": ("Убираю ручную работу", "обучаю команду, перестраиваю процессы или собираю автоматизации сама", "первый шаг бесплатно"),
 }
 
 TPL = """<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8">
@@ -56,7 +56,7 @@ def main():
         title, sub, price = CARDS[slug]
         size = 84 if len(title) <= 24 else 68
         html = TPL.format(accent=offer["accent"], title=title, sub=sub, price=price,
-                          corner=offer["corners"][2], size=size)
+                          corner=(offer["corners"][2] if offer.get("corners") else "ai в работе"), size=size)
         src = TMP / f"{slug}.html"
         src.write_text(html, encoding="utf-8")
         out = ROOT / "img" / f"og-{slug}.png"
