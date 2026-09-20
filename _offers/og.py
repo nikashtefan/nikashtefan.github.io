@@ -45,7 +45,7 @@ TPL = """<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8">
 <div class="grid"></div>
 <div class="row"><span>Ника Штефан</span><span>{corner}</span></div>
 <div><h1>{title}</h1><p>{sub}</p></div>
-<div class="foot"><span>ex-Head of Product Discovery · Т-Банк · 9 лет в продукте</span><span class="price">{price}</span></div>
+<div class="foot"><span>ex-Head of Discovery &amp; CX · Т-Банк · 9 лет в продукте</span><span class="price">{price}</span></div>
 </body></html>"""
 
 
