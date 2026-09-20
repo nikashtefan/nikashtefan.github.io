@@ -674,3 +674,21 @@
 #ways .card:last-child{border-right:none}
 @media (max-width:920px){#ways .cards{grid-template-columns:1fr}
   #ways .card{border-right:none!important}}
+
+/* Кейсы «было → стало»: строка на кейс, слева название и ярлык, справа два абзаца */
+.works-note{font-size:16px;line-height:1.5;opacity:.7;max-width:760px;margin:-32px 0 34px}
+.works{border-top:2px solid var(--ink)}
+.work{display:grid;grid-template-columns:280px 1fr;gap:40px;padding:26px 0;border-bottom:1px solid var(--line)}
+.work .wt h3{font-family:'Unbounded',sans-serif;font-weight:800;font-size:19px;text-transform:lowercase;
+  line-height:1.2;margin:0 0 10px}
+.work .wt .term{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--red)}
+.work .wb p{font-size:17px;line-height:1.5;margin:0 0 8px;max-width:760px}
+.work .wb .was{opacity:.62}
+.work .wb b{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:.1em;
+  text-transform:uppercase;margin-right:6px}
+.work .wb a{color:var(--red);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:860px){
+  .work{grid-template-columns:1fr;gap:12px;padding:22px 0}
+  .works-note{margin-top:-20px}
+}
