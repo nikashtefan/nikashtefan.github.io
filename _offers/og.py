@@ -40,12 +40,13 @@ TPL = """<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8">
   p{{position:relative;font-size:32px;line-height:1.35;max-width:900px;margin-top:26px}}
   .foot{{position:relative;display:flex;justify-content:space-between;align-items:center;font-size:24px}}
   .price{{background:#f4f1e8;color:{accent};font-family:Unbounded,sans-serif;font-weight:700;
-         font-size:26px;padding:12px 22px;text-transform:lowercase}}
+         font-size:26px;padding:12px 22px;text-transform:lowercase;white-space:nowrap}}
+  .foot span:first-child{{max-width:760px}}
 </style></head><body>
 <div class="grid"></div>
 <div class="row"><span>Ника Штефан</span><span>{corner}</span></div>
 <div><h1>{title}</h1><p>{sub}</p></div>
-<div class="foot"><span>ex-Head of Discovery &amp; CX · Т-Банк · 9 лет в продукте</span><span class="price">{price}</span></div>
+<div class="foot"><span>ex-Head of Discovery &amp; CX · Т-Банк</span><span class="price">{price}</span></div>
 </body></html>"""
 
 
