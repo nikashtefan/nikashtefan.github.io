@@ -670,7 +670,7 @@
 
 /* «Три способа»: карточек три, а базовая сетка рассчитана на четыре —
    иначе последняя четверть остаётся пустой */
-#ways .cards{grid-template-columns:repeat(3,1fr)}
+#ways .cards{grid-template-columns:repeat(2,1fr)}
 #ways .card:last-child{border-right:none}
 @media (max-width:920px){#ways .cards{grid-template-columns:1fr}
   #ways .card{border-right:none!important}}
