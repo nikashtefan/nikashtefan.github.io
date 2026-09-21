@@ -840,6 +840,7 @@ def render(slug, o):
     {corners('почему я', 'что я делала до этого', 'WHY')}
     {section_h('почему я')}
     {cards(o['why'])}
+    <p class="works-more reveal">Где работала, что строила и чем занимаюсь сейчас — <a href="index.html">подробно рассказываю тут</a>.</p>
   </div>
 </section>
 
