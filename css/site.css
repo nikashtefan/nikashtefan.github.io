@@ -699,3 +699,34 @@
 /* Ссылка на остальные проекты под блоком кейсов */
 .works-more{font-size:17px;line-height:1.5;margin:26px 0 0}
 .works-more a{color:var(--red);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- Ленты карточек (примеры и кейсы на ainative): листаются вбок ---------- */
+.cs-row{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px;scrollbar-width:thin}
+.cs{flex:0 0 min(380px,84vw);scroll-snap-align:start;border:2px solid var(--ink);background:var(--paper);display:flex;flex-direction:column}
+.cs-shot{aspect-ratio:16/10;border-bottom:2px solid var(--ink);overflow:hidden;background:#eee}
+.cs-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.cs-empty{display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;letter-spacing:.14em;text-transform:uppercase;font-size:13px;opacity:.5;background:repeating-linear-gradient(45deg,#f1ede2 0 10px,#e8e2d3 10px 20px)}
+.cs-body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.cs-body .term{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.cs-body h3{font-family:'Unbounded',sans-serif;font-weight:800;font-size:18px;line-height:1.15;text-transform:lowercase;margin:8px 0 14px}
+.cs-body p{font-size:15px;line-height:1.5;margin:0 0 10px}
+.cs-body .was{opacity:.62}
+.cs-body b{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.cs-link{margin-top:auto;padding-top:10px;color:var(--red);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.cs-nav{display:flex;align-items:center;gap:16px;margin-top:8px}
+.cs-btn{border:2px solid var(--ink);background:none;width:44px;height:44px;font-size:20px;cursor:pointer;color:var(--ink)}
+.cs-btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+.ex{flex-basis:min(330px,80vw)}
+.ex-shot{position:relative;background:#fff;aspect-ratio:4/3}
+.ex-shot img{object-fit:contain;object-position:center;padding:10px}
+.ex-shot img.tall{object-fit:cover;object-position:top;padding:0}
+.ex-cap{position:absolute;left:0;bottom:0;background:var(--ink);color:#fff;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px}
+.ex .cs-body h3{margin-top:0}
+/* одинаковые элементы в соседних карточках стоят на одной линии (Ника просила):
+   результат всегда 2 строки, заголовок кейса — 2 строки, результат прижат к низу */
+.ex-res{margin-top:auto!important;padding-top:6px;min-height:2.8em;color:var(--red);font-family:'Oswald',sans-serif;font-weight:600;font-size:13px!important;letter-spacing:.1em;text-transform:uppercase;line-height:1.4!important}
+.cs:not(.ex) .cs-body h3{min-height:2.3em}
+.pains-after{color:var(--red)}
+/* выделение длинной фразы: переносится вместе с плашкой */
+.lead .hl.hl-wrap{white-space:normal;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ai{text-transform:none}

@@ -65,6 +65,7 @@
     <div class="corners"><span class="mark">боль</span><span class="mid mark">если оставить как есть</span><span class="mark right">PAIN</span></div>
     <h2 class="section-h reveal" style="margin-bottom:58px">знакомо?<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
     <ul class="pains reveal"><li>Подписаны на 50 каналов, а важное всё равно узнаёте от коллег последним</li><li>Мониторинг конкурентов делаете «когда будет время», то есть никогда</li><li>Нанимать аналитика только чтобы следить за рынком — дорого</li><li>Час в день уходит на ленту, а пользы на 5 минут</li></ul>
+    
   </div>
 </section>
 
@@ -122,6 +123,7 @@
     <div class="corners"><span class="mark">цена</span><span class="mid mark">три формата на выбор</span><span class="mark right">PRICE</span></div>
     <h2 class="section-h reveal" style="margin-bottom:58px">форматы и цены<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg></h2>
     <div class="tiers reveal"><div class="tier"><h3 class="tn">разовый обзор рынка</h3><div class="tp">10 000 ₽</div><ul class="incl"><li>одноразовый отчёт</li><li>конкуренты + каналы за месяц</li><li>без агента</li></ul><a class="btn ghost" href="https://t.me/kvazarchIk?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%82%D0%B0%D1%80%D0%B8%D1%84%20%C2%AB%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9%20%D0%BE%D0%B1%D0%B7%D0%BE%D1%80%20%D1%80%D1%8B%D0%BD%D0%BA%D0%B0%C2%BB" target="_blank" rel="noopener">написать про этот формат →</a></div><div class="tier main"><span class="badge">выбирают чаще</span><h3 class="tn">дайджест-агент</h3><div class="tp">30 000 ₽</div><ul class="incl"><li>настройка под вас</li><li>до 50 источников</li><li>ежедневно или еженедельно</li><li>🎁 2 недели доводки</li></ul><a class="btn" href="https://t.me/kvazarchIk?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%82%D0%B0%D1%80%D0%B8%D1%84%20%C2%AB%D0%B4%D0%B0%D0%B9%D0%B4%D0%B6%D0%B5%D1%81%D1%82-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%C2%BB" target="_blank" rel="noopener">обсудить этот формат →</a></div><div class="tier"><h3 class="tn">агент + аналитика</h3><div class="tp">30 000 ₽ + 25 000 ₽/мес</div><ul class="incl"><li>настройка агента как в основном тарифе</li><li>час разбора выводов со мной каждый месяц</li><li>добавляю источники по ходу</li><li>поддержка агента</li></ul><a class="btn ghost" href="https://t.me/kvazarchIk?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%82%D0%B0%D1%80%D0%B8%D1%84%20%C2%AB%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%20%2B%20%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%C2%BB" target="_blank" rel="noopener">написать про этот формат →</a></div></div>
+    
     <div class="guarantee reveal"><span class="gi">🛡</span><p>Если за 2 недели дайджест не станет полезным, <b>верну деньги за настройку</b>.</p></div>
   </div>
 </section>
@@ -185,6 +187,15 @@
     }
     window.addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive:true});
     update();
+  })();
+  // ленты (примеры, кейсы): стрелки листают на одну карточку
+  (function(){
+    document.querySelectorAll('.cs-wrap').forEach(function(w){
+      var row = w.querySelector('.cs-row');
+      w.querySelectorAll('.cs-btn').forEach(function(b){
+        b.addEventListener('click', function(){ var c = row.querySelector('.cs'); row.scrollBy({left:(c.offsetWidth+22)*(+b.dataset.d), behavior:'smooth'}); });
+      });
+    });
   })();
 </script>
 </body>
