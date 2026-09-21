@@ -894,6 +894,25 @@ def render(slug, o):
     }}, {{threshold:.12, rootMargin:'0px 0px -8% 0px'}});
     els.forEach(function(e){{ io.observe(e); }});
   }})();
+  // Подсветка пункта меню: активен раздел, чей верх ближе всех к шапке сверху.
+  // Считаем по скроллу, а не IntersectionObserver: разделы разной высоты, так надёжнее.
+  (function(){{
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+    var pairs = links.map(function(a){{ return [a, document.getElementById(a.getAttribute('href').slice(1))]; }})
+                     .filter(function(p){{ return p[1]; }});
+    if(!pairs.length) return;
+    var ticking = false;
+    function update(){{
+      ticking = false;
+      var line = 140, current = null, best = -Infinity;
+      pairs.forEach(function(p){{ var t = p[1].getBoundingClientRect().top; if(t <= line && t > best){{ best = t; current = p[0]; }} }});
+      // у самого низа страницы последний раздел может так и не дойти до линии
+      if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = pairs[pairs.length-1][0];
+      pairs.forEach(function(p){{ p[0].classList.toggle('active', p[0] === current); }});
+    }}
+    window.addEventListener('scroll', function(){{ if(!ticking){{ ticking = true; requestAnimationFrame(update); }} }}, {{passive:true}});
+    update();
+  }})();
 </script>
 </body>
 </html>

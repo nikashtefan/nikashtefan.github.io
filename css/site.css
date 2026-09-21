@@ -85,6 +85,9 @@
   .nav-links{display:flex;gap:30px;font-family:"Oswald",sans-serif;font-weight:500;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
   .nav-links a{position:relative;padding-bottom:2px}
   .nav-links a:hover{color:var(--red)}
+  /* текущий раздел: подсвечивает скрипт в конце страницы, чтобы в длинном меню было видно, где ты */
+  .nav-links a.active{color:var(--red)}
+  .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:var(--red)}
   .btn{
     display:inline-block;background:var(--red);color:#fff;
     font-family:"Oswald",sans-serif;font-weight:600;font-size:13px;
