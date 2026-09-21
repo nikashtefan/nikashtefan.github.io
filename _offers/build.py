@@ -512,6 +512,8 @@ OFFERS = {
         "note": "",
         "hero_free_note": "Бесплатно: созвон на 1–2 часа, разбор узких мест и первая автоматизация.",
         "photo": ("img/nika.jpg", "ex-head of discovery &amp; cx · т-банк", "Ника Штефан"),
+        # скрины пока выключены (Ника, 21.09); пути оставлены, вернуть — True
+        "examples_shots": False,
         "examples_strip": ("9 примеров задач, которые можно отдать <span class=\"ai\">AI</span>", "куда применить AI", [
             ("<span class=\"ai\">AI</span>-сотрудник", "img/english-bot.png", "агент по английскому", "Ассистент под конкретный процесс: принимает заявки, отвечает клиентам по вашей базе, готовит документы по шаблону. Работает круглосуточно.", "новые руки без найма"),
             ("отчёты сами", "img/idea-checkbot-2.jpg", "Idea CheckBot: разбор собирается сам", "Цифры из CRM, таблиц и рекламы собираются в отчёт к понедельнику.", "видно, какой канал не окупается, в ту же неделю"),
@@ -751,8 +753,11 @@ def examples_strip(o):
         return ""
     t, sub, items = o["examples_strip"]
     cards_html = ""
+    show = o.get("examples_shots", True)
     for h, img, cap, txt, res in items:
-        if img:
+        if not show:
+            shot = ""
+        elif img:
             tall = ' class="tall"' if img in TALL_SHOTS else ""
             shot = f'<div class="cs-shot ex-shot"><img{tall} src="{img}" alt="{cap}" loading="lazy"><span class="ex-cap">на скрине: {cap}</span></div>'
         else:
