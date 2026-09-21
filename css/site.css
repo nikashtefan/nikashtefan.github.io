@@ -730,3 +730,6 @@
 /* выделение длинной фразы: переносится вместе с плашкой */
 .lead .hl.hl-wrap{white-space:normal;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .ai{text-transform:none}
+/* заголовки карточек и шагов в ряду — всегда высотой в 2 строки, чтобы текст под ними начинался на одной линии */
+.cards .card h3,.steps .step h3{min-height:2.2em}
+@media(max-width:860px){.cards .card h3,.steps .step h3{min-height:0}}

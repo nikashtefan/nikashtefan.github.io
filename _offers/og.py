@@ -21,17 +21,20 @@ CARDS = {
     "workshop": ("Воркшоп Claude Code", "за день команда собирает 4 инструмента на своих задачах", "от 25 000 ₽"),
     "content": ("Контент-конвейер", "из одного эфира — 7 публикаций в вашем голосе", "от 12 000 ₽"),
     "digest": ("AI-дайджест", "агент читает рынок за вас и присылает 5–10 событий", "от 10 000 ₽"),
-    "ainative": ("Зарабатывайте больше той же командой", "AI-автоматизации: заявки не теряются, клиенты получают ответ за минуты", "первый шаг бесплатно"),
+    "ainative": ("Зарабатывайте больше той же командой", "AI-автоматизации: заявки не теряются, клиенты получают ответ за минуты", "первая автоматизация бесплатно"),
     "ai-team": ("Научите команду работать с AI", "воркшопы на ваших задачах и чемпионы внутри — команда не откатывается через месяц", "первый шаг бесплатно"),
 }
+
+# светлые карточки: кремовый фон и буквы цвета страницы (Ника выбрала для ainative 21.09)
+LIGHT = {"ainative"}
 
 TPL = """<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
   *{{margin:0;padding:0;box-sizing:border-box}}
-  body{{width:1200px;height:630px;background:{accent};color:#f4f1e8;font-family:Inter,sans-serif;
+  body{{width:1200px;height:630px;background:{bg};color:{fg};font-family:Inter,sans-serif;
        display:flex;flex-direction:column;justify-content:space-between;padding:72px 80px;overflow:hidden;position:relative}}
-  .grid{{position:absolute;inset:0;opacity:.14;
+  .grid{{position:absolute;inset:0;opacity:{grid};
         background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.5) 0 2px,transparent 2px 6px),
                          repeating-linear-gradient(0deg,rgba(0,0,0,.5) 0 2px,transparent 2px 6px)}}
   .row{{position:relative;display:flex;justify-content:space-between;align-items:flex-start;
@@ -40,23 +43,29 @@ TPL = """<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8">
      text-transform:lowercase;letter-spacing:-.02em;max-width:1040px}}
   p{{position:relative;font-size:32px;line-height:1.35;max-width:900px;margin-top:26px}}
   .foot{{position:relative;display:flex;justify-content:space-between;align-items:center;font-size:24px}}
-  .price{{background:#f4f1e8;color:{accent};font-family:Unbounded,sans-serif;font-weight:700;
+  .price{{background:{fg};color:{bg};font-family:Unbounded,sans-serif;font-weight:700;
          font-size:26px;padding:12px 22px;text-transform:lowercase;white-space:nowrap}}
-  .foot span:first-child{{max-width:760px}}
+  .foot span:first-child{{max-width:760px;white-space:nowrap;margin-right:24px}}
+  .foot .price.long{{font-size:22px;padding:12px 18px}}
 </style></head><body>
 <div class="grid"></div>
 <div class="row"><span>Ника Штефан</span><span>{corner}</span></div>
 <div><h1>{title}</h1><p>{sub}</p></div>
-<div class="foot"><span>ex-Head of Discovery &amp; CX · Т-Банк</span><span class="price">{price}</span></div>
+<div class="foot"><span>ex-Head of Discovery &amp; CX · Т-Банк</span><span class="price{long}">{price}</span></div>
 </body></html>"""
 
 
 def main():
     TMP.mkdir(exist_ok=True)
+    only = set(sys.argv[1:])  # можно перегенерировать одну: python3 _offers/og.py ainative
     for slug, offer in OFFERS.items():
+        if only and slug not in only:
+            continue
         title, sub, price = CARDS[slug]
         size = 84 if len(title) <= 24 else 68
-        html = TPL.format(accent=offer["accent"], title=title, sub=sub, price=price,
+        light = slug in LIGHT
+        html = TPL.format(bg="#f4f1e8" if light else offer["accent"], fg=offer["accent"] if light else "#f4f1e8",
+                          grid=".05" if light else ".14", long=" long" if len(price) > 22 else "", title=title, sub=sub, price=price,
                           corner=(offer["corners"][2] if offer.get("corners") else "ai в работе"), size=size)
         src = TMP / f"{slug}.html"
         src.write_text(html, encoding="utf-8")
