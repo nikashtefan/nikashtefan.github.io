@@ -692,3 +692,7 @@
   .work{grid-template-columns:1fr;gap:12px;padding:22px 0}
   .works-note{margin-top:-20px}
 }
+
+/* Ссылка на остальные проекты под блоком кейсов */
+.works-more{font-size:17px;line-height:1.5;margin:26px 0 0}
+.works-more a{color:var(--red);text-decoration:underline;text-underline-offset:3px}

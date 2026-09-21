@@ -658,6 +658,7 @@ def works_section(o):
     {section_h('что я уже собрала')}
     <p class="works-note reveal">{o.get("works_note", "")}</p>
     <div class="works reveal">{rows}</div>
+    <p class="works-more reveal">Остальные проекты — боты, мини-приложения, сайты и агенты — лежат <a href="index.html#projects">на моей странице</a>.</p>
   </div>
 </section>
 """
@@ -773,13 +774,13 @@ def render(slug, o):
 
 <nav>
   <div class="wrap nav-in">
-    <a class="brand" href="index.html"><img src="img/logo.png" alt="Лого"><span><b>НИКА</b> ШТЕФАН</span></a>
+    <a class="brand" href="#top"><img src="img/logo.png" alt="Лого"><span><b>НИКА</b> ШТЕФАН</span></a>
     <div class="nav-links">{'<a href="#ways">что делаю</a>' if o.get("ways") else ""}<a href="#for">кому</a><a href="#get">{"что получишь" if slug == "session" else "что получите"}</a><a href="#how">как проходит</a><a href="#why">почему я</a><a href="#price">цена</a><a href="#faq">вопросы</a></div>
     <a class="btn" href="{tg}" target="_blank" rel="noopener">записаться</a>
   </div>
 </nav>
 
-<section class="hero" style="border-top:none">
+<section class="hero" id="top" style="border-top:none">
   <div class="wrap">
     {corners(*o['corners']) if o.get('corners') else ''}
     <div class="hero-grid">
