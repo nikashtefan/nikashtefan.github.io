@@ -524,7 +524,6 @@
     section{padding:72px 0}
     .facts{margin-top:56px}
     .doodle-star,.doodle-spark{display:none}
-    .nav-links{display:none}
     .fact{grid-template-columns:1fr;gap:6px}
     .cards{grid-template-columns:1fr}
     .card{border-right:none!important}
@@ -608,6 +607,21 @@
   /* 2. якоря не прячутся под липкую шапку */
   html{scroll-padding-top:80px}
   section{scroll-margin-top:80px}
+
+  /* мобильное меню: пункты уезжают второй строкой под лого и листаются пальцем вбок —
+     без бургера и JS, поэтому работает на всех страницах сразу и подсветка раздела видна */
+  @media(max-width:920px){
+    .nav-in{flex-wrap:wrap;height:auto;padding-top:10px;gap:10px 16px}
+    .nav-links{order:3;flex-basis:100%;gap:22px;overflow-x:auto;white-space:nowrap;
+      padding:4px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .nav-links::-webkit-scrollbar{display:none}
+    /* затухание справа — намёк, что строку можно листать */
+    .nav-links{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+    .nav-links a.active::after{bottom:-4px}
+    .nav-links a:last-child{margin-right:40px} /* последний пункт можно выкрутить из-под затухания */
+    html{scroll-padding-top:120px}
+    section{scroll-margin-top:120px}
+  }
   /* 3. заголовки карточек стали h3 — стили те же */
   .card h3{font-family:"Unbounded",sans-serif;font-weight:700;font-size:20px;line-height:1.05;text-transform:lowercase;margin-bottom:16px;min-height:46px}
   .step h3{font-family:"Unbounded",sans-serif;font-weight:700;font-size:19px;text-transform:lowercase;margin-bottom:14px;line-height:1.05}
