@@ -198,6 +198,26 @@
       });
     });
   })();
+  // Докуда дочитал: когда верх блока доходит до середины экрана — один раз шлём в Метрику.
+  // Параметры визита, а не только цели: их не надо заводить в интерфейсе, и они видны в API
+  // (ym:s:paramsLevel2). Номер в названии — порядок блоков, чтобы отчёт сортировался как страница.
+  (function(){
+    if(!('IntersectionObserver' in window) || typeof ym !== 'function') return;
+    var blocks = Array.prototype.slice.call(document.querySelectorAll('section[id], footer'));
+    function seen(entries, obs){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        var i = blocks.indexOf(en.target), id = en.target.id || 'end';
+        var p = {}; p[(i < 9 ? '0' : '') + (i + 1) + '_' + id] = 1;
+        ym(110258557, 'params', {scroll: p});
+        ym(110258557, 'reachGoal', 'sec_' + id);
+        obs.unobserve(en.target);
+      });
+    }
+    var mid = new IntersectionObserver(seen, {rootMargin:'0px 0px -50% 0px'});
+    var any = new IntersectionObserver(seen); // футер низкий и до середины экрана не доедет — считаем, как только показался
+    blocks.forEach(function(b){ (b.tagName === 'FOOTER' ? any : mid).observe(b); });
+  })();
 </script>
 </body>
 </html>
