@@ -936,7 +936,7 @@ def render(slug, o):
 <meta name="twitter:card" content="summary_large_image">
 <noscript><style>.reveal,.cards .card,.steps .step,.reviews .rev,.cta-btns .btn{{opacity:1!important;transform:none!important}}</style></noscript>
 <!-- свой цвет у каждой страницы, чтобы офферы отличались визуально -->
-<style>:root{{--red:{o['accent']};--green:{o['band']}}}.sec-green,.knit-band{{background-color:var(--green)}}</style>
+<style>:root{{--red:{o['accent']};--green:{o['band']};{''.join(f'--{k}:{v};' for k, v in o.get('vars', {}).items())}}}.sec-green,.knit-band{{background-color:var(--green)}}{o.get('css', '')}</style>
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){{m[i]=m[i]||function(){{(m[i].a=m[i].a||[]).push(arguments)}};m[i].l=1*new Date();for (var j = 0; j < document.scripts.length; j++) {{if (document.scripts[j].src === r) {{ return; }}}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110258557', 'ym');
     ym(110258557, 'init', {{ssr:true, webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true}});
@@ -1113,7 +1113,7 @@ DRAFTS = {
         "desc": "Беру ту часть AI-трансформации, на которой всё обычно ломается: люди и процессы. Обучение команд работе с агентами, AI в Discovery и Delivery, AI-амбассадоры внутри и эффект в цифрах.",
         "tg_text": "Привет! Интересует AI-трансформация команд",
         "accent": "#7b4326", "band": "#2b1f19",
-        "creds": ["ex-Head of Discovery &amp; CX группы продуктов в Т-Банке", "Новый способ работы прижился в 350+ продуктовых командах и работает после моего ухода", "Сократила полный цикл Discovery с 4 месяцев до 2 недель", "Тренер по вайбкодингу и Claude Code на курсе Ивана Замесина «Boost»"],
+        "creds": ["ex-Head of Discovery &amp; CX группы продуктов в Т-Банке", "Внедрила Discovery в 14 бизнес-линиях и 30% команд массового бизнеса. Работает после моего ухода", "Сократила полный цикл Discovery с 4 месяцев до 2 недель", "Тренер по вайбкодингу и Claude Code на курсе Ивана Замесина «Boost»"],
         "corners": ("ai-трансформация команд", "для IT и digital · 100–1000 человек", "для компаний"),
         "h1": ("команды работают с ", "AI", " каждый день"),
         "h1_sub": "а не только на пилоте и в презентации для руководства",
@@ -1176,16 +1176,16 @@ DRAFTS = {
         ],
         "tiers_before": "Стоимость считаем после разбора: сколько команд, какие процессы, нужны ли интеграции.",
         "guarantee": "Если через месяц после пилота команда <b>не пользуется</b> тем, что внедрили, возвращаюсь и довожу до результата.",
-        "story_h": "я уже меняла способ работы сотен команд",
+        "story_h": "я уже меняла способ работы команд",
         "story": [
             ("ситуация", "Т-Банк: сотни продуктовых команд, у каждой свой способ работы."),
             ("проблема", "Новые подходы не приживались: обучили, и через месяц всё вернулось как было."),
             ("решение", "Построила систему: обучение, амбассадоры в командах, общие инструменты и метрики внедрения."),
-            ("результат", "Прижилось в 350+ командах, полный цикл Discovery сократился с 4 месяцев до 2 недель. Работает после моего ухода."),
+            ("результат", "Методологию утвердили на уровне компании, она работает в 14 бизнес-линиях. Полный цикл Discovery сократился с 4 месяцев до 2 недель. Работает после моего ухода."),
         ],
         "why": [
-            ("350+ команд", "Знаю, как новый способ работы приживается в большой компании, а не забывается через месяц после обучения.", "внедрение"),
-            ("1500+ учеников", "Учила продактов и дизайнеров находить, что строить, и проверять идеи до разработки.", "обучение"),
+            ("14 бизнес-линий", "Знаю, как новый способ работы приживается в большой компании, а не забывается через месяц после обучения.", "внедрение"),
+            ("950+ сотрудников", "Вовлекла в новый процесс 950+ человек, 130+ продактов и дизайнеров обучила сама: находить, что строить, и проверять идеи до разработки.", "обучение"),
             ("тренер boost", "Веду воркшопы по вайбкодингу и Claude Code на курсе Ивана Замесина «Boost».", "claude code"),
             ("спикер и лектор", "Центральный университет, Product Camp, Нетология: рассказываю, как внедрять новый способ работы в крупной компании.", "опыт"),
         ],
@@ -1211,6 +1211,16 @@ DRAFTS = {
 }
 
 
+# 13.10: варианты палитры для transform по подборке Ники (saintgillies «Colour theory»).
+# Пара цветов: насыщенный — акцент и тёмные полосы, приглушённый — фон и подсветка на тёмном.
+TRANSFORM_THEMES = {
+    "raspberry": {"accent": "#a3173f", "band": "#5c1026", "vars": {"cream": "#f2efee", "paper": "#fbfaf9", "ink": "#1f1a1c", "line": "#d6d1d1", "yellow": "#cfcacb"}, "css": ".lead .hl{background:#cfcacb;color:var(--ink)}"},
+    "ultramarine": {"accent": "#2b3fa0", "band": "#1c2a6b", "vars": {"cream": "#f4ecea", "paper": "#fcf8f7", "ink": "#141a3a", "line": "#e2d3d0", "yellow": "#dba8a4"}, "css": ".lead .hl{background:#dba8a4;color:var(--ink)}"},
+    "ochre": {"accent": "#8e5f17", "band": "#4f3f58", "vars": {"cream": "#f2eef2", "paper": "#fbf9fb", "ink": "#2a1e14", "line": "#dcd3dc", "yellow": "#d9a85c"}, "css": ".lead .hl{background:#c9b3d1;color:var(--ink)}"},
+    "damson": {"accent": "#6a1c45", "band": "#3f1229", "vars": {"cream": "#f1f0e6", "paper": "#faf9f2", "ink": "#24121c", "line": "#d8d6c2", "yellow": "#b9c06c"}, "css": ".lead .hl{background:#b9c06c;color:var(--ink)}"},
+    "pine": {"accent": "#1f4a3a", "band": "#14352a", "vars": {"cream": "#f7edec", "paper": "#fdf8f7", "ink": "#10231c", "line": "#e6d3d1", "yellow": "#ecbac0"}, "css": ".lead .hl{background:#ecbac0;color:var(--ink)}"},
+}
+
 if __name__ == "__main__":
     for slug, offer in OFFERS.items():
         (ROOT / f"{slug}.html").write_text(typo(render(slug, offer)), encoding="utf-8")
@@ -1219,3 +1229,7 @@ if __name__ == "__main__":
         html = typo(render(slug, offer)).replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n<meta name="robots" content="noindex">', 1)
         (ROOT / f"{slug}-preprod.html").write_text(html, encoding="utf-8")
         print("written draft", slug + "-preprod.html")
+    for name, theme in TRANSFORM_THEMES.items():
+        html = typo(render("transform", {**DRAFTS["transform"], **theme})).replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n<meta name="robots" content="noindex">', 1)
+        (ROOT / f"transform-{name}-preprod.html").write_text(html, encoding="utf-8")
+        print("written theme", name)
