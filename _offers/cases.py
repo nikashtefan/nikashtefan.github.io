@@ -160,9 +160,15 @@ CSS = """<style>
 </style>"""
 
 
+def ver(c):
+    # GitHub Pages кэширует картинки на 10 минут: без версии в ссылке браузер показывает старую обложку
+    import hashlib
+    return hashlib.md5((ROOT / "img" / f"cover-{c}.jpg").read_bytes()).hexdigest()[:8]
+
+
 def section():
     cards = "".join(
-        f'<article class="kc cs"><img src="img/cover-{c}.jpg" alt="" loading="lazy" width="1200" height="900">'
+        f'<article class="kc cs"><img src="img/cover-{c}.jpg?v={ver(c)}" alt="" loading="lazy" width="1200" height="900">'
         f'<div class="kc-b"><div class="kc-t"><span class="kc-who{"" if who.startswith("клиент") else " own"}">{who}</span><span class="term">{tag}</span></div>'
         f'<h3>{prod}</h3><p class="kc-pr">{prob}</p><p>{what}</p>'
         + (f'<a class="kc-go" href="{link}" target="_blank" rel="noopener">посмотреть вживую →</a>' if link else "") +
