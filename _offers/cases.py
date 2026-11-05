@@ -28,12 +28,34 @@ BAR = 46
 # id, файл, кроп исходника (None = целиком), фон под скрином внутри окна
 COVERS = [
     ("kp", "kp.png", (40, 40, 1150, 1060), (255, 255, 255)),
-    ("ads", "report.png", (110, 40, 890, 1180), (25, 25, 25)),
+    ("ads", "report.png", None, (243, 244, 249)),
     ("contracts", "contracts.png", (50, 180, 725, 530), (243, 235, 227)),
     ("litbot", "litbot-admin.png", None, (255, 255, 255)),
     ("content", "content-factory.png", (380, 0, 1290, 700), (255, 255, 255)),
     ("models", "models-hub.png", None, (255, 255, 255)),
 ]
+
+# телефон поверх окна: второй экран того же кейса (файл, кроп исходника)
+PHONES = {"ads": ("report-bot.png", (0, 10, 754, 1190))}
+PH_W, PH_X, PH_Y = 330, 800, 250
+
+
+def phone(canvas, fname, crop):
+    shot = Image.open(SRC / fname).convert("RGB").crop(crop)
+    shot = shot.resize((PH_W, round(shot.height * PH_W / shot.width)), Image.LANCZOS)
+    b = 12                                       # рамка телефона
+    pw, ph = PH_W + 2 * b, min(shot.height, H - PH_Y + 40) + 2 * b
+    shadow = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(shadow).rounded_rectangle((PH_X, PH_Y + 16, PH_X + pw, PH_Y + ph), 40, fill=110)
+    shadow = shadow.filter(ImageFilter.GaussianBlur(24))
+    canvas.paste(Image.new("RGB", (W, H), (60, 15, 35)), (0, 0), shadow)
+    body = Image.new("RGB", (pw, ph), (24, 26, 32))
+    inner = Image.new("L", shot.size, 0)
+    ImageDraw.Draw(inner).rounded_rectangle((0, 0, shot.width, shot.height), 28, fill=255)
+    body.paste(shot.crop((0, 0, PH_W, ph - 2 * b)), (b, b), inner.crop((0, 0, PH_W, ph - 2 * b)))
+    mask = Image.new("L", (pw, ph), 0)
+    ImageDraw.Draw(mask).rounded_rectangle((0, 0, pw, ph), 40, fill=255)
+    canvas.paste(body, (PH_X, PH_Y), mask)
 
 
 def cover(name, fname, crop, inner_bg):
@@ -57,29 +79,37 @@ def cover(name, fname, crop, inner_bg):
     mask = Image.new("L", (WIN_W, win_h), 0)
     ImageDraw.Draw(mask).rounded_rectangle((0, 0, WIN_W, win_h), 22, fill=255)
     canvas.paste(win, (WIN_X, WIN_Y), mask)
+    if name in PHONES:
+        phone(canvas, *PHONES[name])
     out = ROOT / "img" / f"cover-{name}.jpg"
     canvas.save(out, quality=86, optimize=True, progressive=True)
 
 
-CASES = [  # (обложка, кто, тег, проблема-заголовок, что сделала, было, стало)
-    ("kp", "клиент · nda", "кп и расчёты", "каждый объект считает только владелец",
-     "Владелец надиктовывает объект голосом, ассистент подбирает оборудование по его правилам и присылает КП в PDF и спецификацию в Excel.",
-     "расчёт и КП только в голове владельца", "КП приходит в чат готовым, владелец проверяет"),
-    ("ads", "клиент · nda", "отчёты по рекламе", "почти 1 млн ₽ в месяц на рекламу, и непонятно, что работает",
-     "Подключила Директ и ВК по API. Отчёт за месяц собирается из кабинетов: где теряются деньги и что поменять.",
-     "мусорные площадки ловили руками в Метрике", "нашли 900 тыс. ₽ в ВК на клики вместо охвата"),
-    ("contracts", "клиент · nda", "документы", "договор с самозанятым ждут 3–4 часа",
-     "Исполнитель присылает фото документов, AI их читает, формулы проверяют ИНН, СНИЛС и счёт. Договор собирается в шаблоне компании.",
-     "HR переносит паспорт и реквизиты в шаблон руками", "остаётся одна кнопка «на подпись»"),
-    ("litbot", "мой проект", "ai-сотрудник", "учитель раздаёт задания и считает, кто что сделал",
-     "Админка, где учитель сам ведёт программу, и бот, который каждый день присылает ученикам задания и собирает статистику.",
-     "задания и проверка руками", "работает у реального учителя литературы"),
-    ("content", "мой проект", "контент", "один выпуск подкаста разбирали на посты целый день",
-     "Конвейер делает превью, главы и семь публикаций под разные площадки, в голосе автора.",
-     "день ручной работы на выпуск", "7 публикаций из одного выпуска"),
-    ("models", "мой проект", "расчёты", "каждый пересчёт экономики заново в табличке",
-     "Девять интерактивных моделей: юнит-экономика, окупаемость, воронки. Меняешь вводные и сразу видишь результат.",
-     "статичные таблицы", "решения о цене на цифрах"),
+CASES = [  # (обложка, кто, тег, продукт, проблема, что сделала, было, стало, ссылка)
+    ("kp", "клиент · nda", "кп и расчёты", "AI-ассистент для КП и смет",
+     "Каждый объект считает владелец, поэтому проект готов только на следующий день. Взять больше объектов компания не может.",
+     "Владелец надиктовывает объект, а ассистент присылает КП и спецификацию.",
+     "1–2 дня, и всё через владельца", "2 минуты, владелец только проверяет", ""),
+    ("ads", "клиент · nda", "реклама", "AI-автоотчёт по рекламным кампаниям",
+     "На рекламу уходит почти 1 млн ₽ в месяц, а какие деньги сгорают, никто не знает.",
+     "Отчёт сам собирается из Директа и ВК, показывает утечки, а агент предлагает решения.",
+     "мусор ловили руками в Метрике", "нашли 900 тыс. ₽: ВК покупал клики вместо охвата", ""),
+    ("contracts", "клиент · nda", "документы", "AI-ассистент для договоров с самозанятыми",
+     "На каждого исполнителя HR руками переносит паспорт и реквизиты, договор ждут 3–4 часа.",
+     "Исполнитель присылает фото документов, а AI сам проверяет данные и собирает договор.",
+     "3–4 часа на договор", "10 минут, остаётся нажать «на подпись»", ""),
+    ("litbot", "мой проект", "обучение", "Бот-ассистент учителя",
+     "Учитель сам рассылает задания и считает, кто что сделал.",
+     "Бот каждый день присылает задания и сам ведёт статистику, программу учитель меняет в админке.",
+     "рассылка и учёт руками", "учитель только смотрит итоги", ""),
+    ("content", "мой проект", "контент", "Контент-фабрика",
+     "На посты по одному выпуску подкаста уходил целый день.",
+     "Из одного выпуска получаются превью, главы и 7 постов в голосе автора.",
+     "1 день на выпуск", "30 минут, 7 публикаций", "content.html"),
+    ("models", "мой проект", "расчёты", "Хаб расчётных моделей",
+     "Каждое «а если поднять цену» приходилось пересчитывать в таблице заново.",
+     "9 моделей: юнит-экономика, окупаемость, воронки. Меняешь цифру и сразу видишь результат.",
+     "пересчёт на каждый вопрос", "цену выбираешь по цифрам", "models-hub/"),
 ]
 
 SQUIGGLE = '<svg class="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C40 4 70 16 105 9 C140 2 175 15 210 8 C240 3 270 13 297 7"/></svg>'
@@ -93,6 +123,8 @@ CSS = """<style>
 .kc-who{font-family:"Oswald",sans-serif;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;background:var(--ink);color:#fff}
 .kc-who.own{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
 .kc h3{font-family:"Unbounded",sans-serif;font-weight:700;font-size:18px;line-height:1.22;text-transform:lowercase;margin:2px 0 0;min-height:3.66em}
+.kc .kc-pr{font-weight:600;min-height:5.8em}
+.kc-go{font-family:"Oswald",sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);text-decoration:none}
 .kc p{margin:0;font-size:14.5px;line-height:1.45}
 .kc-ba{margin-top:auto;padding-top:12px;border-top:1.5px solid var(--line);display:grid;gap:6px;font-size:14px;line-height:1.35}
 .kc-ba span{font-family:"Oswald",sans-serif;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-right:6px}
@@ -107,9 +139,10 @@ def section():
     cards = "".join(
         f'<article class="kc cs"><img src="img/cover-{c}.jpg" alt="" loading="lazy" width="1200" height="900">'
         f'<div class="kc-b"><div class="kc-t"><span class="kc-who{"" if who.startswith("клиент") else " own"}">{who}</span><span class="term">{tag}</span></div>'
-        f'<h3>{h}</h3><p>{what}</p>'
+        f'<h3>{prod}</h3><p class="kc-pr">{prob}</p><p>{what}</p>'
+        + (f'<a class="kc-go" href="{link}" target="_blank" rel="noopener">посмотреть вживую →</a>' if link else "") +
         f'<div class="kc-ba"><div class="was"><span>было</span>{was}</div><div class="now"><span>стало</span>{now}</div></div></div></article>'
-        for c, who, tag, h, what, was, now in CASES
+        for c, who, tag, prod, prob, what, was, now, link in CASES
     )
     return f"""<section id="examples">
   <div class="wrap">
