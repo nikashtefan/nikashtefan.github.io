@@ -40,7 +40,8 @@ PHONES = {"ads": ("report-bot.png", (0, 10, 754, 1190))}
 PH_W, PH_X, PH_Y = 330, 800, 250
 
 
-def phone(canvas, fname, crop):
+def phone(canvas, fname, crop, w=PH_W, x=PH_X, y=PH_Y):
+    PH_W, PH_X, PH_Y = w, x, y
     shot = Image.open(SRC / fname).convert("RGB").crop(crop)
     shot = shot.resize((PH_W, round(shot.height * PH_W / shot.width)), Image.LANCZOS)
     b = 12                                       # рамка телефона
@@ -56,6 +57,18 @@ def phone(canvas, fname, crop):
     mask = Image.new("L", (pw, ph), 0)
     ImageDraw.Draw(mask).rounded_rectangle((0, 0, pw, ph), 40, fill=255)
     canvas.paste(body, (PH_X, PH_Y), mask)
+
+
+# обложка только из телефонов (кейсы, где весь продукт живёт в Telegram)
+DUOS = {"assistant": [("assistant-1.png", (0, 190, 662, 1432), 420, 140, 60),
+                      ("assistant-2.png", (0, 660, 736, 1470), 440, 610, 300)]}
+
+
+def duo(name):
+    canvas = Image.new("RGB", (W, H), BG)
+    for args in DUOS[name]:
+        phone(canvas, *args)
+    canvas.save(ROOT / "img" / f"cover-{name}.jpg", quality=86, optimize=True, progressive=True)
 
 
 def cover(name, fname, crop, inner_bg):
@@ -98,6 +111,10 @@ CASES = [  # (обложка, кто, тег, продукт, проблема, 
      "На каждого исполнителя HR руками переносит паспорт и реквизиты, договор ждут 3–4 часа.",
      "Исполнитель присылает фото документов, а AI сам проверяет данные и собирает договор.",
      "3–4 часа на договор", "10 минут, остаётся нажать «на подпись»", ""),
+    ("assistant", "мой проект", "ai-ассистент", "Личный AI-ассистент",
+     "Договорённости с клиентами раскиданы по чатам и созвонам, и что кому обещала, приходится держать в голове.",
+     "Ассистент сам читает переписку и встречи, ведёт карточки клиентов и пишет в Telegram: кто что обещал и кто молчит.",
+     "обещания и встречи в голове", "сводка 4 раза в день, новый человек сразу в базе", ""),
     ("litbot", "мой проект", "обучение", "Бот-ассистент учителя",
      "Учитель сам рассылает задания и считает, кто что сделал.",
      "Бот каждый день присылает задания и сам ведёт статистику, программу учитель меняет в админке.",
@@ -183,6 +200,8 @@ def section_bounds(html, sid):
 
 for args in COVERS:
     cover(*args)
+for name in DUOS:
+    duo(name)
 
 html = PAGE.read_text(encoding="utf-8")
 # старые блоки: прошлая версия кейсов (между маркерами), #works и #examples
