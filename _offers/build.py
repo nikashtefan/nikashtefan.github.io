@@ -769,7 +769,7 @@ OFFERS = {
         ],
         "works_h": "что получалось раньше",
         "works_note": "Это было до AI, но механика та же: новый способ работы должен прижиться в командах и дать результат в цифрах.",
-        "works_more": "Где работала и чем занимаюсь сейчас — <a href=\"index.html\">подробно рассказываю тут</a>.",
+        "works_more": "Где работала и чем занимаюсь сейчас — <a href=\"about.html\">подробно рассказываю тут</a>.",
         "works": [
             ("Discovery на уровне компании", "Каждая команда проверяла гипотезы по-своему, полный цикл Discovery занимал 4 месяца.", "Единая методология вошла в стратегию массового бизнеса, работает в 14 бизнес-линиях. Цикл — 2 недели, исследование — 2 недели вместо 8. 5 внутренних инструментов, 1600+ пользователей.", "т-банк · 2022–2025"),
             ("решения с проверкой на клиентах", "Решения в продуктах принимали без проверки на клиентах.", "Конверсия в 6 продуктах выросла до +8 п.п., CSAT в двух продуктах +15 и +32 п.п., обращения в поддержку −9 п.п.", "т-банк · 2022–2025"),
@@ -912,7 +912,7 @@ def works_section(o):
     {section_h('что я уже собрала')}
     <p class="works-note reveal">{o.get("works_note", "")}</p>
     <div class="cs-wrap reveal"><div class="cs-row">{cards_html}</div>{STRIP_NAV}</div>
-    <p class="works-more reveal">Остальные проекты — боты, мини-приложения, сайты и агенты — лежат <a href="index.html#projects">на моей странице</a>.</p>
+    <p class="works-more reveal">Остальные проекты — боты, мини-приложения, сайты и агенты — лежат <a href="about.html#projects">на моей странице</a>.</p>
   </div>
 </section>
 """
@@ -927,7 +927,7 @@ def works_section(o):
     {section_h(o.get("works_h", 'что я уже собрала'))}
     <p class="works-note reveal">{o.get("works_note", "")}</p>
     <div class="works reveal">{rows}</div>
-    <p class="works-more reveal">{o.get("works_more", 'Остальные проекты — боты, мини-приложения, сайты и агенты — лежат <a href="index.html#projects">на моей странице</a>.')}</p>
+    <p class="works-more reveal">{o.get("works_more", 'Остальные проекты — боты, мини-приложения, сайты и агенты — лежат <a href="about.html#projects">на моей странице</a>.')}</p>
   </div>
 </section>
 """
@@ -938,7 +938,7 @@ def cases_section(o):
     if o.get("works") or not o.get("cases"):
         return ""
     shots = "".join(
-        f'<a class="shot" href="index.html#projects"><img src="{img}" alt="{alt}"><span class="shot-cap">{cap}</span></a>'
+        f'<a class="shot" href="about.html#projects"><img src="{img}" alt="{alt}"><span class="shot-cap">{cap}</span></a>'
         for img, cap, alt in o["cases"]
     )
     return f'''<section>
@@ -946,7 +946,7 @@ def cases_section(o):
     {corners('проекты', 'собрала сама, на AI', 'CASES')}
     {section_h('что я уже собрала')}
     <div class="shots reveal">{shots}</div>
-    <p class="steps-note reveal"><a class="back" href="index.html#projects">все проекты и кейсы →</a></p>
+    <p class="steps-note reveal"><a class="back" href="about.html#projects">все проекты и кейсы →</a></p>
   </div>
 </section>
 '''
@@ -1110,7 +1110,7 @@ def render(slug, o):
     {corners('почему я', 'что я делала до этого', 'WHY')}
     {section_h('почему я')}
     {cards(o['why'])}
-    <p class="works-more reveal">Где работала, что строила и чем занимаюсь сейчас — <a href="index.html">подробно рассказываю тут</a>.</p>
+    <p class="works-more reveal">Где работала, что строила и чем занимаюсь сейчас — <a href="about.html">подробно рассказываю тут</a>.</p>
   </div>
 </section>
 
@@ -1150,7 +1150,7 @@ def render(slug, o):
       <a class="btn" href="{tg}" target="_blank" rel="noopener">✈️ написать в Telegram →</a>
       <a class="btn ghost" href="mailto:nik.shtefan@gmail.com">✉️ написать на почту</a>
     </div>
-    <p style="margin-top:40px"><a class="back" href="index.html">← обо мне и моих проектах</a></p>
+    <p style="margin-top:40px"><a class="back" href="about.html">← обо мне и моих проектах</a></p>
   </div>
 </section>
 
