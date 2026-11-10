@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Aimers: where AI could take manual work off</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5fa; --card:#ffffff; --ink:#1c2040; --muted:#5b6080; --line:#e5e3ee;
+  --ultra:#3b4cca; --ultra-soft:#eef0fc; --rose:#d9a5b3; --rose-soft:#fbf1f4; --rose-ink:#9b5468;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 40px 0}
+.eyebrow{display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:600;color:var(--muted);
+  letter-spacing:.02em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow b{color:var(--ultra)}
+h1{font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:1100px}
+h1 .co{color:var(--ultra)}
+.sub{margin-top:10px;color:var(--muted);font-size:16px}
+.hero{margin-top:26px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+  background:var(--ultra);color:#fff;border-radius:20px;padding:26px 32px}
+.hero .n{font-size:96px;line-height:.95;font-weight:800;letter-spacing:-.04em}
+.hero .t{font-size:24px;line-height:1.25;font-weight:700}
+.hero .b{margin-top:6px;font-size:14px;opacity:.8}
+.hero .note{margin-top:10px;font-size:15px;line-height:1.45;padding-left:12px;border-left:3px solid var(--rose)}
+.pains{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pain{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;display:flex;flex-direction:column}
+.pain .head{display:flex;align-items:baseline;gap:8px}
+.pain .big{font-size:40px;font-weight:800;color:var(--ultra);letter-spacing:-.03em;line-height:1}
+.pain .small{font-size:14px;color:var(--muted);font-weight:600}
+.pain .rank{margin-left:auto;font-size:12px;font-weight:700;color:var(--rose-ink);background:var(--rose-soft);border-radius:99px;padding:3px 9px}
+.pain h3{margin-top:10px;font-size:17px;line-height:1.3;font-weight:700;min-height:44px}
+.pain .note{margin-top:6px;font-size:13px;color:var(--rose-ink);font-weight:600}
+.q{margin-top:12px;font-size:14.5px;line-height:1.45;color:#33375a;background:var(--rose-soft);border-left:3px solid var(--rose);
+  border-radius:0 10px 10px 0;padding:9px 12px;overflow-wrap:anywhere}
+.q::before{content:"«"}.q::after{content:"»"}
+.more{margin-top:14px;font-size:14px;color:var(--muted)}
+section{margin-top:52px}
+h2{font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-.01em}
+.lead{margin-top:10px;color:var(--muted);max-width:820px}
+.agents{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.agent{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ultra);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.agent h3{font-size:18px;font-weight:800;line-height:1.3}
+.agent ol{list-style:none;margin-top:12px;flex:1}
+.agent li{position:relative;padding:0 0 10px 22px;font-size:15px;line-height:1.4}
+.agent li::before{content:"";position:absolute;left:4px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--ultra)}
+.agent li:not(:last-child)::after{content:"";position:absolute;left:7.5px;top:17px;bottom:-1px;width:1px;background:var(--rose)}
+.agent li:first-child{font-weight:700}
+.closes{margin-top:8px;font-size:13px;font-weight:600;color:var(--ultra);background:var(--ultra-soft);border-radius:10px;padding:8px 10px}
+.notai{margin-top:16px;font-size:14.5px;color:var(--muted);padding:12px 16px;border:1px dashed var(--rose);border-radius:12px;background:#fff}
+.notai b{color:var(--ink)}
+.method{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-top:16px}
+.method p{font-size:14.5px;color:#3f4363}
+.method p+p{margin-top:8px}
+.method .open{margin-top:12px;font-weight:700;color:var(--ink)}
+footer{margin-top:48px;border-top:1px solid var(--line);padding:22px 0 36px;font-size:15px;color:var(--muted)}
+footer b{color:var(--ink)}
+footer a{color:var(--ultra);font-weight:700;text-decoration:none}
+@media (max-width:980px){
+  .pains,.agents{grid-template-columns:1fr}
+  .pain h3{min-height:0}
+}
+@media (max-width:640px){
+  .wrap{padding:22px 16px 0}
+  .eyebrow{flex-direction:column;gap:2px;font-size:12px}
+  h1{font-size:27px}
+  .sub{font-size:14px}
+  .hero{grid-template-columns:1fr;gap:6px;padding:20px;border-radius:16px}
+  .hero .n{font-size:64px}
+  .hero .t{font-size:19px}
+  h2{font-size:23px}
+  section{margin-top:40px}
+  .pain,.agent,.method{padding:16px}
+}
+
+.facts{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px}
+.facts li{margin:0 0 8px 18px;font-size:15.5px} .facts .src{color:var(--muted);font-size:13px} .facts a{color:var(--ultra)}
+.idx{font-size:12px;font-weight:700;color:var(--rose-ink);text-transform:uppercase;margin-bottom:6px}
+.first{margin-top:16px;background:var(--ultra-soft);border-radius:14px;padding:14px 18px;font-size:15px}
+</style></head><body><div class="wrap">
+<header>
+  <div class="eyebrow"><span>Company brief</span><span><b>Aimers</b> · November 2026</span></div>
+  <h1>Aimers: where AI could take manual work off</h1>
+  <p class="sub">Aimers team</p>
+</header>
+<div class="hero" style="grid-template-columns:1fr"><div><div class="t">Weekly reports for 100+ SaaS clients: AI can draft the insights for every report</div>
+  <div class="note">I looked at the Aimers website and your Clutch profile. You promise clients weekly reports, and reviews mention reporting as part of the work. That is a lot of text every week for every client, and it looks like a PPC or account manager writes it.</div></div></div>
+<section><h2>What I looked at</h2><ul class="facts"><li>On the website: &quot;Weekly reports, direct communication, and max 3 projects per team&quot; <span class="src">· <a href="https://aimers.io" target="_blank" rel="noopener">aimers.io</a>, 10.11.2026</span></li><li>100+ SaaS and tech brands, $30M+ in ad budgets under management <span class="src">· <a href="https://aimers.io" target="_blank" rel="noopener">aimers.io</a>, 10.11.2026</span></li><li>On Clutch: 50–249 employees, offices in New York, Tbilisi and Hong Kong <span class="src">· <a href="https://clutch.co/profile/aimers-agency" target="_blank" rel="noopener">clutch.co</a>, 10.11.2026</span></li><li>Review from 04.11.2026: &quot;Their work included reporting, media buying, and a bit of creative development&quot; <span class="src">· <a href="https://clutch.co/profile/aimers-agency" target="_blank" rel="noopener">clutch.co</a>, 10.11.2026</span></li></ul></section>
+<section><h2>Where AI could take manual work off</h2><div class="agents"><article class="agent"><div class="idx">idea 1</div><h3>AI writes the insights and recommendations in the monthly report</h3><ol><li>Monthly numbers from Google Ads, Meta, LinkedIn and analytics land in one table</li><li>AI compares them with last month and the plan, and finds what went up, what dropped and why</li><li>AI drafts the &quot;insights and next steps&quot; section in the client&#x27;s language; the PPC manager checks and edits it</li><li>The client gets a report with clear conclusions, not just tables</li></ol><div class="closes">Takes off: hours that account managers and specialists spend writing insights for every monthly report</div></article><article class="agent"><div class="idx">idea 2</div><h3>Daily ad account check for budget leaks</h3><ol><li>Every day AI looks at campaigns in Google Ads, Meta and LinkedIn</li><li>It looks for leaks: spend with no conversions, rising cost per lead, click campaigns where reach or leads are needed</li><li>It sends the specialist a short list in Telegram: where money is lost and what to fix</li><li>The specialist decides and fixes it, and the findings go into the monthly report</li></ol><div class="closes">Takes off: checking ad accounts by hand and the risk of spotting a leak only at month end</div></article><article class="agent"><div class="idx">idea 3</div><h3>Answering client questions about the report</h3><ol><li>A client writes in chat: &quot;why did cost per lead go up in October?&quot;</li><li>AI looks at ad account and report data and drafts an answer with numbers</li><li>The account manager checks and sends it</li><li>Recurring questions get answered in the next report in advance</li></ol><div class="closes">Takes off: digging through ad accounts for numbers for every client question</div></article></div>
+  <p class="first"><b>Where to start:</b> Start with weekly insights for 3–5 clients for 2 weeks. From you: 2–3 past reports, guest access to ad accounts or data exports, and your weekly report template.</p><p class="notai"><b>What AI won't fix.</b> AI does not know your agreements with the client or what was said on a call. The account manager keeps the strategy and the decision on what to tell the client. AI only prepares a draft.</p></section>
+<section><h2>How this brief was made</h2><div class="method"><p>This review is based on open sources: the aimers.io website and the agency&#x27;s Clutch profile. I did not see any internal data, ad accounts or reports.</p></div></section>
+<footer>Prepared by <b>Nika Shtefan</b> · AI automation for business · Telegram <a href="https://t.me/kvazarchik">@kvazarchik</a> · <a href="https://nikashtefan.github.io/ainative.html" target="_blank" rel="noopener">Website and cases →</a></footer>
+</div></body></html>
