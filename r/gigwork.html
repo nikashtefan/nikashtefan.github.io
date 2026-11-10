@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>GigWork: где AI может снять ручную работу</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5fa; --card:#ffffff; --ink:#1c2040; --muted:#5b6080; --line:#e5e3ee;
+  --ultra:#3b4cca; --ultra-soft:#eef0fc; --rose:#d9a5b3; --rose-soft:#fbf1f4; --rose-ink:#9b5468;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 40px 0}
+.eyebrow{display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:600;color:var(--muted);
+  letter-spacing:.02em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow b{color:var(--ultra)}
+h1{font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:1100px}
+h1 .co{color:var(--ultra)}
+.sub{margin-top:10px;color:var(--muted);font-size:16px}
+.hero{margin-top:26px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+  background:var(--ultra);color:#fff;border-radius:20px;padding:26px 32px}
+.hero .n{font-size:96px;line-height:.95;font-weight:800;letter-spacing:-.04em}
+.hero .t{font-size:24px;line-height:1.25;font-weight:700}
+.hero .b{margin-top:6px;font-size:14px;opacity:.8}
+.hero .note{margin-top:10px;font-size:15px;line-height:1.45;padding-left:12px;border-left:3px solid var(--rose)}
+.pains{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pain{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;display:flex;flex-direction:column}
+.pain .head{display:flex;align-items:baseline;gap:8px}
+.pain .big{font-size:40px;font-weight:800;color:var(--ultra);letter-spacing:-.03em;line-height:1}
+.pain .small{font-size:14px;color:var(--muted);font-weight:600}
+.pain .rank{margin-left:auto;font-size:12px;font-weight:700;color:var(--rose-ink);background:var(--rose-soft);border-radius:99px;padding:3px 9px}
+.pain h3{margin-top:10px;font-size:17px;line-height:1.3;font-weight:700;min-height:44px}
+.pain .note{margin-top:6px;font-size:13px;color:var(--rose-ink);font-weight:600}
+.q{margin-top:12px;font-size:14.5px;line-height:1.45;color:#33375a;background:var(--rose-soft);border-left:3px solid var(--rose);
+  border-radius:0 10px 10px 0;padding:9px 12px;overflow-wrap:anywhere}
+.q::before{content:"«"}.q::after{content:"»"}
+.more{margin-top:14px;font-size:14px;color:var(--muted)}
+section{margin-top:52px}
+h2{font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-.01em}
+.lead{margin-top:10px;color:var(--muted);max-width:820px}
+.agents{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.agent{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ultra);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.agent h3{font-size:18px;font-weight:800;line-height:1.3}
+.agent ol{list-style:none;margin-top:12px;flex:1}
+.agent li{position:relative;padding:0 0 10px 22px;font-size:15px;line-height:1.4}
+.agent li::before{content:"";position:absolute;left:4px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--ultra)}
+.agent li:not(:last-child)::after{content:"";position:absolute;left:7.5px;top:17px;bottom:-1px;width:1px;background:var(--rose)}
+.agent li:first-child{font-weight:700}
+.closes{margin-top:8px;font-size:13px;font-weight:600;color:var(--ultra);background:var(--ultra-soft);border-radius:10px;padding:8px 10px}
+.notai{margin-top:16px;font-size:14.5px;color:var(--muted);padding:12px 16px;border:1px dashed var(--rose);border-radius:12px;background:#fff}
+.notai b{color:var(--ink)}
+.method{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-top:16px}
+.method p{font-size:14.5px;color:#3f4363}
+.method p+p{margin-top:8px}
+.method .open{margin-top:12px;font-weight:700;color:var(--ink)}
+footer{margin-top:48px;border-top:1px solid var(--line);padding:22px 0 36px;font-size:15px;color:var(--muted)}
+footer b{color:var(--ink)}
+footer a{color:var(--ultra);font-weight:700;text-decoration:none}
+@media (max-width:980px){
+  .pains,.agents{grid-template-columns:1fr}
+  .pain h3{min-height:0}
+}
+@media (max-width:640px){
+  .wrap{padding:22px 16px 0}
+  .eyebrow{flex-direction:column;gap:2px;font-size:12px}
+  h1{font-size:27px}
+  .sub{font-size:14px}
+  .hero{grid-template-columns:1fr;gap:6px;padding:20px;border-radius:16px}
+  .hero .n{font-size:64px}
+  .hero .t{font-size:19px}
+  h2{font-size:23px}
+  section{margin-top:40px}
+  .pain,.agent,.method{padding:16px}
+}
+
+.facts{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px}
+.facts li{margin:0 0 8px 18px;font-size:15.5px} .facts .src{color:var(--muted);font-size:13px} .facts a{color:var(--ultra)}
+.idx{font-size:12px;font-weight:700;color:var(--rose-ink);text-transform:uppercase;margin-bottom:6px}
+.first{margin-top:16px;background:var(--ultra-soft);border-radius:14px;padding:14px 18px;font-size:15px}
+</style></head><body><div class="wrap">
+<header>
+  <div class="eyebrow"><span>Разбор компании</span><span><b>GigWork</b> · ноябрь 2026</span></div>
+  <h1>GigWork: где AI может снять ручную работу</h1>
+  <p class="sub">Денис Решанов, основатель</p>
+</header>
+<div class="hero" style="grid-template-columns:1fr"><div><div class="t">30 000+ исполнителей и проверка всех документов: подключение нового исполнителя можно отдать AI</div>
+  <div class="note">Я посмотрела сайт GigWork, профиль компании на Хабр Карьере и ваши финансовые отчеты на vc.ru. На сайте сказано, что вы проверяете все документы исполнителей, а исполнители работают как самозанятые, ИП или по ГПХ. В сезон к вам приходит 500 тыс.+ заявок от компаний, и каждая новая волна исполнителей значит новую пачку документов на проверку.</div></div></div>
+<section><h2>Что я посмотрела</h2><ul class="facts"><li>На сайте: 300+ партнеров, база более 30 000 исполнителей, 100+ городов, 500 тыс.+ заявок от компаний в сезон <span class="src">· <a href="https://gigwork.ru" target="_blank" rel="noopener">gigwork.ru</a>, 10.11.2026</span></li><li>Путь исполнителя: скачать приложение, пройти проверку, выполнить заказ, получить выплату. Исполнители работают как самозанятые, ИП или по договору ГПХ <span class="src">· <a href="https://gigwork.ru" target="_blank" rel="noopener">gigwork.ru</a>, 10.11.2026</span></li><li>Выручка за II квартал 2024 года 610 360 000 ₽, присутствие в 165 городах <span class="src">· <a href="https://vc.ru/1435437" target="_blank" rel="noopener">vc.ru, отчет Дениса Решанова</a>, 03.09.2024</span></li><li>Среди клиентов «Вкусвилл», «Лента», «Дикси», Spar; в 2020 году премия HR-Tech Award <span class="src">· <a href="https://career.habr.com/companies/gigant" target="_blank" rel="noopener">Хабр Карьера</a>, 10.11.2026</span></li></ul></section>
+<section><h2>Где AI может снять ручную работу</h2><div class="agents"><article class="agent"><div class="idx">идея 1</div><h3>Проверка документов исполнителя при подключении</h3><ol><li>Исполнитель фотографирует в приложении паспорт, справку о статусе самозанятого и реквизиты</li><li>AI читает документы, сверяет ФИО, ИНН и статус самозанятого, ищет нечеткие фото и несовпадения</li><li>Если все сходится, AI собирает договор по шаблону и отправляет исполнителю на подпись</li><li>Модератор получает только спорные случаи с пометкой, что именно не так</li></ol><div class="closes">Снимает: ручную сверку документов модераторами и переписку с исполнителем из-за плохого фото или опечатки. В похожем проекте договор собирался 1–2 дня и 2 часа работы HR, стал готов сразу</div></article><article class="agent"><div class="idx">идея 2</div><h3>Проверка статуса самозанятого перед выплатой</h3><ol><li>Перед выплатой AI проверяет, что исполнитель все еще самозанятый и реквизиты не менялись</li><li>Если статус слетел, исполнитель получает сообщение, что сделать</li><li>Бухгалтерия видит список выплат, которые можно проводить</li><li>Проблемные выплаты собираются отдельным списком</li></ol><div class="closes">Снимает: ручные проверки и возвраты выплат из-за потерянного статуса или неверных реквизитов</div></article><article class="agent"><div class="idx">идея 3</div><h3>Ответы исполнителям по заказам и выплатам</h3><ol><li>Правила, частые вопросы и статусы заказов собираются в одну базу</li><li>Исполнитель пишет вопрос в чат приложения или Telegram</li><li>AI отвечает по базе и статусу его заказа</li><li>Сложные вопросы уходят менеджеру с уже собранным контекстом</li></ol><div class="closes">Снимает: однотипные вопросы «когда выплата», «где заказ», «почему не прошел проверку» в поддержку</div></article></div>
+  <p class="first"><b>С чего начать:</b> Начать с проверки документов новых исполнителей в одном городе на 2 недели. От вас нужны список обязательных документов, правила проверки и 20–30 обезличенных примеров, где документы отклоняли.</p><p class="notai"><b>Что AI не решит.</b> AI не решит, надежен ли человек на объекте, и не заменит обучение исполнителей. Спорные документы и подозрения на подделку все равно смотрит модератор.</p></section>
+<section><h2>Как собран разбор</h2><div class="method"><p>Разбор сделан по открытым источникам: gigwork.ru, профиль на Хабр Карьере и отчеты основателя на vc.ru. Как сейчас устроена проверка внутри платформы, я не видела, возможно, часть ее уже автоматизирована.</p></div></section>
+<footer>Разбор подготовила <b>Ника Штефан</b> · AI-автоматизации для бизнеса · Telegram <a href="https://t.me/kvazarchik">@kvazarchik</a> · <a href="https://nikashtefan.github.io/ainative.html" target="_blank" rel="noopener">Сайт и кейсы →</a></footer>
+</div></body></html>
