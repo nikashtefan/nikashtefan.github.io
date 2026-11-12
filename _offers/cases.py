@@ -103,7 +103,7 @@ def cover(name, fname, crop, inner_bg):
 
 
 CASES = [  # (обложка, кто, тег, продукт, проблема, что сделала, было, стало, ссылка)
-    ("kp", "клиент · nda", "кп и расчёты", "AI-ассистент для КП и смет",
+    ("kp", "BASO · усилители связи", "кп и расчёты", "AI-ассистент для КП и смет",
      "Каждый объект считает владелец, поэтому проект готов только на следующий день. Взять больше объектов компания не может.",
      "Владелец надиктовывает объект, а ассистент присылает КП и спецификацию.",
      "1–2 дня, и всё через владельца", "2 минуты, владелец только проверяет", ""),
@@ -179,7 +179,7 @@ def section():
   <div class="wrap">
     <div class="corners"><span class="mark">кейсы</span><span class="mid mark">проблема → решение → результат</span><span class="mark right">CASES</span></div>
     <h2 class="section-h reveal" style="margin-bottom:58px">узнаёте свою задачу?{SQUIGGLE}</h2>
-    <p class="works-note reveal">Первые три — мои клиенты, названия под NDA, суммы на скринах скрыты. Дальше мои собственные проекты. Каждый кейс показываю вживую на созвоне.</p>
+    <p class="works-note reveal">Первые три — мои клиенты. Названия под NDA, кроме BASO, суммы на скринах скрыты. Дальше мои собственные проекты. Каждый кейс показываю вживую на созвоне.</p>
     {CSS}
     <div class="cs-wrap reveal"><div class="cs-row">{cards}</div><div class="cs-nav"><button type="button" class="cs-btn" data-d="-1" aria-label="Назад">←</button><span class="mark">листай вбок</span><button type="button" class="cs-btn" data-d="1" aria-label="Вперёд">→</button></div></div>
     <div class="kc-cta reveal"><p>Похожая задача у вас?</p><a class="btn" href="{TG}" target="_blank" rel="noopener">покажу кейсы на созвоне</a></div>
