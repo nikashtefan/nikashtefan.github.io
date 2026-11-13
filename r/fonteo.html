@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ИИ для встреч и кастдевов</title>
+<style>
+  :root{
+    --bg:#191919; --card:#222226; --line:#34343a; --text:#ececef; --muted:#a3a3ad;
+    --ultra:#4c6ef5; --ultra-soft:#4c6ef522; --rose:#d9a5b3; --rose-soft:#d9a5b322;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 16px 64px}
+  h1{font-size:28px;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 28px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+  .tab{background:var(--card);border:1px solid var(--line);color:var(--text);padding:10px 16px;border-radius:10px;cursor:pointer;font:inherit;font-size:15px}
+  .tab.on{background:var(--ultra);border-color:var(--ultra);color:#fff}
+  .tab small{display:block;font-size:11px;opacity:.7}
+  .panel{display:none}
+  .panel.on{display:block}
+  .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column}
+  .box h3{margin:0 0 4px;font-size:17px;min-height:26px}
+  .box .when{color:var(--muted);font-size:13px;min-height:20px;margin-bottom:10px}
+  .box ul{margin:0;padding-left:18px}
+  .box li{margin:4px 0}
+  .hub{margin-top:14px;background:var(--rose-soft);border:1px solid var(--rose);border-radius:14px;padding:16px 18px}
+  .hub b{color:var(--rose)}
+  .who{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .who .box h3{display:flex;gap:8px;align-items:center}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .you .dot{background:var(--rose)} .ai .dot{background:var(--ultra)}
+  .you{border-color:var(--rose)} .ai{border-color:var(--ultra)}
+  .note{color:var(--muted);font-size:14px;margin-top:14px}
+  pre{background:#121214;border:1px solid var(--line);border-radius:12px;padding:16px;white-space:pre-wrap;font-family:Menlo,Consolas,monospace;font-size:13px;margin:0;color:#dcdce2}
+  .copy{margin-top:10px;background:var(--ultra);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit;font-size:14px}
+  .tree{font-family:Menlo,Consolas,monospace;font-size:14px}
+  .tree span{color:var(--muted)}
+  .levels{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .lvl .n{font-size:13px;color:var(--ultra);font-weight:bold;min-height:20px}
+  .lvl h3{min-height:48px}
+  .lvl .hands{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+  .lvl.hl{border-color:var(--rose)}
+  @media (max-width:720px){.flow,.who,.levels{grid-template-columns:1fr}.lvl h3,.box h3{min-height:0}}
+  footer{margin-top:48px;border-top:1px solid var(--line);padding:22px 0 36px;font-size:15px;color:var(--muted)}
+  footer b{color:var(--text)}
+  footer a{color:var(--ultra);font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ИИ для встреч и кастдевов Fonteo</h1>
+  <p class="sub">Что настроить, чтобы ИИ сам готовил к встрече и сам разбирал её после. Ты переносишь только запись.</p>
+
+  <div class="tabs">
+    <button class="tab on" data-t="0">Схема<small>как всё связано</small></button>
+    <button class="tab" data-t="1">1. Поставить<small>один раз</small></button>
+    <button class="tab" data-t="2">2. Папка<small>один раз</small></button>
+    <button class="tab" data-t="3">3. Инструкция<small>один раз</small></button>
+    <button class="tab" data-t="4">4. Каждый день<small>после и до встречи</small></button>
+    <button class="tab" data-t="5">Дальше<small>совсем без рук</small></button>
+  </div>
+
+  <!-- 0 -->
+  <section class="panel on">
+    <div class="flow">
+      <div class="box">
+        <h3>До встречи</h3>
+        <div class="when">за 15–30 минут</div>
+        <ul>
+          <li>Кто это и о чём говорили в прошлый раз</li>
+          <li>Что обещали друг другу</li>
+          <li>Цель разговора</li>
+          <li>3 вопроса, которые стоит проверить</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Встреча</h3>
+        <div class="when">Zoom с записью</div>
+        <ul>
+          <li>Просто разговариваешь</li>
+          <li>Zoom пишет запись на ноутбук</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>После встречи</h3>
+        <div class="when">10 минут вместо часа</div>
+        <ul>
+          <li>Расшифровка</li>
+          <li>Сигналы с цитатами и таймкодами</li>
+          <li>Сравнение с прошлыми кастдевами</li>
+          <li>Обновлённые гипотезы и следующие шаги</li>
+        </ul>
+      </div>
+    </div>
+    <div class="hub">
+      <b>Всё живёт в одной папке Fonteo на Яндекс-диске.</b> Codex читает её перед встречей и дописывает после. Каждая следующая встреча знает про все предыдущие, и тебе не нужно переносить контекст руками.
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section class="panel">
+    <div class="who">
+      <div class="box you">
+        <h3><span class="dot"></span>Ты делаешь</h3>
+        <ul>
+          <li>Ставишь приложение Codex на ноутбук и входишь своим аккаунтом ChatGPT</li>
+          <li>Ставишь Яндекс-диск для компьютера, чтобы папка Fonteo была на ноутбуке</li>
+          <li>В Zoom: Настройки → Запись → «Сохранять записи в…» указываешь папку <code>Fonteo/кастдевы</code></li>
+        </ul>
+      </div>
+      <div class="box ai">
+        <h3><span class="dot"></span>Codex делает сам</h3>
+        <ul>
+          <li>При первом разборе ставит себе Whisper для расшифровки. Ты это уже видел 15.10</li>
+          <li>Спросит разрешение на установку, просто соглашаешься</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Чат ChatGPT здесь не подойдёт: он не видит файлов на ноутбуке и не может сам их обновлять. Нужен именно Codex, это агент.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="panel">
+    <div class="who">
+      <div class="box">
+        <h3>Как устроена папка</h3>
+        <div class="tree">
+Fonteo/<br>
+&nbsp;&nbsp;AGENTS.md <span>— инструкция для Codex</span><br>
+&nbsp;&nbsp;гипотезы.md <span>— что проверяем сейчас</span><br>
+&nbsp;&nbsp;договорённости.md <span>— кто что обещал</span><br>
+&nbsp;&nbsp;кастдевы/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2026-11-10 МИР Тюмень.mp4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2026-11-10 МИР Тюмень — разбор.md<br>
+&nbsp;&nbsp;встречи/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;…
+        </div>
+      </div>
+      <div class="box">
+        <h3>Что положить в первый раз</h3>
+        <ul>
+          <li><b>гипотезы.md</b> — выгрузи из ChatGPT текущие гипотезы Fonteo, хоть списком</li>
+          <li><b>кастдевы/</b> — записи или транскрипты прошлых кастдевов, сколько есть</li>
+          <li><b>договорённости.md</b> — можно пустой, Codex заполнит сам</li>
+          <li><b>AGENTS.md</b> — текст со следующей вкладки</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="panel">
+    <p class="sub" style="margin-bottom:12px">Скопируй это в файл <b>AGENTS.md</b> в папке Fonteo. Codex сам читает его при каждом запуске, и поэтому каждый раз разбирает одинаково.</p>
+<pre id="agents"># Fonteo: разбор встреч и кастдевов
+
+Я Паша, основатель Fonteo (B2B-платформа обмена ресурсами между компаниями).
+Пиши по-русски, коротко, по делу.
+
+## После кастдева
+Когда я пишу «разбери кастдев» или в папке кастдевы/ появилась новая запись без разбора:
+1. Расшифруй запись через Whisper (локально), сохрани транскрипт рядом.
+2. Сделай файл «<имя записи> — разбор.md»:
+   - Кто собеседник: компания, роль, контекст.
+   - Сигналы: что важно для Fonteo. К каждому дословная цитата и таймкод.
+   - Гипотезы: какие из гипотезы.md подтвердились, какие опровергнуты, что новое.
+     Только с опорой на цитату. Нет цитаты — пиши «не проверили».
+   - Что недораскрыли: темы, где стоило копнуть глубже, и какой вопрос задать.
+   - Сравнение с прошлыми кастдевами: что повторяется, что противоречит.
+   - Следующие шаги.
+3. Обнови гипотезы.md: пометь, что изменилось и на основе какого кастдева.
+4. Допиши в договорённости.md: дата, с кем, кто что обещал, срок.
+
+## Перед встречей
+Когда я пишу «бриф к встрече с X»:
+- Кто это и что было в прошлый раз (из договорённости.md и разборов).
+- Что мы друг другу обещали и что из этого не сделано.
+- Цель встречи (если не знаешь, спроси меня одной строкой).
+- 3 вопроса, которые стоит проверить, с учётом гипотез.
+Не больше одного экрана.
+
+## Правила
+- Не выдумывай. Каждый вывод должен опираться на кусок разговора.
+- Файлы не удаляй, только дописывай.</pre>
+    <button class="copy" onclick="copyAgents(this)">Скопировать</button>
+  </section>
+
+  <!-- 4 -->
+  <section class="panel">
+    <div class="who">
+      <div class="box you">
+        <h3><span class="dot"></span>После встречи</h3>
+        <ul>
+          <li>Запись Zoom сама попадает в <code>кастдевы/</code></li>
+          <li>Открываешь Codex и пишешь: <b>«разбери кастдев»</b></li>
+          <li>Через несколько минут разбор лежит в папке, гипотезы обновлены</li>
+        </ul>
+      </div>
+      <div class="box ai">
+        <h3><span class="dot"></span>Перед встречей</h3>
+        <ul>
+          <li>Пишешь в Codex: <b>«бриф к встрече с МИР»</b></li>
+          <li>Получаешь один экран: прошлый раз, обещания, цель, 3 вопроса</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Как понять, что работает: засеки, сколько сейчас уходит на разбор одного кастдева, и сравни через 2 недели.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="panel">
+    <div class="levels">
+      <div class="box lvl">
+        <div class="n">Уровень 1</div>
+        <h3>Codex + папка</h3>
+        <ul>
+          <li>Всё из вкладок 1–4</li>
+          <li>Можно настроить за вечер</li>
+        </ul>
+        <div class="hands">Руками: одна фраза после встречи и одна перед</div>
+      </div>
+      <div class="box lvl">
+        <div class="n">Уровень 2</div>
+        <h3>Codex сам проверяет папку</h3>
+        <ul>
+          <li>По расписанию видит новую запись и разбирает её сам</li>
+          <li>Ноутбук должен быть включён</li>
+        </ul>
+        <div class="hands">Руками: почти ничего</div>
+      </div>
+      <div class="box lvl hl">
+        <div class="n">Уровень 3</div>
+        <h3>Работает сам на сервере</h3>
+        <ul>
+          <li>За 30 минут до встречи бриф сам приходит в Telegram, его собирает календарь</li>
+          <li>После встречи Zoom сам отдаёт запись, разбор приходит в Telegram и ложится на Яндекс-диск</li>
+        </ul>
+        <div class="hands">Руками: ничего</div>
+      </div>
+    </div>
+    <p class="note">Начать стоит с уровня 1 на кастдевах Fonteo. Когда станет понятно, что разбор правда полезный, его можно автоматизировать и потом перенести на встречи в парках.</p>
+  </section>
+<footer>Подготовила <b>Ника Штефан</b> · AI-автоматизации для бизнеса · Telegram <a href="https://t.me/kvazarchik">@kvazarchik</a> · <a href="https://nikashtefan.github.io/ainative.html" target="_blank" rel="noopener">Сайт и кейсы →</a></footer>
+</div>
+
+<script>
+  const tabs=[...document.querySelectorAll('.tab')], panels=[...document.querySelectorAll('.panel')];
+  tabs.forEach(t=>t.onclick=()=>{tabs.forEach(x=>x.classList.remove('on'));panels.forEach(x=>x.classList.remove('on'));t.classList.add('on');panels[+t.dataset.t].classList.add('on')});
+  function copyAgents(b){
+    const txt=document.getElementById('agents').innerText;
+    const done=()=>{b.textContent='Скопировано';setTimeout(()=>b.textContent='Скопировать',1500)};
+    if(navigator.clipboard){navigator.clipboard.writeText(txt).then(done).catch(()=>{fallback(txt);done()})}else{fallback(txt);done()}
+  }
+  function fallback(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}
+</script>
+</body>
+</html>
