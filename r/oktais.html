@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Октайс-Техника: где AI может снять ручную работу</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5fa; --card:#ffffff; --ink:#1c2040; --muted:#5b6080; --line:#e5e3ee;
+  --ultra:#3b4cca; --ultra-soft:#eef0fc; --rose:#d9a5b3; --rose-soft:#fbf1f4; --rose-ink:#9b5468;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 40px 0}
+.eyebrow{display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:600;color:var(--muted);
+  letter-spacing:.02em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow b{color:var(--ultra)}
+h1{font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:1100px}
+h1 .co{color:var(--ultra)}
+.sub{margin-top:10px;color:var(--muted);font-size:16px}
+.hero{margin-top:26px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+  background:var(--ultra);color:#fff;border-radius:20px;padding:26px 32px}
+.hero .n{font-size:96px;line-height:.95;font-weight:800;letter-spacing:-.04em}
+.hero .t{font-size:24px;line-height:1.25;font-weight:700}
+.hero .b{margin-top:6px;font-size:14px;opacity:.8}
+.hero .note{margin-top:10px;font-size:15px;line-height:1.45;padding-left:12px;border-left:3px solid var(--rose)}
+.pains{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pain{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;display:flex;flex-direction:column}
+.pain .head{display:flex;align-items:baseline;gap:8px}
+.pain .big{font-size:40px;font-weight:800;color:var(--ultra);letter-spacing:-.03em;line-height:1}
+.pain .small{font-size:14px;color:var(--muted);font-weight:600}
+.pain .rank{margin-left:auto;font-size:12px;font-weight:700;color:var(--rose-ink);background:var(--rose-soft);border-radius:99px;padding:3px 9px}
+.pain h3{margin-top:10px;font-size:17px;line-height:1.3;font-weight:700;min-height:44px}
+.pain .note{margin-top:6px;font-size:13px;color:var(--rose-ink);font-weight:600}
+.q{margin-top:12px;font-size:14.5px;line-height:1.45;color:#33375a;background:var(--rose-soft);border-left:3px solid var(--rose);
+  border-radius:0 10px 10px 0;padding:9px 12px;overflow-wrap:anywhere}
+.q::before{content:"«"}.q::after{content:"»"}
+.more{margin-top:14px;font-size:14px;color:var(--muted)}
+section{margin-top:52px}
+h2{font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-.01em}
+.lead{margin-top:10px;color:var(--muted);max-width:820px}
+.agents{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.agent{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ultra);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.agent h3{font-size:18px;font-weight:800;line-height:1.3}
+.agent ol{list-style:none;margin-top:12px;flex:1}
+.agent li{position:relative;padding:0 0 10px 22px;font-size:15px;line-height:1.4}
+.agent li::before{content:"";position:absolute;left:4px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--ultra)}
+.agent li:not(:last-child)::after{content:"";position:absolute;left:7.5px;top:17px;bottom:-1px;width:1px;background:var(--rose)}
+.agent li:first-child{font-weight:700}
+.closes{margin-top:8px;font-size:13px;font-weight:600;color:var(--ultra);background:var(--ultra-soft);border-radius:10px;padding:8px 10px}
+.notai{margin-top:16px;font-size:14.5px;color:var(--muted);padding:12px 16px;border:1px dashed var(--rose);border-radius:12px;background:#fff}
+.notai b{color:var(--ink)}
+.method{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-top:16px}
+.method p{font-size:14.5px;color:#3f4363}
+.method p+p{margin-top:8px}
+.method .open{margin-top:12px;font-weight:700;color:var(--ink)}
+footer{margin-top:48px;border-top:1px solid var(--line);padding:22px 0 36px;font-size:15px;color:var(--muted)}
+footer b{color:var(--ink)}
+footer a{color:var(--ultra);font-weight:700;text-decoration:none}
+@media (max-width:980px){
+  .pains,.agents{grid-template-columns:1fr}
+  .pain h3{min-height:0}
+}
+@media (max-width:640px){
+  .wrap{padding:22px 16px 0}
+  .eyebrow{flex-direction:column;gap:2px;font-size:12px}
+  h1{font-size:27px}
+  .sub{font-size:14px}
+  .hero{grid-template-columns:1fr;gap:6px;padding:20px;border-radius:16px}
+  .hero .n{font-size:64px}
+  .hero .t{font-size:19px}
+  h2{font-size:23px}
+  section{margin-top:40px}
+  .pain,.agent,.method{padding:16px}
+}
+
+.facts{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px}
+.facts li{margin:0 0 8px 18px;font-size:15.5px} .facts .src{color:var(--muted);font-size:13px} .facts a{color:var(--ultra)}
+.idx{font-size:12px;font-weight:700;color:var(--rose-ink);text-transform:uppercase;margin-bottom:6px}
+.first{margin-top:16px;background:var(--ultra-soft);border-radius:14px;padding:14px 18px;font-size:15px}
+</style></head><body><div class="wrap">
+<header>
+  <div class="eyebrow"><span>Разбор компании</span><span><b>Октайс-Техника</b> · ноябрь 2026</span></div>
+  <h1>Октайс-Техника: где AI может снять ручную работу</h1>
+  <p class="sub">Алексей Кулемин, генеральный директор</p>
+</header>
+<div class="hero" style="grid-template-columns:1fr"><div><div class="t">Заявка на сварочные материалы превращается в черновик КП по вашему прайсу за пару минут</div>
+  <div class="note">Я посмотрела сайт svarpostavka.ru, прайс-лист и новости компании. На сайте обещан ответ на заявку в течение часа, а в прайсе 11 листов и часть позиций идет по запросу у менеджера. В 2026 году ассортимент расширился, и подбирать позиции под заявку, похоже, стало дольше.</div></div></div>
+<section><h2>Что я посмотрела</h2><ul class="facts"><li>Компания «Октайс-Техника» основана в 2004 году и специализируется на комплектации производственных предприятий сварочными материалами и технологическим оборудованием. Дистрибьютор МЭЗ, АЭМЗ, «СпецЭлектрод», ММК-МЕТИЗ <span class="src">· <a href="https://svarpostavka.ru/o-kompanii" target="_blank" rel="noopener">сайт, раздел «О компании»</a>, 19.11.2026</span></li><li>«Компания «Октайс-Техника» существенно расширяет предлагаемый для клиентов ассортимент сварочных материалов и оборудования. На сайт добавлен актуальный прайс-лист» <span class="src">· <a href="https://svarpostavka.ru/novosti/new-rasshirenie-assortimenta" target="_blank" rel="noopener">сайт, новости компании</a>, 10.02.2026</span></li><li>ООО «Октайс-Техника» начинает продажи сварочной проволоки СВ-08Г2С производства АО «Межгосметиз-Мценск» <span class="src">· <a href="https://svarpostavka.ru/novosti/new-svarochnaya-provoloka-proizvodstva-ao-mezhgosmetiz-mcensk-v-assortimente-kompanii" target="_blank" rel="noopener">сайт, новости компании</a>, 08.09.2026</span></li><li>Прайс-лист на 11 листов (электроды, проволока, горелки и расходка, оборудование, круги, СИЗ и другие), часть позиций с пометкой «по запросу у менеджера» и строкой «Работаем также под конкретные запросы клиента. Обращайтесь к Вашему менеджеру» <span class="src">· <a href="https://svarpostavka.ru/images/pagesFiles/10-02-2026-15-44-06.xlsx" target="_blank" rel="noopener">сайт, прайс-лист (xlsx)</a>, 19.11.2026</span></li><li>На сайте форма заявки с обещанием «ответим Вам в течение 1 часа»; склады в Подольске и Ульяновске, срок и условия доставки «обговариваются с ответственным за заказ сотрудником» <span class="src">· <a href="https://svarpostavka.ru/dostavka" target="_blank" rel="noopener">сайт, главная и раздел «Доставка»</a>, 19.11.2026</span></li></ul></section>
+<section><h2>Где AI может снять ручную работу</h2><div class="agents"><article class="agent"><div class="idx">идея 1</div><h3>Черновик КП по заявке за пару минут</h3><ol><li>Заявка клиента из почты или формы на сайте: список марок, диаметров и объемов, похоже, часто в свободной форме</li><li>AI разбирает заявку, сопоставляет позиции с прайсом, предлагает аналоги (например МК-46 вместо ОК 46.00) и помечает то, чего нет в прайсе</li><li>Менеджер получает готовый черновик КП в шаблоне компании и список вопросов, которые нужно уточнить у клиента</li><li>Ответ на заявку уходит быстрее обещанного часа, менеджер тратит время на проверку и звонок клиенту</li></ol><div class="closes">Снимает: ручной поиск позиций по прайсу из 11 листов и перенос их в КП</div></article><article class="agent"><div class="idx">идея 2</div><h3>Подбор позиций «по запросу у менеджера»</h3><ol><li>Запрос клиента на позицию, которой нет в прайсе или которая идет по запросу</li><li>AI ищет по прайсам и каталогам поставщиков (МЭЗ, АЭМЗ, «СпецЭлектрод», Межгосметиз-Мценск и другие) подходящие марки и аналоги, собирает характеристики и сертификаты</li><li>Менеджер получает короткую справку: что предложить, у какого поставщика запросить цену и срок</li><li>Похоже, такие запросы сейчас держатся на опыте конкретных менеджеров, а с AI-справкой их быстрее закрывает любой сотрудник</li></ol><div class="closes">Снимает: поиск аналогов и сверку характеристик вручную</div></article><article class="agent"><div class="idx">идея 3</div><h3>Сводка по заявкам и отгрузкам для руководителя</h3><ol><li>Переписка с клиентами, выставленные КП и счета за неделю</li><li>AI собирает, какие заявки получили ответ, какие КП зависли без решения, кому пора напомнить</li><li>Руководитель получает короткую сводку раз в день или неделю, менеджеры получают список напоминаний</li><li>Все заявки Подольска и Ульяновска видны в одном месте, ни одна не теряется между менеджерами</li></ol><div class="closes">Снимает: ручной сбор статусов по заявкам и КП</div></article></div>
+  <p class="first"><b>С чего начать:</b> Неделя на одну задачу: черновики КП по заявкам на электроды и проволоку. Нужны актуальный прайс, шаблон КП и 15–20 обезличенных заявок с готовыми ответами, чтобы сравнить черновики AI с тем, как отвечают менеджеры.</p><p class="notai"><b>Что AI не решит.</b> AI не знает живых остатков и закупочных цен, если не дать ему доступ к учетной системе. Договориться с клиентом об отсрочке и условиях доставки по-прежнему будет менеджер.</p></section>
+<section><h2>Как собран разбор</h2><div class="method"><p>Разбор сделан по открытым источникам: сайт svarpostavka.ru (о компании, прайс-лист, доставка, новости 2025–2026) и открытые реквизиты компании (list-org.com). Внутренних данных нет, все про процессы внутри компании отмечено словом «похоже».</p></div></section>
+<footer>Разбор подготовила <b>Ника Штефан</b> · AI-автоматизации для бизнеса · Telegram <a href="https://t.me/kvazarchik">@kvazarchik</a> · <a href="https://nikashtefan.github.io/ainative.html" target="_blank" rel="noopener">Сайт и кейсы →</a></footer>
+</div></body></html>
