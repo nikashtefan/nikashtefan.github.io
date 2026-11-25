@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ITTech Trade: where AI could take manual work off</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5fa; --card:#ffffff; --ink:#1c2040; --muted:#5b6080; --line:#e5e3ee;
+  --ultra:#3b4cca; --ultra-soft:#eef0fc; --rose:#d9a5b3; --rose-soft:#fbf1f4; --rose-ink:#9b5468;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 40px 0}
+.eyebrow{display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:600;color:var(--muted);
+  letter-spacing:.02em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow b{color:var(--ultra)}
+h1{font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:1100px}
+h1 .co{color:var(--ultra)}
+.sub{margin-top:10px;color:var(--muted);font-size:16px}
+.hero{margin-top:26px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+  background:var(--ultra);color:#fff;border-radius:20px;padding:26px 32px}
+.hero .n{font-size:96px;line-height:.95;font-weight:800;letter-spacing:-.04em}
+.hero .t{font-size:24px;line-height:1.25;font-weight:700}
+.hero .b{margin-top:6px;font-size:14px;opacity:.8}
+.hero .note{margin-top:10px;font-size:15px;line-height:1.45;padding-left:12px;border-left:3px solid var(--rose)}
+.pains{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pain{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;display:flex;flex-direction:column}
+.pain .head{display:flex;align-items:baseline;gap:8px}
+.pain .big{font-size:40px;font-weight:800;color:var(--ultra);letter-spacing:-.03em;line-height:1}
+.pain .small{font-size:14px;color:var(--muted);font-weight:600}
+.pain .rank{margin-left:auto;font-size:12px;font-weight:700;color:var(--rose-ink);background:var(--rose-soft);border-radius:99px;padding:3px 9px}
+.pain h3{margin-top:10px;font-size:17px;line-height:1.3;font-weight:700;min-height:44px}
+.pain .note{margin-top:6px;font-size:13px;color:var(--rose-ink);font-weight:600}
+.q{margin-top:12px;font-size:14.5px;line-height:1.45;color:#33375a;background:var(--rose-soft);border-left:3px solid var(--rose);
+  border-radius:0 10px 10px 0;padding:9px 12px;overflow-wrap:anywhere}
+.q::before{content:"«"}.q::after{content:"»"}
+.more{margin-top:14px;font-size:14px;color:var(--muted)}
+section{margin-top:52px}
+h2{font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-.01em}
+.lead{margin-top:10px;color:var(--muted);max-width:820px}
+.agents{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.agent{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ultra);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.agent h3{font-size:18px;font-weight:800;line-height:1.3}
+.agent ol{list-style:none;margin-top:12px;flex:1}
+.agent li{position:relative;padding:0 0 10px 22px;font-size:15px;line-height:1.4}
+.agent li::before{content:"";position:absolute;left:4px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--ultra)}
+.agent li:not(:last-child)::after{content:"";position:absolute;left:7.5px;top:17px;bottom:-1px;width:1px;background:var(--rose)}
+.agent li:first-child{font-weight:700}
+.closes{margin-top:8px;font-size:13px;font-weight:600;color:var(--ultra);background:var(--ultra-soft);border-radius:10px;padding:8px 10px}
+.notai{margin-top:16px;font-size:14.5px;color:var(--muted);padding:12px 16px;border:1px dashed var(--rose);border-radius:12px;background:#fff}
+.notai b{color:var(--ink)}
+.method{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-top:16px}
+.method p{font-size:14.5px;color:#3f4363}
+.method p+p{margin-top:8px}
+.method .open{margin-top:12px;font-weight:700;color:var(--ink)}
+footer{margin-top:48px;border-top:1px solid var(--line);padding:22px 0 36px;font-size:15px;color:var(--muted)}
+footer b{color:var(--ink)}
+footer a{color:var(--ultra);font-weight:700;text-decoration:none}
+@media (max-width:980px){
+  .pains,.agents{grid-template-columns:1fr}
+  .pain h3{min-height:0}
+}
+@media (max-width:640px){
+  .wrap{padding:22px 16px 0}
+  .eyebrow{flex-direction:column;gap:2px;font-size:12px}
+  h1{font-size:27px}
+  .sub{font-size:14px}
+  .hero{grid-template-columns:1fr;gap:6px;padding:20px;border-radius:16px}
+  .hero .n{font-size:64px}
+  .hero .t{font-size:19px}
+  h2{font-size:23px}
+  section{margin-top:40px}
+  .pain,.agent,.method{padding:16px}
+}
+
+.facts{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px}
+.facts li{margin:0 0 8px 18px;font-size:15.5px} .facts .src{color:var(--muted);font-size:13px} .facts a{color:var(--ultra)}
+.idx{font-size:12px;font-weight:700;color:var(--rose-ink);text-transform:uppercase;margin-bottom:6px}
+.first{margin-top:16px;background:var(--ultra-soft);border-radius:14px;padding:14px 18px;font-size:15px}
+</style></head><body><div class="wrap">
+<header>
+  <div class="eyebrow"><span>Company brief</span><span><b>ITTech Trade</b> · November 2026</span></div>
+  <h1>ITTech Trade: where AI could take manual work off</h1>
+  <p class="sub">Kirill Rytsevich, Director</p>
+</header>
+<div class="hero" style="grid-template-columns:1fr"><div><div class="t">Quotes in a few minutes instead of a couple of hours, with the manager only checking</div>
+  <div class="note">I looked at ittt.by: you promise a quote within a couple of hours and bring equipment to order from Russia, China and the UAE. With 200+ regular clients a month, the speed of the quote is often what wins the order, and this is the part AI can take off your team.</div></div></div>
+<section><h2>What I looked at</h2><ul class="facts"><li>ITTech Trade promises a quote within a couple of hours during working hours (&quot;КП за пару часов&quot;, &quot;В рабочее время&quot;) <span class="src">· <a href="https://ittt.by/" target="_blank" rel="noopener">ittt.by, home page</a>, 25.11.2026</span></li><li>200+ regular clients every month (&quot;200+ постоянных клиентов каждый месяц&quot;) <span class="src">· <a href="https://ittt.by/" target="_blank" rel="noopener">ittt.by, home page</a>, 25.11.2026</span></li><li>Equipment is brought to order, including from Russia, China and the UAE (&quot;в том числе из РФ, Китая и ОАЭ&quot;) <span class="src">· <a href="https://ittt.by/" target="_blank" rel="noopener">ittt.by, home page</a>, 25.11.2026</span></li><li>2026 case: 50 ASUS ExpertBook laptops for a Belarusian software company, delivery about one month, the team tested one laptop first <span class="src">· <a href="https://ittt.by/" target="_blank" rel="noopener">ittt.by, cases</a>, 25.11.2026</span></li><li>2025 case: 25 PCs and 50 monitors with peripherals in one shipment for a transport infrastructure design organization (&quot;два монитора на каждое рабочее место&quot;) <span class="src">· <a href="https://ittt.by/" target="_blank" rel="noopener">ittt.by, cases</a>, 25.11.2026</span></li><li>ООО «АйТиТех Трэйд» was registered in Minsk on 19 August 2024 <span class="src">· <a href="https://contragento.by/company/193783859" target="_blank" rel="noopener">contragento.by, company card</a>, 25.11.2026</span></li></ul></section>
+<section><h2>Where AI could take manual work off</h2><div class="agents"><article class="agent"><div class="idx">idea 1</div><h3>A quote draft from the client&#x27;s request</h3><ol><li>A request comes in by form, email or Telegram: model or specs, quantity, budget</li><li>AI matches it to your catalog and supplier price lists, picks 2–3 options and adds price with 20% VAT, warranty and lead time</li><li>The manager gets a ready quote draft in your template</li><li>The quote goes out in minutes, the manager only checks and sends</li></ol><div class="closes">Takes off: picking models by hand and copying prices and lead times into the quote</div></article><article class="agent"><div class="idx">idea 2</div><h3>Big multi-item requests sorted line by line</h3><ol><li>The client sends a list, like 25 PCs, 50 monitors and peripherals, in Excel, PDF or a message</li><li>AI reads every line, finds matching models and marks what is in stock and what needs ordering from Russia, China or the UAE</li><li>The manager gets one table with options and lead times for each line</li><li>A large request gets an answer the same day without hours of sorting</li></ol><div class="closes">Takes off: going through long spec lists item by item</div></article><article class="agent"><div class="idx">idea 3</div><h3>Reminders for regular clients</h3><ol><li>Order history of regular clients, for example MFPs and the toner they use</li><li>AI looks at when consumables or a refresh are likely due</li><li>The manager gets a weekly list of who to contact with a ready message</li><li>More repeat orders without tracking clients in a notebook</li></ol><div class="closes">Takes off: looks like the team keeps track of repeat needs by memory or spreadsheets</div></article></div>
+  <p class="first"><b>Where to start:</b> One week, one category (for example laptops): you share 20–30 past requests with the quotes you sent, current price lists and your quote template. I set up AI to draft quotes for new requests and your manager compares them with their own.</p><p class="notai"><b>What AI won't fix.</b> AI won&#x27;t negotiate a batch price with a vendor or promise a lead time a supplier hasn&#x27;t confirmed, that stays with your people. If price lists are outdated, the drafts will be too, so they need regular updates.</p></section>
+<section><h2>How this brief was made</h2><div class="method"><p>Made from open sources: ittt.by and the Belarusian company registry card. I had no internal data, so guesses about how your processes work are marked as such.</p></div></section>
+<footer>Prepared by <b>Nika Shtefan</b> · AI automation for business · Telegram <a href="https://t.me/kvazarchik">@kvazarchik</a> · <a href="https://nikashtefan.github.io/en.html" target="_blank" rel="noopener">Website and cases →</a></footer>
+</div></body></html>
