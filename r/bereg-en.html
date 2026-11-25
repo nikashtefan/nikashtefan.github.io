@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Chisty bereg: where AI could take manual work off</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5fa; --card:#ffffff; --ink:#1c2040; --muted:#5b6080; --line:#e5e3ee;
+  --ultra:#3b4cca; --ultra-soft:#eef0fc; --rose:#d9a5b3; --rose-soft:#fbf1f4; --rose-ink:#9b5468;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 40px 0}
+.eyebrow{display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:600;color:var(--muted);
+  letter-spacing:.02em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow b{color:var(--ultra)}
+h1{font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.02em;max-width:1100px}
+h1 .co{color:var(--ultra)}
+.sub{margin-top:10px;color:var(--muted);font-size:16px}
+.hero{margin-top:26px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;
+  background:var(--ultra);color:#fff;border-radius:20px;padding:26px 32px}
+.hero .n{font-size:96px;line-height:.95;font-weight:800;letter-spacing:-.04em}
+.hero .t{font-size:24px;line-height:1.25;font-weight:700}
+.hero .b{margin-top:6px;font-size:14px;opacity:.8}
+.hero .note{margin-top:10px;font-size:15px;line-height:1.45;padding-left:12px;border-left:3px solid var(--rose)}
+.pains{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pain{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;display:flex;flex-direction:column}
+.pain .head{display:flex;align-items:baseline;gap:8px}
+.pain .big{font-size:40px;font-weight:800;color:var(--ultra);letter-spacing:-.03em;line-height:1}
+.pain .small{font-size:14px;color:var(--muted);font-weight:600}
+.pain .rank{margin-left:auto;font-size:12px;font-weight:700;color:var(--rose-ink);background:var(--rose-soft);border-radius:99px;padding:3px 9px}
+.pain h3{margin-top:10px;font-size:17px;line-height:1.3;font-weight:700;min-height:44px}
+.pain .note{margin-top:6px;font-size:13px;color:var(--rose-ink);font-weight:600}
+.q{margin-top:12px;font-size:14.5px;line-height:1.45;color:#33375a;background:var(--rose-soft);border-left:3px solid var(--rose);
+  border-radius:0 10px 10px 0;padding:9px 12px;overflow-wrap:anywhere}
+.q::before{content:"«"}.q::after{content:"»"}
+.more{margin-top:14px;font-size:14px;color:var(--muted)}
+section{margin-top:52px}
+h2{font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-.01em}
+.lead{margin-top:10px;color:var(--muted);max-width:820px}
+.agents{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.agent{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ultra);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.agent h3{font-size:18px;font-weight:800;line-height:1.3}
+.agent ol{list-style:none;margin-top:12px;flex:1}
+.agent li{position:relative;padding:0 0 10px 22px;font-size:15px;line-height:1.4}
+.agent li::before{content:"";position:absolute;left:4px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--ultra)}
+.agent li:not(:last-child)::after{content:"";position:absolute;left:7.5px;top:17px;bottom:-1px;width:1px;background:var(--rose)}
+.agent li:first-child{font-weight:700}
+.closes{margin-top:8px;font-size:13px;font-weight:600;color:var(--ultra);background:var(--ultra-soft);border-radius:10px;padding:8px 10px}
+.notai{margin-top:16px;font-size:14.5px;color:var(--muted);padding:12px 16px;border:1px dashed var(--rose);border-radius:12px;background:#fff}
+.notai b{color:var(--ink)}
+.method{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-top:16px}
+.method p{font-size:14.5px;color:#3f4363}
+.method p+p{margin-top:8px}
+.method .open{margin-top:12px;font-weight:700;color:var(--ink)}
+footer{margin-top:48px;border-top:1px solid var(--line);padding:22px 0 36px;font-size:15px;color:var(--muted)}
+footer b{color:var(--ink)}
+footer a{color:var(--ultra);font-weight:700;text-decoration:none}
+@media (max-width:980px){
+  .pains,.agents{grid-template-columns:1fr}
+  .pain h3{min-height:0}
+}
+@media (max-width:640px){
+  .wrap{padding:22px 16px 0}
+  .eyebrow{flex-direction:column;gap:2px;font-size:12px}
+  h1{font-size:27px}
+  .sub{font-size:14px}
+  .hero{grid-template-columns:1fr;gap:6px;padding:20px;border-radius:16px}
+  .hero .n{font-size:64px}
+  .hero .t{font-size:19px}
+  h2{font-size:23px}
+  section{margin-top:40px}
+  .pain,.agent,.method{padding:16px}
+}
+
+.facts{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px}
+.facts li{margin:0 0 8px 18px;font-size:15.5px} .facts .src{color:var(--muted);font-size:13px} .facts a{color:var(--ultra)}
+.idx{font-size:12px;font-weight:700;color:var(--rose-ink);text-transform:uppercase;margin-bottom:6px}
+.first{margin-top:16px;background:var(--ultra-soft);border-radius:14px;padding:14px 18px;font-size:15px}
+</style></head><body><div class="wrap">
+<header>
+  <div class="eyebrow"><span>Company brief</span><span><b>Chisty bereg</b> · November 2026</span></div>
+  <h1>Chisty bereg: where AI could take manual work off</h1>
+  <p class="sub">Viktor Podgaisky, director and co-founder</p>
+</header>
+<div class="hero" style="grid-template-columns:1fr"><div><div class="t">Offers from equipment questionnaires could take minutes instead of 1–2 business days</div>
+  <div class="note">I looked at bereg.by: the about page, the equipment selection service and the list of objects. Chisty bereg has 330 people and more than 28,000 items, and after a client sends a questionnaire the offer comes within 1–2 business days. This looks like the place where AI could save engineers a lot of time.</div></div></div>
+<section><h2>What I looked at</h2><ul class="facts"><li>330 people in the team, 2 retail sites and 10 offices in Belarus, revenue over $53M in 2025 <span class="src">· <a href="https://www.bereg.by/about/" target="_blank" rel="noopener">bereg.by, About the company</a>, 25.11.2026</span></li><li>More than 28,000 items in stock and to order, more than 100 brands in the portfolio, own 10,000 m2 warehouse <span class="src">· <a href="https://www.bereg.by/about/" target="_blank" rel="noopener">bereg.by, About the company</a>, 25.11.2026</span></li><li>Equipment selection service: the client sends a filled questionnaire (or product wishes) and company details, the offer comes within 1–2 business days. Questionnaires cover heat substations, heat meters, pump units, circulation, borehole and drainage pumps <span class="src">· <a href="https://www.bereg.by/services/engineering-services/" target="_blank" rel="noopener">bereg.by, Services, Calculation and selection of equipment</a>, 25.11.2026</span></li><li>The design and technical group did hydraulic calculations and equipment selection for objects including Minsk Mir residential complex, Minsk-Arena and the BELGEE Geely assembly plant <span class="src">· <a href="https://www.bereg.by/services/engineering-services/" target="_blank" rel="noopener">bereg.by, Services, Calculation and selection of equipment</a>, 25.11.2026</span></li><li>Chisty Bereg Vostok started work in Uzbekistan on 10 November 2022 and offers more than 10,000 items there <span class="src">· <a href="https://www.bereg.by/about/" target="_blank" rel="noopener">bereg.by, About the company</a>, 25.11.2026</span></li></ul></section>
+<section><h2>Where AI could take manual work off</h2><div class="agents"><article class="agent"><div class="idx">idea 1</div><h3>Questionnaire to draft offer in minutes</h3><ol><li>A filled questionnaire comes in by email: a pump unit, a heat substation or a heat meter</li><li>AI reads the parameters, finds matching models in the catalog of 28,000 items and checks stock</li><li>The engineer gets a draft offer with 2–3 options, specs and certificates attached</li><li>The client gets the offer the same day, the engineer only checks and signs</li></ol><div class="closes">Takes off: reading questionnaires and searching the catalog by hand for each request</div></article><article class="agent"><div class="idx">idea 2</div><h3>Designer&#x27;s specification to priced basket</h3><ol><li>A specification from a project comes in as PDF or Excel</li><li>AI matches each line to catalog items and suggests analogs if the exact model is missing</li><li>The manager gets a ready basket with prices and a list of lines to clarify</li><li>Quotes for residential and commercial objects go out faster</li></ol><div class="closes">Takes off: line by line matching of long specifications, which looks like a big part of work with designers</div></article><article class="agent"><div class="idx">idea 3</div><h3>Quick answers to technical questions</h3><ol><li>A client asks about a product, a certificate or a replacement in email or chat</li><li>AI finds the product card, the certificate and the catalog page</li><li>The manager gets a ready answer with attachments</li><li>Answers come in minutes and the technical team gets fewer simple calls</li></ol><div class="closes">Takes off: searching certificates and catalogs for routine questions</div></article></div>
+  <p class="first"><b>Where to start:</b> One week on one questionnaire type, for example circulation pumps. We need 20–30 past questionnaires with the offers that were sent and a catalog export. AI drafts offers for them and engineers compare with what they sent.</p><p class="notai"><b>What AI won't fix.</b> AI won&#x27;t take responsibility for a hydraulic calculation of a complex object, an engineer still checks it. If pump data in the catalog is incomplete, it needs to be filled first.</p></section>
+<section><h2>How this brief was made</h2><div class="method"><p>Open sources only: bereg.by (about, services, objects, news) and hr.bereg.by. No internal data.</p></div></section>
+<footer>Prepared by <b>Nika Shtefan</b> · AI automation for business · Telegram <a href="https://t.me/kvazarchik">@kvazarchik</a> · <a href="https://nikashtefan.github.io/en.html" target="_blank" rel="noopener">Website and cases →</a></footer>
+</div></body></html>
